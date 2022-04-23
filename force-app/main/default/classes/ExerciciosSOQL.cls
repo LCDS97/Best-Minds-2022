@@ -56,11 +56,12 @@ public class ExerciciosSOQL {
     }
     
         // 5 - Criar um método que retorne a quantidade de todos os Contratos ( Apólice ) com o status em Aberto
-    public static void contratosEmAberto(){
+    public static List<AggregateResult> contratosEmAberto(){
     	List<AggregateResult> contratosEmAberto = [Select Count(Status) FROM Contract WHERE Status = 'Em Aberto'];
         	for (AggregateResult contrato : contratosEmAberto){
             	System.debug('O número total de contratos em aberto foi: ' + contrato.get('expr0'));
         }
+        return contratosEmAberto;
     }
     
     // 6 - Criar um método que receba o Id de um Contrato ( Apólice ) e retorne a soma de todas as parcelas desse contrato
