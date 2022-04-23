@@ -1,4 +1,17 @@
 public class ExerciciosSOQL {
+    // 1 - Criar um método que retorne todos os registros do objeto Contrato ( Apólice ) cadastrados no Salesforce.
+    public static void retornarApolices() {
+        List<Contract> contractList = [SELECT Id, Name FROM Contract];
+        List<AggregateResult> contratosTotal = [Select Count(id) FROM Contract];
+
+        for(Contract c : contractList){
+            System.debug('Apólice: ' + c.Id);
+        }
+        for (AggregateResult contrato : contratosTotal){
+            System.debug('O número total de contratos retornado foi: ' + contrato.get('expr0'));
+        }
+    }
+
     // 3 - Cria um método que receberá o Id de um cliente e retornará a lista de Bônus para esse cliente
     public static void retornarBonusPorId(String valorId){
         List<Bonus__c> bonusPorId = [SELECT Id, Name, Conta__c, Conta__r.Name FROM Bonus__c WHERE Conta__c = :valorId];
