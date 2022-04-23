@@ -10,7 +10,6 @@ public class ExerciciosSOQL {
         for (AggregateResult contrato : contratosTotal){
             System.debug('O número total de contratos retornado foi: ' + contrato.get('expr0'));
         }
-
         return contractList;
     }
 
@@ -35,19 +34,23 @@ public class ExerciciosSOQL {
         
     }
     // 4 - Cria um método que retornará apenas as Parcelas que o valor seja maior que 10 mil
-    public static void parcelasMaiorQueMil(){
-        List<Parcela__c> parcelas = [SELECT Id, Name, Moeda__c, Contrato__c, Contrato__r.Account.Name FROM Parcela__c WHERE Moeda__c > 10000200];
+    public static List<Parcela__c> parcelasMaiorQueMil(){
+        List<Parcela__c> listParcelas = [SELECT Id, Name, Moeda__c, Contrato__c, Contrato__r.Account.Name FROM Parcela__c WHERE Moeda__c > 1000];
         
-        for(Parcela__c parcela : parcelas){
+        for(Parcela__c parcela : listParcelas){
             System.debug('Parcela: ' + parcela.Name + ' do Valor R$' + parcela.Moeda__c + ' do Contrato ' + parcela.Contrato__c + ' da Conta: ' + parcela.Contrato__r.Account.Name);
         }
         
-        if(parcelas.size() == 0){
-        	System.debug('Não há parcelas maiores que 10 mil');           
+        if(listParcelas.size() != 0){
+            System.debug('O total de Parcelas maiores que 10 mil foi de: ' + listParcelas.size()); 
+
         }
         else{
-			System.debug('O total de Parcelas maiores que 10 mil foi de: ' + parcelas.size()); 
+            System.debug('Não há parcelas maiores que 10 mil');           
+			
         }
+
+        return listParcelas;
 
 
     }
