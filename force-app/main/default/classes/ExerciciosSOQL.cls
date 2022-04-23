@@ -12,6 +12,14 @@ public class ExerciciosSOQL {
         }
     }
 
+    // 2 - Criar um método que retorne apenas os Contratos que estejam com o Status Finalizado
+    public static void retornarApoliceFinalizada(){
+        List<Contract> closedContracts = [SELECT Id, Status FROM Contract WHERE Status = 'Finalizado'];
+
+            System.debug('O total de Apólices com o Status Finalizado é de: ' + closedContracts.size());
+    }
+    
+
     // 3 - Cria um método que receberá o Id de um cliente e retornará a lista de Bônus para esse cliente
     public static void retornarBonusPorId(String valorId){
         List<Bonus__c> bonusPorId = [SELECT Id, Name, Conta__c, Conta__r.Name FROM Bonus__c WHERE Conta__c = :valorId];
