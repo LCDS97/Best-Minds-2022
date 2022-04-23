@@ -1,6 +1,6 @@
 public class ExerciciosSOQL {
     // 1 - Criar um método que retorne todos os registros do objeto Contrato ( Apólice ) cadastrados no Salesforce.
-    public static void retornarApolices() {
+    public static List<Contract> retornarApolices() {
         List<Contract> contractList = [SELECT Id, Name FROM Contract];
         List<AggregateResult> contratosTotal = [Select Count(id) FROM Contract];
 
@@ -10,6 +10,8 @@ public class ExerciciosSOQL {
         for (AggregateResult contrato : contratosTotal){
             System.debug('O número total de contratos retornado foi: ' + contrato.get('expr0'));
         }
+
+        return contractList;
     }
 
     // 2 - Criar um método que retorne apenas os Contratos que estejam com o Status Finalizado ( Usei Draft para concluir o Desafio )
