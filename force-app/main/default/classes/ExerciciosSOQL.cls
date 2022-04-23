@@ -18,6 +18,14 @@ public class ExerciciosSOQL {
 
             System.debug('O total de Apólices com o Status Finalizado é de: ' + closedContracts.size());
     }
+
+    // 2 - Refazer para retornar a lista
+    public static List<Contract> retornarApoliceFinalizadaLista(){
+        List<Contract> closedContracts = [SELECT Id, Status FROM Contract WHERE Status = 'Finalizado'];
+
+            System.debug('O total de Apólices com o Status Finalizado é de: ' + closedContracts.size());
+        return closedContracts;
+    }    
     
 
     // 3 - Cria um método que receberá o Id de um cliente e retornará a lista de Bônus para esse cliente
