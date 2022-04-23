@@ -23,7 +23,7 @@ public class ExerciciosSOQL {
     
 
     // 3 - Cria um método que receberá o Id de um cliente e retornará a lista de Bônus para esse cliente
-    public static List<Bonus__c> retornarBonusPorId(String valorId){
+    public static List<Bonus__c> retornarBonusPorId(Id valorId){
         List<Bonus__c> bonusPorId = [SELECT Id, Name, Conta__c, Conta__r.Name FROM Bonus__c WHERE Conta__c = :valorId];
         
         for(Bonus__c bonus : bonusPorId){
@@ -61,11 +61,12 @@ public class ExerciciosSOQL {
         	for (AggregateResult contrato : contratosEmAberto){
             	System.debug('O número total de contratos em aberto foi: ' + contrato.get('expr0'));
         }
+        System.debug(contratosEmAberto);
         return contratosEmAberto;
     }
     
     // 6 - Criar um método que receba o Id de um Contrato ( Apólice ) e retorne a soma de todas as parcelas desse contrato
-    public static void retornaParcelasContratoPorId(String valorId){
+    public static void retornaParcelasContratoPorId(Id valorId){
         List<Parcela__c> contratoPorId = [SELECT Id, Contrato__c, Moeda__c, Contrato__r.Account.Name FROM Parcela__c WHERE Contrato__c = :valorId];
 		Decimal valorTotal = 0;        
         
