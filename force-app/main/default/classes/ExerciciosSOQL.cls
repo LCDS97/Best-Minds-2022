@@ -12,13 +12,6 @@ public class ExerciciosSOQL {
         }
     }
 
-    // 2 - Criar um método que retorne apenas os Contratos que estejam com o Status Finalizado
-    public static void retornarApoliceFinalizada(){
-        List<Contract> closedContracts = [SELECT Id, Status FROM Contract WHERE Status = 'Draft'];
-
-            System.debug('O total de Apólices com o Status Finalizado é de: ' + closedContracts.size());
-    }
-
     // 2 - Criar um método que retorne apenas os Contratos que estejam com o Status Finalizado ( Usei Draft para concluir o Desafio )
     public static List<Contract> retornarApoliceFinalizadaLista(){
         List<Contract> closedContracts = [SELECT Id, Status FROM Contract WHERE Status = 'Draft'];
