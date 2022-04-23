@@ -11,4 +11,15 @@ public with sharing class ExercicioDML {
         update oportunidadeAtualizar;
 
     }
+
+    // 2 - Criar um método que receba o Id de um Cliente PJ e mude o campo Ativo para false ( Verificar com o Arthur depois sobre o campo )
+
+    // 3 - Criar um método que receba o Id de uma Parcela e atualize o campo Status para Paga
+    public static void atualizeCampoParcela(Id idParcela){
+        Parcela__c parcelaAtualizar = new Parcela__c();
+        parcelaAtualizar.Id = idParcela;
+        parcelaAtualizar.Status__c = 'Paga';
+        
+        update parcelaAtualizar;
+    }
 }
