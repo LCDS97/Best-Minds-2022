@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <assignments>
+        <name>ColocarMotivoFaseOportunidade</name>
+        <label>Colocar Motivo e Fase da Oportunidade</label>
+        <locationX>578</locationX>
+        <locationY>518</locationY>
+        <assignmentItems>
+            <assignToReference>BuscarRegistroOportunidadeAtualizado.Motivo__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>DescreverMotivoCancelamento</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>BuscarRegistroOportunidadeAtualizado.StageName</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue>Closed Lost</stringValue>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>AtualizarOportunidade_0_0</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <name>ColocarSomenteMotivo</name>
+        <label>Colocar Somente Motivo</label>
+        <locationX>314</locationX>
+        <locationY>518</locationY>
+        <assignmentItems>
+            <assignToReference>BuscarRegistroOportunidadeAtualizado.Motivo__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>DescreverMotivoCancelamento</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>ClosedLostSemMotivoTela_0</targetReference>
+        </connector>
+    </assignments>
+    <decisions>
+        <name>Verificar_Fase_da_Oportunidade</name>
+        <label>Verificar Fase da Oportunidade</label>
+        <locationX>314</locationX>
+        <locationY>398</locationY>
+        <defaultConnector>
+            <targetReference>ColocarMotivoFaseOportunidade</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Outros</defaultConnectorLabel>
+        <rules>
+            <name>Closed_Won</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>BuscarRegistroOportunidadeAtualizado.StageName</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Closed Won</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>AvisoClosedWon</targetReference>
+            </connector>
+            <label>Closed Won</label>
+        </rules>
+        <rules>
+            <name>ClosedLostSemMotivo</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>BuscarRegistroOportunidadeAtualizado.StageName</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Closed Lost</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>BuscarRegistroOportunidadeAtualizado.Motivo__c</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>ColocarSomenteMotivo</targetReference>
+            </connector>
+            <label>Closed Lost Sem Motivo</label>
+        </rules>
+    </decisions>
+    <description>Descrever o Motivo de Cancelamento da Oportunidade, foi colocado o recordId, buscando o registro e depois com adição do nome da oportunidade e fase atual com tratativas das Fases</description>
+    <interviewLabel>Descrever o Motivo do Cancelamento {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Descrever o Motivo do Cancelamento</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>Flow</processType>
+    <recordLookups>
+        <name>BuscarRegistroOportunidadeAtualizado</name>
+        <label>Buscar Registro da Oportunidade</label>
+        <locationX>314</locationX>
+        <locationY>158</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>MotivoCancelamento</targetReference>
+        </connector>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>recordId</elementReference>
+            </value>
+        </filters>
+        <object>Opportunity</object>
+    </recordLookups>
+    <recordUpdates>
+        <name>AtualizarMotivoOportunidade</name>
+        <label>Atualizar Motivo da Oportunidade</label>
+        <locationX>314</locationX>
+        <locationY>758</locationY>
+        <inputReference>BuscarRegistroOportunidadeAtualizado</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <name>AtualizarOportunidade_0_0</name>
+        <label>Atualizar Oportunidade</label>
+        <locationX>578</locationX>
+        <locationY>638</locationY>
+        <connector>
+            <targetReference>AvisoCancelamento</targetReference>
+        </connector>
+        <inputReference>BuscarRegistroOportunidadeAtualizado</inputReference>
+    </recordUpdates>
+    <screens>
+        <name>AvisoCancelamento</name>
+        <label>Aviso de Cancelamento</label>
+        <locationX>578</locationX>
+        <locationY>758</locationY>
+        <allowBack>true</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>true</allowPause>
+        <fields>
+            <name>OportunidadeCancelada</name>
+            <fieldText>&lt;p&gt;Sua Oportunidade foi cancelada com Sucesso!&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+        </fields>
+        <showFooter>true</showFooter>
+        <showHeader>true</showHeader>
+    </screens>
+    <screens>
+        <name>AvisoClosedWon</name>
+        <label>AvisoClosedWon</label>
+        <locationX>50</locationX>
+        <locationY>518</locationY>
+        <allowBack>true</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>true</allowPause>
+        <fields>
+            <name>MensagemErro</name>
+            <fieldText>&lt;p&gt;A oportunidade não pode ser cancelada, pois ela ja esta na fase de &lt;b&gt;Closed Won&lt;/b&gt;&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+        </fields>
+        <showFooter>true</showFooter>
+        <showHeader>true</showHeader>
+    </screens>
+    <screens>
+        <name>ClosedLostSemMotivoTela_0</name>
+        <label>Closed Lost Sem Motivo Tela</label>
+        <locationX>314</locationX>
+        <locationY>638</locationY>
+        <allowBack>true</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>true</allowPause>
+        <connector>
+            <targetReference>AtualizarMotivoOportunidade</targetReference>
+        </connector>
+        <fields>
+            <name>MensagemClosedLostSemMotivo_0</name>
+            <fieldText>&lt;p&gt;Sua Oportunidade ja estava na fase de &lt;b&gt;Closed Lost&lt;/b&gt;, o motivo na tela anterior foi adicionado agora na oportunidade&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+        </fields>
+        <showFooter>true</showFooter>
+        <showHeader>true</showHeader>
+    </screens>
+    <screens>
+        <description>Descrever Motivo do Cancelamento ( Closed Lost ) da Oportunidade</description>
+        <name>MotivoCancelamento</name>
+        <label>Motivo do Cancelamento</label>
+        <locationX>314</locationX>
+        <locationY>278</locationY>
+        <allowBack>true</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>true</allowPause>
+        <connector>
+            <targetReference>Verificar_Fase_da_Oportunidade</targetReference>
+        </connector>
+        <fields>
+            <name>NomeOportunidade</name>
+            <fieldText>&lt;p&gt;{!BuscarRegistroOportunidadeAtualizado.Name}&lt;/p&gt;&lt;p&gt;Fase Atual: {!BuscarRegistroOportunidadeAtualizado.StageName}&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+        </fields>
+        <fields>
+            <name>DescreverMotivoCancelamento</name>
+            <dataType>String</dataType>
+            <fieldText>Descrever o Motivo do Cancelamento</fieldText>
+            <fieldType>InputField</fieldType>
+            <isRequired>true</isRequired>
+        </fields>
+        <showFooter>true</showFooter>
+        <showHeader>true</showHeader>
+    </screens>
+    <startElementReference>BuscarRegistroOportunidadeAtualizado</startElementReference>
+    <status>Active</status>
+    <variables>
+        <name>BuscarOportunidade</name>
+        <dataType>SObject</dataType>
+        <isCollection>true</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
+        <objectType>Opportunity</objectType>
+    </variables>
+    <variables>
+        <name>Opportunity</name>
+        <dataType>SObject</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <objectType>Opportunity</objectType>
+    </variables>
+    <variables>
+        <name>recordId</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+</Flow>

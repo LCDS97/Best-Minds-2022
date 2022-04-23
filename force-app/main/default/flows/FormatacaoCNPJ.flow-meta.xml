@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <assignments>
+        <name>Formatar_CNPJ_0</name>
+        <label>Formatar CNPJ</label>
+        <locationX>578</locationX>
+        <locationY>431</locationY>
+        <assignmentItems>
+            <assignToReference>$Record.CNPJ__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>FormulaCNPJ</elementReference>
+            </value>
+        </assignmentItems>
+    </assignments>
+    <assignments>
+        <name>Formatar_CNPJ_0_0</name>
+        <label>Formatar CNPJ</label>
+        <locationX>50</locationX>
+        <locationY>431</locationY>
+        <assignmentItems>
+            <assignToReference>$Record.CNPJ__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>FormulaCNPJ</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>FormatarTel_0</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <name>FormatarTel</name>
+        <label>FormatarTel</label>
+        <locationX>314</locationX>
+        <locationY>431</locationY>
+        <assignmentItems>
+            <assignToReference>$Record.Phone</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>FormatarTelefoneFixo</elementReference>
+            </value>
+        </assignmentItems>
+    </assignments>
+    <assignments>
+        <name>FormatarTel_0</name>
+        <label>FormatarTel</label>
+        <locationX>50</locationX>
+        <locationY>551</locationY>
+        <assignmentItems>
+            <assignToReference>$Record.Phone</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>FormatarTelefoneFixo</elementReference>
+            </value>
+        </assignmentItems>
+    </assignments>
+    <decisions>
+        <name>Verificar_Alteracao</name>
+        <label>Verificar Alteração</label>
+        <locationX>446</locationX>
+        <locationY>311</locationY>
+        <defaultConnectorLabel>Resultado padrão</defaultConnectorLabel>
+        <rules>
+            <name>Ambos_Alterados</name>
+            <conditionLogic>1 OR ( 1 AND 2 AND 5 ) OR 3 OR ( 3 AND 4 AND 6)</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.CNPJ__c</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.CNPJ__c</leftValueReference>
+                <operator>IsChanged</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Phone</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Phone</leftValueReference>
+                <operator>IsChanged</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.CNPJ__c</leftValueReference>
+                <operator>NotEqualTo</operator>
+                <rightValue>
+                    <elementReference>$Record__Prior.CNPJ__c</elementReference>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Phone</leftValueReference>
+                <operator>NotEqualTo</operator>
+                <rightValue>
+                    <elementReference>$Record__Prior.Phone</elementReference>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Formatar_CNPJ_0_0</targetReference>
+            </connector>
+            <label>Ambos Alterados</label>
+        </rules>
+        <rules>
+            <name>Telefone</name>
+            <conditionLogic>1 AND 2 AND 3</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Phone</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Phone</leftValueReference>
+                <operator>IsChanged</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Phone</leftValueReference>
+                <operator>NotEqualTo</operator>
+                <rightValue>
+                    <elementReference>$Record__Prior.Phone</elementReference>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>FormatarTel</targetReference>
+            </connector>
+            <label>Telefone</label>
+        </rules>
+        <rules>
+            <name>CondCNPJ</name>
+            <conditionLogic>1 AND 2 AND 3</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.CNPJ__c</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.CNPJ__c</leftValueReference>
+                <operator>IsChanged</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.CNPJ__c</leftValueReference>
+                <operator>NotEqualTo</operator>
+                <rightValue>
+                    <elementReference>$Record__Prior.CNPJ__c</elementReference>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Formatar_CNPJ_0</targetReference>
+            </connector>
+            <label>CNPJ</label>
+        </rules>
+    </decisions>
+    <description>Adicionado Tres Decisões, e atualização da formula CNPJ</description>
+    <formulas>
+        <name>FormatarTelefoneFixo</name>
+        <dataType>String</dataType>
+        <expression>IF(AND(LEN((SUBSTITUTE(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE({!$Record.Phone}, &apos;)&apos;, &apos;&apos;), &apos;(&apos;, &apos;&apos;), &apos; &apos;, &apos;&apos;), &apos;-&apos;, &apos;&apos;))) = 10,
+NOT(CONTAINS((SUBSTITUTE(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE({!$Record.Phone}, &apos;)&apos;, &apos;&apos;), &apos;(&apos;, &apos;&apos;), &apos; &apos;, &apos;&apos;), &apos;-&apos;, &apos;&apos;)), &apos;(&apos;))),
+&quot;(&quot; &amp; MID(((SUBSTITUTE(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE({!$Record.Phone}, &apos;)&apos;, &apos;&apos;), &apos;(&apos;, &apos;&apos;), &apos; &apos;, &apos;&apos;), &apos;-&apos;, &apos;&apos;))),1,2) &amp; &quot;)&quot;
+&amp; &quot; &quot;
+&amp; MID(((SUBSTITUTE(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE({!$Record.Phone}, &apos;)&apos;, &apos;&apos;), &apos;(&apos;, &apos;&apos;), &apos; &apos;, &apos;&apos;), &apos;-&apos;, &apos;&apos;))),3,4)
+&amp; &quot;-&quot;
+&amp; MID(((SUBSTITUTE(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE({!$Record.Phone}, &apos;)&apos;, &apos;&apos;), &apos;(&apos;, &apos;&apos;), &apos; &apos;, &apos;&apos;), &apos;-&apos;, &apos;&apos;))),7,4),
+IF(AND(LEN((SUBSTITUTE(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE({!$Record.Phone}, &apos;)&apos;, &apos;&apos;), &apos;(&apos;, &apos;&apos;), &apos; &apos;, &apos;&apos;), &apos;-&apos;, &apos;&apos;))) = 11,
+NOT(CONTAINS((SUBSTITUTE(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE({!$Record.Phone}, &apos;)&apos;, &apos;&apos;), &apos;(&apos;, &apos;&apos;), &apos; &apos;, &apos;&apos;), &apos;-&apos;, &apos;&apos;)) , &apos;(&apos;))),
+&quot;(&quot; &amp; MID(((SUBSTITUTE(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE({!$Record.Phone}, &apos;)&apos;, &apos;&apos;), &apos;(&apos;, &apos;&apos;), &apos; &apos;, &apos;&apos;), &apos;-&apos;, &apos;&apos;))),1,2)&amp; &quot;)&quot;
+&amp; &quot; &quot;
+&amp;MID(((SUBSTITUTE(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE({!$Record.Phone}, &apos;)&apos;, &apos;&apos;), &apos;(&apos;, &apos;&apos;), &apos; &apos;, &apos;&apos;), &apos;-&apos;, &apos;&apos;))),3,5)
+&amp; &quot;-&quot;
+&amp;MID(((SUBSTITUTE(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE({!$Record.Phone}, &apos;)&apos;, &apos;&apos;), &apos;(&apos;, &apos;&apos;), &apos; &apos;, &apos;&apos;), &apos;-&apos;, &apos;&apos;))),8,5),
+(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE({!$Record.Phone}, &apos;)&apos;, &apos;&apos;), &apos;(&apos;, &apos;&apos;), &apos; &apos;, &apos;&apos;), &apos;-&apos;, &apos;&apos;))
+)
+)</expression>
+    </formulas>
+    <formulas>
+        <name>FormulaCNPJ</name>
+        <dataType>String</dataType>
+        <expression>IF(
+     AND(
+               LEN((SUBSTITUTE(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE({!$Record.CNPJ__c}, &apos;.&apos;, &apos;&apos;), &apos;/&apos;, &apos;&apos;), &apos; &apos;, &apos;&apos;), &apos;-&apos;, &apos;&apos;))) = 14,
+               NOT(CONTAINS((SUBSTITUTE(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE({!$Record.CNPJ__c}, &apos;.&apos;, &apos;&apos;), &apos;/&apos;, &apos;&apos;), &apos; &apos;, &apos;&apos;), &apos;-&apos;, &apos;&apos;)),
+             &apos;(&apos;))),
+            MID(((SUBSTITUTE(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE({!$Record.CNPJ__c}, &apos;.&apos;, &apos;&apos;), &apos;/&apos;, &apos;&apos;), &apos; &apos;, &apos;&apos;), &apos;-&apos;, &apos;&apos;))),1,2)
+            &amp; &quot;.&quot;
+            &amp;MID(((SUBSTITUTE(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE({!$Record.CNPJ__c}, &apos;.&apos;, &apos;&apos;), &apos;/&apos;, &apos;&apos;), &apos; &apos;, &apos;&apos;), &apos;-&apos;, &apos;&apos;))),3,3)
+            &amp; &quot;.&quot;
+            &amp;MID(((SUBSTITUTE(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE({!$Record.CNPJ__c}, &apos;.&apos;, &apos;&apos;), &apos;/&apos;, &apos;&apos;), &apos; &apos;, &apos;&apos;), &apos;-&apos;, &apos;&apos;))),6,3)
+            &amp; &quot;/&quot;
+            &amp;MID(((SUBSTITUTE(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE({!$Record.CNPJ__c}, &apos;.&apos;, &apos;&apos;), &apos;/&apos;, &apos;&apos;), &apos; &apos;, &apos;&apos;), &apos;-&apos;, &apos;&apos;))),9,4)
+            &amp; &quot;-&quot;
+            &amp;MID(((SUBSTITUTE(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE({!$Record.CNPJ__c}, &apos;.&apos;, &apos;&apos;), &apos;/&apos;, &apos;&apos;), &apos; &apos;, &apos;&apos;), &apos;-&apos;, &apos;&apos;))),13,2),
+            (SUBSTITUTE(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE({!$Record.CNPJ__c}, &apos;.&apos;, &apos;&apos;), &apos;/&apos;, &apos;&apos;), &apos; &apos;, &apos;&apos;), &apos;-&apos;, &apos;&apos;))
+        )</expression>
+    </formulas>
+    <interviewLabel>Formatação do CNPJ {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Formatação do CNPJ</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <startElementReference>Verificar_Alteracao</startElementReference>
+    <status>Active</status>
+</Flow>

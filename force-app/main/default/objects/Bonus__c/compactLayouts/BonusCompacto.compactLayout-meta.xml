@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CompactLayout xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>BonusCompacto</fullName>
+    <fields>Conta__c</fields>
+    <fields>Pontos__c</fields>
+    <fields>Contato__c</fields>
+    <fields>Tipo__c</fields>
+    <label>Bonus Compacto</label>
+</CompactLayout>

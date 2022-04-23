@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <assignments>
+        <name>Atualizar_Fase_da_Cole_o_do_Loop</name>
+        <label>Atualizar Fase da Coleção do Loop</label>
+        <locationX>176</locationX>
+        <locationY>948</locationY>
+        <assignmentItems>
+            <assignToReference>Verificar_Inatividade.StageName</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue>Closed Lost</stringValue>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>AtualizarColecao</targetReference>
+        </connector>
+    </assignments>
+    <decisions>
+        <name>VerificarStage</name>
+        <label>Verificar Stage</label>
+        <locationX>352</locationX>
+        <locationY>516</locationY>
+        <defaultConnectorLabel>Outras Fases</defaultConnectorLabel>
+        <rules>
+            <name>DiferenteClosedWonLost</name>
+            <conditionLogic>or</conditionLogic>
+            <conditions>
+                <leftValueReference>Verificar_Inatividade.StageName</leftValueReference>
+                <operator>NotEqualTo</operator>
+                <rightValue>
+                    <stringValue>Closed Won</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>Verificar_Inatividade.StageName</leftValueReference>
+                <operator>NotEqualTo</operator>
+                <rightValue>
+                    <stringValue>Closed Lost</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>Verificar_Inatividade.Data_da_Ultima_Atividade__c</leftValueReference>
+                <operator>LessThanOrEqualTo</operator>
+                <rightValue>
+                    <elementReference>formulaDataHoje</elementReference>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Verificar_Inatividade</targetReference>
+            </connector>
+            <label>Diferente de Closed Won e Lost</label>
+        </rules>
+    </decisions>
+    <description>Rotina diaria para cancelar oportunidade a partir de 3 dias sem atividade da mesma</description>
+    <formulas>
+        <name>formulaDataHoje</name>
+        <dataType>Date</dataType>
+        <expression>TODAY() - 3</expression>
+    </formulas>
+    <interviewLabel>Data {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Rotina Diaria de Cancelamento</label>
+    <loops>
+        <name>Verificar_Inatividade</name>
+        <label>Verificar Inatividade</label>
+        <locationX>176</locationX>
+        <locationY>396</locationY>
+        <collectionReference>BuscarOportunidade</collectionReference>
+        <iterationOrder>Asc</iterationOrder>
+        <nextValueConnector>
+            <targetReference>VerificarStage</targetReference>
+        </nextValueConnector>
+        <noMoreValuesConnector>
+            <targetReference>Atualizar_Fase_da_Cole_o_do_Loop</targetReference>
+        </noMoreValuesConnector>
+    </loops>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordLookups>
+        <name>BuscarOportunidade</name>
+        <label>Buscar Oportunidade</label>
+        <locationX>176</locationX>
+        <locationY>276</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Verificar_Inatividade</targetReference>
+        </connector>
+        <filters>
+            <field>Data_da_Ultima_Atividade__c</field>
+            <operator>IsNull</operator>
+            <value>
+                <booleanValue>false</booleanValue>
+            </value>
+        </filters>
+        <object>Opportunity</object>
+    </recordLookups>
+    <recordUpdates>
+        <name>AtualizarColecao</name>
+        <label>Atualizar Coleção</label>
+        <locationX>176</locationX>
+        <locationY>1068</locationY>
+        <filters>
+            <field>Data_da_Ultima_Atividade__c</field>
+            <operator>LessThanOrEqualTo</operator>
+            <value>
+                <elementReference>formulaDataHoje</elementReference>
+            </value>
+        </filters>
+        <filters>
+            <field>StageName</field>
+            <operator>NotEqualTo</operator>
+            <value>
+                <stringValue>Closed Won</stringValue>
+            </value>
+        </filters>
+        <inputAssignments>
+            <field>StageName</field>
+            <value>
+                <stringValue>Closed Lost</stringValue>
+            </value>
+        </inputAssignments>
+        <object>Opportunity</object>
+    </recordUpdates>
+    <startElementReference>BuscarOportunidade</startElementReference>
+    <status>Active</status>
+</Flow>

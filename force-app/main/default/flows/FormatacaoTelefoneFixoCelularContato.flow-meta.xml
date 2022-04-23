@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <assignments>
+        <name>FormatarCelular</name>
+        <label>Formatar Celular</label>
+        <locationX>50</locationX>
+        <locationY>431</locationY>
+        <assignmentItems>
+            <assignToReference>$Record.MobilePhone</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>FormatarCel</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>FormatarTelefoneFixo</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <name>FormatarCelular_0</name>
+        <label>Formatar Celular</label>
+        <locationX>314</locationX>
+        <locationY>431</locationY>
+        <assignmentItems>
+            <assignToReference>$Record.MobilePhone</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>FormatarCel</elementReference>
+            </value>
+        </assignmentItems>
+    </assignments>
+    <assignments>
+        <name>FormatarTelefoneFixo</name>
+        <label>Formatar Telefone Fixo</label>
+        <locationX>50</locationX>
+        <locationY>551</locationY>
+        <assignmentItems>
+            <assignToReference>$Record.Phone</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>FormatarTelFixo</elementReference>
+            </value>
+        </assignmentItems>
+    </assignments>
+    <assignments>
+        <name>FormatarTelefoneFixo_0</name>
+        <label>Formatar Telefone Fixo</label>
+        <locationX>578</locationX>
+        <locationY>431</locationY>
+        <assignmentItems>
+            <assignToReference>$Record.Phone</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>FormatarTelFixo</elementReference>
+            </value>
+        </assignmentItems>
+    </assignments>
+    <decisions>
+        <name>Verificar_Alteracao</name>
+        <label>Verificar Alteração</label>
+        <locationX>446</locationX>
+        <locationY>311</locationY>
+        <defaultConnectorLabel>Resultado padrão</defaultConnectorLabel>
+        <rules>
+            <name>AmbosAlterado</name>
+            <conditionLogic>1 OR ( 1 AND 2 AND 3 ) OR 4 OR ( 4 AND 5 AND 6 )</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.MobilePhone</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.MobilePhone</leftValueReference>
+                <operator>IsChanged</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.MobilePhone</leftValueReference>
+                <operator>NotEqualTo</operator>
+                <rightValue>
+                    <elementReference>$Record__Prior.MobilePhone</elementReference>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Phone</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Phone</leftValueReference>
+                <operator>IsChanged</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Phone</leftValueReference>
+                <operator>NotEqualTo</operator>
+                <rightValue>
+                    <elementReference>$Record__Prior.Phone</elementReference>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>FormatarCelular</targetReference>
+            </connector>
+            <label>Ambos Alterado</label>
+        </rules>
+        <rules>
+            <name>CelAlterado</name>
+            <conditionLogic>1 OR (1 AND 2 AND 3 )</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.MobilePhone</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.MobilePhone</leftValueReference>
+                <operator>IsChanged</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.MobilePhone</leftValueReference>
+                <operator>NotEqualTo</operator>
+                <rightValue>
+                    <elementReference>$Record__Prior.MobilePhone</elementReference>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>FormatarCelular_0</targetReference>
+            </connector>
+            <label>Cel Alterado</label>
+        </rules>
+        <rules>
+            <name>Tel_Alterado</name>
+            <conditionLogic>1 OR (1 AND 2 AND 3 )</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Phone</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Phone</leftValueReference>
+                <operator>IsChanged</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Phone</leftValueReference>
+                <operator>NotEqualTo</operator>
+                <rightValue>
+                    <elementReference>$Record__Prior.Phone</elementReference>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>FormatarTelefoneFixo_0</targetReference>
+            </connector>
+            <label>Tel Alterado</label>
+        </rules>
+    </decisions>
+    <description>Formatação de Telefone Fixo e Celular para Criação e Atualização do Contato</description>
+    <formulas>
+        <description>Formatação de Celular</description>
+        <name>FormatarCel</name>
+        <dataType>String</dataType>
+        <expression>IF(AND(LEN((SUBSTITUTE(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE({!$Record.MobilePhone}, &apos;)&apos;, &apos;&apos;), &apos;(&apos;, &apos;&apos;), &apos; &apos;, &apos;&apos;), &apos;-&apos;, &apos;&apos;))) = 11,
+NOT(CONTAINS((SUBSTITUTE(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE({!$Record.MobilePhone}, &apos;)&apos;, &apos;&apos;), &apos;(&apos;, &apos;&apos;), &apos; &apos;, &apos;&apos;), &apos;-&apos;, &apos;&apos;)) , &apos;(&apos;))),
+&quot;(&quot; &amp; MID(((SUBSTITUTE(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE({!$Record.MobilePhone}, &apos;)&apos;, &apos;&apos;), &apos;(&apos;, &apos;&apos;), &apos; &apos;, &apos;&apos;), &apos;-&apos;, &apos;&apos;))),1,2)&amp; &quot;)&quot;
+&amp; &quot; &quot;
+&amp;MID(((SUBSTITUTE(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE({!$Record.MobilePhone}, &apos;)&apos;, &apos;&apos;), &apos;(&apos;, &apos;&apos;), &apos; &apos;, &apos;&apos;), &apos;-&apos;, &apos;&apos;))),3,5)
+&amp; &quot;-&quot;
+&amp;MID(((SUBSTITUTE(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE({!$Record.MobilePhone}, &apos;)&apos;, &apos;&apos;), &apos;(&apos;, &apos;&apos;), &apos; &apos;, &apos;&apos;), &apos;-&apos;, &apos;&apos;))),8,5),
+(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE({!$Record.MobilePhone}, &apos;)&apos;, &apos;&apos;), &apos;(&apos;, &apos;&apos;), &apos; &apos;, &apos;&apos;), &apos;-&apos;, &apos;&apos;))
+)</expression>
+    </formulas>
+    <formulas>
+        <description>Formatação de Telefone Fixo</description>
+        <name>FormatarTelFixo</name>
+        <dataType>String</dataType>
+        <expression>IF(AND(LEN((SUBSTITUTE(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE({!$Record.Phone}, &apos;)&apos;, &apos;&apos;), &apos;(&apos;, &apos;&apos;), &apos; &apos;, &apos;&apos;), &apos;-&apos;, &apos;&apos;))) = 10,
+NOT(CONTAINS((SUBSTITUTE(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE({!$Record.Phone}, &apos;)&apos;, &apos;&apos;), &apos;(&apos;, &apos;&apos;), &apos; &apos;, &apos;&apos;), &apos;-&apos;, &apos;&apos;)) , &apos;(&apos;))),
+&quot;(&quot; &amp; MID(((SUBSTITUTE(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE({!$Record.Phone}, &apos;)&apos;, &apos;&apos;), &apos;(&apos;, &apos;&apos;), &apos; &apos;, &apos;&apos;), &apos;-&apos;, &apos;&apos;))),1,2)&amp; &quot;)&quot;
+&amp; &quot; &quot;
+&amp;MID(((SUBSTITUTE(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE({!$Record.Phone}, &apos;)&apos;, &apos;&apos;), &apos;(&apos;, &apos;&apos;), &apos; &apos;, &apos;&apos;), &apos;-&apos;, &apos;&apos;))),3,4)
+&amp; &quot;-&quot;
+&amp;MID(((SUBSTITUTE(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE({!$Record.Phone}, &apos;)&apos;, &apos;&apos;), &apos;(&apos;, &apos;&apos;), &apos; &apos;, &apos;&apos;), &apos;-&apos;, &apos;&apos;))),7,4),
+(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE({!$Record.Phone}, &apos;)&apos;, &apos;&apos;), &apos;(&apos;, &apos;&apos;), &apos; &apos;, &apos;&apos;), &apos;-&apos;, &apos;&apos;))
+)</expression>
+    </formulas>
+    <interviewLabel>Formatação de Telefone Fixo e Celular para o Contato {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Formatação de Telefone Fixo e Celular para o Contato</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <startElementReference>Verificar_Alteracao</startElementReference>
+    <status>Active</status>
+</Flow>

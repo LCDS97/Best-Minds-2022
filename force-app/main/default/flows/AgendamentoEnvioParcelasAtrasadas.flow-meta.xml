@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionCalls>
+        <name>EnviarEmailParcelaAtrasada</name>
+        <label>EnviarEmailParcelaAtrasada</label>
+        <locationX>264</locationX>
+        <locationY>876</locationY>
+        <actionName>emailSimple</actionName>
+        <actionType>emailSimple</actionType>
+        <connector>
+            <targetReference>Verificar_Data</targetReference>
+        </connector>
+        <inputParameters>
+            <name>emailSubject</name>
+            <value>
+                <elementReference>emailHead</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>emailBody</name>
+            <value>
+                <elementReference>emailBody</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>emailAddresses</name>
+            <value>
+                <elementReference>Verificar_Data.Contrato__r.CustomerSigned.Email</elementReference>
+            </value>
+        </inputParameters>
+    </actionCalls>
+    <assignments>
+        <description>Mudar Status para Atrasada</description>
+        <name>Atribuir_Status</name>
+        <label>Atribuir Status</label>
+        <locationX>264</locationX>
+        <locationY>756</locationY>
+        <assignmentItems>
+            <assignToReference>Verificar_Data.Status__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue>Atrasada</stringValue>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>EnviarEmailParcelaAtrasada</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <name>DefinirPendente</name>
+        <label>Definir Pendente</label>
+        <locationX>528</locationX>
+        <locationY>756</locationY>
+        <assignmentItems>
+            <assignToReference>Verificar_Data.Status__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue>Pendente</stringValue>
+            </value>
+        </assignmentItems>
+    </assignments>
+    <decisions>
+        <name>Verificar_Data_e_Vencimento</name>
+        <label>Verificar Data e Vencimento</label>
+        <locationX>396</locationX>
+        <locationY>636</locationY>
+        <defaultConnector>
+            <targetReference>DefinirPendente</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Parcela Não atrasada</defaultConnectorLabel>
+        <rules>
+            <name>Parcela_Atrasada</name>
+            <conditionLogic>or</conditionLogic>
+            <conditions>
+                <leftValueReference>Verificar_Data.Status__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Atrasada</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>Verificar_Data.DataVencimento__c</leftValueReference>
+                <operator>LessThan</operator>
+                <rightValue>
+                    <elementReference>formulaDataHoje</elementReference>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Atribuir_Status</targetReference>
+            </connector>
+            <label>Parcela Atrasada</label>
+        </rules>
+    </decisions>
+    <description>Agendamento de serviço para pesquisar na Base contratos atrasado e atualizar Status</description>
+    <formulas>
+        <name>formulaDataHoje</name>
+        <dataType>Date</dataType>
+        <expression>TODAY()</expression>
+    </formulas>
+    <interviewLabel>Agendamento de Envio de Parcelas Atrasadas {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Agendamento de Envio de Parcelas Atrasadas</label>
+    <loops>
+        <description>Verificar Data de Vencimento</description>
+        <name>Verificar_Data</name>
+        <label>Verificar Data</label>
+        <locationX>176</locationX>
+        <locationY>516</locationY>
+        <collectionReference>RegistrosParcelaAtrasada</collectionReference>
+        <iterationOrder>Asc</iterationOrder>
+        <nextValueConnector>
+            <targetReference>Verificar_Data_e_Vencimento</targetReference>
+        </nextValueConnector>
+        <noMoreValuesConnector>
+            <targetReference>AtualizarStatusParcela_0</targetReference>
+        </noMoreValuesConnector>
+    </loops>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordLookups>
+        <name>ObterContatoOportunidade</name>
+        <label>Obter Contato pela Oportunidade</label>
+        <locationX>176</locationX>
+        <locationY>276</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>RegistrosParcelaAtrasada</targetReference>
+        </connector>
+        <filters>
+            <field>ContactId</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>Verificar_Data.Contrato__r.CustomerSignedId</elementReference>
+            </value>
+        </filters>
+        <object>Opportunity</object>
+    </recordLookups>
+    <recordLookups>
+        <name>RegistrosParcelaAtrasada</name>
+        <label>Registros de Parcela Atrasada</label>
+        <locationX>176</locationX>
+        <locationY>396</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Verificar_Data</targetReference>
+        </connector>
+        <filters>
+            <field>DataVencimento__c</field>
+            <operator>LessThan</operator>
+            <value>
+                <elementReference>formulaDataHoje</elementReference>
+            </value>
+        </filters>
+        <object>Parcela__c</object>
+    </recordLookups>
+    <recordUpdates>
+        <name>AtualizarStatusParcela_0</name>
+        <label>Atualizar Status da Parcela</label>
+        <locationX>176</locationX>
+        <locationY>1188</locationY>
+        <inputReference>RegistrosParcelaAtrasada</inputReference>
+    </recordUpdates>
+    <startElementReference>ObterContatoOportunidade</startElementReference>
+    <status>Draft</status>
+    <textTemplates>
+        <description>Corpo do email para envio de Email de parcela Atrasada</description>
+        <name>emailBody</name>
+        <text>Sua parcela do contrato {!Verificar_Data.Contrato__c} esta com vencimento em {!Verificar_Data.DataVencimento__c} e consta como {!Verificar_Data.Status__c}. Por favor, regularize a situação o mais rapido possível!</text>
+    </textTemplates>
+    <textTemplates>
+        <description>Cabeçalho do Email</description>
+        <name>emailHead</name>
+        <text>&lt;p&gt;Sua Parcela esta em Atraso!&lt;/p&gt;</text>
+    </textTemplates>
+    <variables>
+        <name>contact</name>
+        <dataType>SObject</dataType>
+        <isCollection>true</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <objectType>Contact</objectType>
+    </variables>
+    <variables>
+        <name>obterParcela</name>
+        <dataType>SObject</dataType>
+        <isCollection>true</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <objectType>Parcela__c</objectType>
+    </variables>
+    <variables>
+        <name>recordId</name>
+        <dataType>SObject</dataType>
+        <isCollection>true</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <objectType>Contact</objectType>
+    </variables>
+</Flow>
