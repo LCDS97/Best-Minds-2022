@@ -13,7 +13,13 @@ public with sharing class ExercicioDML {
     }
 
     // 2 - Criar um método que receba o Id de um Cliente PJ e mude o campo Ativo para false ( Verificar com o Arthur depois sobre o campo )
+    public static void clientePJAtualizarCampo(Id idAccount){
+        Account clientePj = new Account();
+        clientePj.Id = idAccount;
+        clientePj.Ativo__c = false;
 
+        update clientePj;
+    }
     // 3 - Criar um método que receba o Id de uma Parcela e atualize o campo Status para Paga
     public static void atualizeCampoParcela(Id idParcela){
         Parcela__c parcelaAtualizar = new Parcela__c();
