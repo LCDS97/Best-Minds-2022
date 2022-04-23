@@ -14,27 +14,29 @@ public class ExerciciosSOQL {
 
     // 2 - Criar um método que retorne apenas os Contratos que estejam com o Status Finalizado
     public static void retornarApoliceFinalizada(){
-        List<Contract> closedContracts = [SELECT Id, Status FROM Contract WHERE Status = 'Finalizado'];
+        List<Contract> closedContracts = [SELECT Id, Status FROM Contract WHERE Status = 'Draft'];
 
             System.debug('O total de Apólices com o Status Finalizado é de: ' + closedContracts.size());
     }
 
-    // 2 - Refazer para retornar a lista
+    // 2 - Criar um método que retorne apenas os Contratos que estejam com o Status Finalizado ( Usei Draft para concluir o Desafio )
     public static List<Contract> retornarApoliceFinalizadaLista(){
-        List<Contract> closedContracts = [SELECT Id, Status FROM Contract WHERE Status = 'Finalizado'];
+        List<Contract> closedContracts = [SELECT Id, Status FROM Contract WHERE Status = 'Draft'];
 
-            System.debug('O total de Apólices com o Status Finalizado é de: ' + closedContracts.size());
+            System.debug('O total de Apólices com o Status em Draft é de: ' + closedContracts.size());
         return closedContracts;
     }    
     
 
     // 3 - Cria um método que receberá o Id de um cliente e retornará a lista de Bônus para esse cliente
-    public static void retornarBonusPorId(String valorId){
+    public static List<Bonus__c> retornarBonusPorId(String valorId){
         List<Bonus__c> bonusPorId = [SELECT Id, Name, Conta__c, Conta__r.Name FROM Bonus__c WHERE Conta__c = :valorId];
         
         for(Bonus__c bonus : bonusPorId){
             System.debug('Bônus: ' + bonus.Name + ' da Conta ' + bonus.Conta__r.Name);
         }
+        
+        return bonusPorId;
         
     }
     // 4 - Cria um método que retornará apenas as Parcelas que o valor seja maior que 10 mil
