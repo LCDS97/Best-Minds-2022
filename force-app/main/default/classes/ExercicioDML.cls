@@ -22,4 +22,14 @@ public with sharing class ExercicioDML {
         
         update parcelaAtualizar;
     }
+
+    // 4 - Criar um método que receba o Id de uma Parcela e delete o registro
+    public static void deletarParcela(Id idParcela){
+        Parcela__c parcelaDeletar = new Parcela__c();
+        System.debug('Verificando antes de deletar a parcela' + idParcela);
+        parcelaDeletar.Id = idParcela;
+        
+        delete parcelaDeletar;
+        System.debug('Verificando depois de deletar a parcela' + idParcela);
+    }
 }
