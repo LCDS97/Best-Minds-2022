@@ -52,7 +52,7 @@ public with sharing class ExercicioDML {
         2 - Se algum dos campos não estiver preenchido é necessário retornar false
         3 - Se todos os campos estiverem preenchidos, é necessário criar um registro de contato para o Cliente e retornar true
     */
-      public static void contatoClientePJ(
+      public static Boolean contatoClientePJ(
                             Id clientePJ,
                             String nomeContato,
                             String sobrenomeContato,
@@ -64,11 +64,11 @@ public with sharing class ExercicioDML {
                     Contact novoContato = new Contact();
                     
                     if (
-                        String.IsBlank(clientePJ) == false ||
-                        String.isBlank(nomeContato) == false ||
-                        String.isBlank(sobrenomeContato) == false ||
-                        String.isBlank(cargoContato) == false ||
-                        String.isBlank(dataNascimentoContato) == false ||
+                        String.IsBlank(clientePJ) == false &&
+                        String.isBlank(nomeContato) == false &&
+                        String.isBlank(sobrenomeContato) == false &&
+                        String.isBlank(cargoContato) == false &&
+                        String.isBlank(dataNascimentoContato) == false &&
                         String.isBlank(emailContato) == false ){
                         
                         try {
@@ -81,15 +81,19 @@ public with sharing class ExercicioDML {
                             novoContato.Email = emailContato;
                             contactWasCreated = true;
 
+                            System.debug('dentro do if' + contactWasCreated);
                             insert novoContato;
                         
                         } catch (exception  e) {
-                            System.debug('Preencha todos os campos por favor');
-                            contactWasCreated = false;
+                            System.debug('Algo deu errado');
                         }
-
+                        
                     }
-                    System.debug(contactWasCreated);
+                    else {
+                        contactWasCreated = false;
+                        System.debug('Preencha todos os campos por favor');
+                    }
+                    return contactWasCreated;
                     
 
                     }
