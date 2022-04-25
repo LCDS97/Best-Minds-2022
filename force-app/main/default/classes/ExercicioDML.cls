@@ -1,4 +1,6 @@
 public with sharing class ExercicioDML {
+
+    public class CampoVazioException extends Exception {}
 	
     // 1 - Criar um Método que atualize o valor da Oportunidade
                     // Paramêtros: Receber Id Oportunidade / Valor Decimal
@@ -58,43 +60,42 @@ public with sharing class ExercicioDML {
                             String sobrenomeContato,
                             String cargoContato,
                             String dataNascimentoContato,
-                            String emailContato)
-                    {
+                            String emailContato){
                     Boolean contactWasCreated;
                     Contact novoContato = new Contact();
-                    
-                    if (
-                        String.IsBlank(clientePJ) == false &&
-                        String.isBlank(nomeContato) == false &&
-                        String.isBlank(sobrenomeContato) == false &&
-                        String.isBlank(cargoContato) == false &&
-                        String.isBlank(dataNascimentoContato) == false &&
-                        String.isBlank(emailContato) == false ){
-                        
-                        try {
-                            Date dataConvertida = Date.valueOf(dataNascimentoContato);
-                            novoContato.AccountId = clientePJ;
-                            novoContato.FirstName = nomeContato;
-                            novoContato.LastName = sobrenomeContato;
-                            novoContato.Title = cargoContato;
-                            novoContato.BirthDate = dataConvertida;
-                            novoContato.Email = emailContato;
-                            contactWasCreated = true;
-
-                            System.debug('dentro do if' + contactWasCreated);
-                            insert novoContato;
-                        
-                        } catch (exception  e) {
-                            System.debug('Algo deu errado');
+                    try {
+                        if (
+                            String.IsBlank(clientePJ) == false &&
+                            String.isBlank(nomeContato) == false &&
+                            String.isBlank(sobrenomeContato) == false &&
+                            String.isBlank(cargoContato) == false &&
+                            String.isBlank(dataNascimentoContato) == false &&
+                            String.isBlank(emailContato) == false ){
+                            
+                            
+                                Date dataConvertida = Date.valueOf(dataNascimentoContato);
+                                novoContato.AccountId = clientePJ;
+                                novoContato.FirstName = nomeContato;
+                                novoContato.LastName = sobrenomeContato;
+                                novoContato.Title = cargoContato;
+                                novoContato.BirthDate = dataConvertida;
+                                novoContato.Email = emailContato;
+                                contactWasCreated = true;
+    
+                                insert novoContato;
+                            
+                            }
+                                throw new CampoVazioException('Preencher todos os campos por favor!!');
+                   
                         }
-                        
-                    }
-                    else {
+                    catch (CampoVazioException e) {
                         contactWasCreated = false;
-                        System.debug('Preencha todos os campos por favor');
+                        System.debug('### Exception Personalizado => ' + e.getMessage());
                     }
-                    return contactWasCreated;
-                    
-
+                    catch(Exception e){
+                        contactWasCreated = false;
+                        System.debug('### Exception Padrão => ' + e.getMessage());
                     }
+                        return contactWasCreated;    
+                }
 }
