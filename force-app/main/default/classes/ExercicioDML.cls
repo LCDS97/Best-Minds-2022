@@ -65,11 +65,11 @@ public with sharing class ExercicioDML {
                     Contact novoContato = new Contact();
                     try {
                         if (
-                            String.IsBlank(clientePJ) == false &&
-                            String.isBlank(nomeContato) == false &&
-                            String.isBlank(sobrenomeContato) == false &&
-                            String.isBlank(cargoContato) == false &&
-                            String.isBlank(dataNascimentoContato) == false &&
+                            String.IsBlank(clientePJ) == false ||
+                            String.isBlank(nomeContato) == false ||
+                            String.isBlank(sobrenomeContato) == false ||
+                            String.isBlank(cargoContato) == false ||
+                            String.isBlank(dataNascimentoContato) == false ||
                             String.isBlank(emailContato) == false ){
                             
                             
