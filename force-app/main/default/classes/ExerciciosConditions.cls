@@ -15,8 +15,8 @@ public with sharing class ExerciciosConditions {
         Date dataHoje = Date.Today();
         Decimal valorParcelaAlterado = 0;
 
-        Integer verificarVencimento = dataHoje.daysBetween(pegarParcela.DataVencimento__c);
         try {
+            Integer verificarVencimento = dataHoje.daysBetween(pegarParcela.DataVencimento__c);
             
             if( verificarVencimento > 0){
                 valorParcelaAlterado = pegarParcela.Moeda__c - (pegarParcela.Moeda__c * 0.05);
@@ -28,7 +28,7 @@ public with sharing class ExerciciosConditions {
                 System.debug('Sem desconto pois é o dia do Vencimento');
         }   else {
                 throw new DataVencimentoVazioException('Valor do campo Date está Nulo');
-        } 
+            } 
         } catch (DataVencimentoVazioException error) {
             System.debug('###Erro DataVencimentoException => :' + error.getMessage());
         } catch (NullPointerException error) {
