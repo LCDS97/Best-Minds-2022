@@ -3,6 +3,8 @@ public with sharing class ExerciciosConditions {
     public class ContaInativaException extends Exception{}
     public class CampoVazioException extends Exception{}
     public class DataVencimentoVazioException extends Exception{}
+    public class SemDadosBancariosNuloException extends Exception{}
+    public class SemContatosException extends Exception{}
 
     /*  1 - Criar um método que receba o Id de uma parcela como paramêtro e retorne o valor desta parcela adicionando um percentual
         As condições devem ser:
@@ -64,16 +66,54 @@ public with sharing class ExerciciosConditions {
             System.debug('Todos os campos preenchidos');
             
            
-       } catch (ContaInativaException error) {
+        } catch (ContaInativaException error) {
            System.debug('### Exception ContaInativa: ' + error.getMessage());
-       } catch (CampoVazioException error) {
-        System.debug('### Exception CampoVazio: ' + error.getMessage());
-    }   catch (Exception error) {
-        System.debug('### Exception Padrão: ' + error.getMessage());
-    } 
+        } catch (CampoVazioException error) {
+            System.debug('### Exception CampoVazio: ' + error.getMessage());
+        } catch (Exception error) {
+            System.debug('### Exception Padrão: ' + error.getMessage());
+        }
     }
+    /* 3 - Criar um método que receba o Id de um Cliente PJ e faça as segiuntes ações:
+        1. Se o Cliente PJ não tiver nenhum Dado Bancário cadastrado no sistema, é necessário lançar uma exceção
+            indicando a falta de registro de Dados Bancários.
+        2. Se o Cliente PJ não tiver nenhum Contato cadastrado é necessário lançar uma exceção indicando a falta de registros Contato para a Conta.
+        3. Criar uma Oportunidade para o Cliente PJ caso nenhum dos tópicos anteriores for verdadeiro
+    */
+    public static void criarOportunidadeClientePJ(Id IdAccount){
+        List <DadosBancarios__c> dadosBancariosClientePJ = [SELECT Id, Conta__c, Conta__r.Name FROM DadosBancarios__c WHERE Conta__c	 =: IdAccount];
+        List <Contact> contatosClientePJ = [SELECT Id FROM Contact WHERE AccountId =: IdAccount];
+
+        try {
+            if(dadosBancariosClientePJ.isEmpty()){
+                throw new SemDadosBancariosNuloException('É Necessário ter pelo menos um Dado Bancário cadastrado na Conta!');
+            }
+            if(contatosClientePJ.isEmpty()){
+                throw new SemContatosException('É necessário a conta ter pelo menos um contato cadastrado!');
+            }
+            Opportunity novaOportunidadeClientePJ = new Opportunity();
+            Account nomeOportunidade = [SELECT Id, Name FROM Account WHERE Id =: IdAccount ];
+            
+            //Date dataFechamentoOportunidade = date.today().addMonths(1);
+            novaOportunidadeClientePJ.AccountId = IdAccount;
+            novaOportunidadeClientePJ.Name = 'Oportunidade da Conta ' + nomeOportunidade.Name;
+            novaOportunidadeClientePJ.StageName = 'Prospecting';
+            novaOportunidadeClientePJ.CloseDate = date.today().addMonths(2);
+
+            System.debug(novaOportunidadeClientePJ);
+            insert novaOportunidadeClientePJ;
 
 
+
+        } catch (SemDadosBancariosNuloException error) {
+            System.debug('### SemDadosBancariosNuloException => ' + error.getMessage());
+        } catch (SemContatosException error) {
+            System.debug('### SemContatosException => ' + error.getMessage());
+        } catch (Exception error) {
+            System.debug('### Exception Padrão => ' + error.getMessage());
+            
+        }
+    }
 
     
 }
