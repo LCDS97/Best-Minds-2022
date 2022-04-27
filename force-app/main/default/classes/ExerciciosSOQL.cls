@@ -65,7 +65,7 @@ public class ExerciciosSOQL {
     }
     
     // 6 - Criar um método que receba o Id de um Contrato ( Apólice ) e retorne a soma de todas as parcelas desse contrato
-    public static List<Parcela__c> retornaParcelasContratoPorId(String valorId){
+    public static Decimal retornaParcelasContratoPorId(String valorId){
         List<Parcela__c> parcelasContratoId = [SELECT Id, Contrato__c, Moeda__c, Contrato__r.Account.Name FROM Parcela__c WHERE Contrato__c = :valorId];
 		Decimal valorTotal = 0;        
         
@@ -74,8 +74,7 @@ public class ExerciciosSOQL {
             valorTotal += parcela.Moeda__c;
             System.debug('O valor atual da Parcela é de R$' + parcela.Moeda__c + ' da Conta ' + parcela.Contrato__r.Account.Name + ' com o total de R$' + valorTotal);
         }
-
-        return parcelasContratoId;
+        return valorTotal;
         
         
     }    
