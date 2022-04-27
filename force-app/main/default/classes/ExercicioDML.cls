@@ -18,7 +18,11 @@ public with sharing class ExercicioDML {
     public static void clientePJAtualizarCampo(Id idAccount){
         Account clientePj = new Account();
         clientePj.Id = idAccount;
-        clientePj.Ativo__c = false;
+        if (clientePj.Ativo__c == true){
+            clientePj.Ativo__c = false;
+            System.debug('Dentro do IF = VerificarCampo igual a ' + clientePj.Ativo__c);
+        }
+        System.debug('Fora do IF = VerificarCampo igual a ' + clientePj.Ativo__c);
 
         update clientePj;
     }
