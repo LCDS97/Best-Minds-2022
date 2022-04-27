@@ -34,4 +34,11 @@ public with sharing class ExerciciosCollection {
         return buscarContasClientePj;
     }
 
+    // 5 - Criar um método que receba um Id de Contrato e retorne a quantidade de parcelas do mesmo Contrato
+    public static Integer buscarParcelasContrato(Id IdContrato){
+        Integer buscaParcelaPorContratoId = [SELECT Count() FROM Parcela__c WHERE Contrato__c =: IdContrato];
+
+        return buscaParcelaPorContratoId;
+    } 
+
 }
