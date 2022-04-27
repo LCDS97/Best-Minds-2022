@@ -3,6 +3,7 @@ public with sharing class ExerciciosLacosRepeticao {
     public class ContaInativaException extends Exception{}
     public class ContatoNaoExistenteException extends Exception{}
     public class ValorBonusZeradoException extends Exception{}
+    public class ListaVaziaException extends Exception{}
 
     /* 1 - Criar um método que insira vários registros de Oportunidade.
     Este método deve receber um valor inteiro que representará a quantidade de Oportunidade a serem criadas
@@ -78,6 +79,22 @@ public with sharing class ExerciciosLacosRepeticao {
             if(valorBonus <= 0){
                 throw new ValorBonusZeradoException('É Necessário o valor do Bônus maior que zero');
             }
+
+            List<Bonus__c> listaBonus = new List <Bonus__c>(); 
+
+            for(Contact contato : listContatos){
+                Bonus__c bonusParaContato = new Bonus__c();
+
+                bonusParaContato.Conta__c = IdAccount;
+                bonusParaContato.Contato__c = contato.Id;
+                bonusParaContato.Pontos__c = valorBonus;
+
+                listaBonus.add(bonusParaContato);
+            }
+
+            System.debug(listaBonus);
+
+            insert listaBonus;
             
         } catch (ContaInativaException e) {
             System.debug('#### ContaInativaException: ' + e.getMessage());
@@ -89,5 +106,46 @@ public with sharing class ExerciciosLacosRepeticao {
             System.debug('#### Exception Padrao: ' + e.getMessage());
             
         }
+    }
+
+    /*  4 - Criar um método que faça a comparação dos itens de duas listas e retorne a quantidade de itens que são comuns entre as duas listas
+            1. Paramêtros:
+                1. lista1 (List <String>)
+                2. lista2 (List <String>)
+            2. Validações:
+                1. Se uma das listas estiver vazia, lançar uma exceção informando qual lista está vazia
+            3. Retorno do Método:
+                1. Um número que indica a quantidade de itens repetidos
+        For dentro For
+        Compara campos
+    */
+    public static Integer comparacaoItensLista(List<String> lista1,List<String> lista2){
+        Set<String> valoresUnicos = new Set<String>();
+        try {
+            if(lista1.isEmpty()){
+                throw new ListaVaziaException('A lista esta vazia! A lista vazia é a Lista 1');
+            }
+            if(lista2.isEmpty()){
+                throw new ListaVaziaException('A lista esta vazia! A lista vazia é a Lista 2');
+            }
+
+            for(String item1 : lista1){
+                for(String item2: lista2){
+                    if(item1 == item2){
+                        System.debug('O item 1: ' + item1 + ' é igual ao item 2: ' + item2);
+                        valoresUnicos.add(item1);
+                    }
+                }
+            }
+
+        } catch (ListaVaziaException e) {
+            System.debug('### ExceptionListaVazia' + e.getMessage());
+        }catch (Exception e) {
+            System.debug('### Exception Padrão '  + e.getMessage());
+            
+        }
+        Integer valoresRepetidos = valoresUnicos.size(); 
+        System.debug('Itens iguais é ' + valoresRepetidos);
+        return valoresRepetidos;
     }
 }
