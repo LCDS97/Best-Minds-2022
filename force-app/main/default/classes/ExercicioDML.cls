@@ -16,9 +16,10 @@ public with sharing class ExercicioDML {
 
     // 2 - Criar um método que receba o Id de um Cliente PJ e mude o campo Ativo para false ( Verificar com o Arthur depois sobre o campo )
     public static void clientePJAtualizarCampo(Id idAccount){
-        Account clientePj = new Account();
-        clientePj.Id = idAccount;
-        if (clientePj.Ativo__c == true){
+        Account clientePj = [SELECT Id, Ativo__c FROM Account WHERE Id =: idAccount];
+        
+        System.debug('Antes do IF = VerificarCampo igual a ' + clientePj.Ativo__c);
+        if (clientePj.Ativo__c){
             clientePj.Ativo__c = false;
             System.debug('Dentro do IF = VerificarCampo igual a ' + clientePj.Ativo__c);
         }
