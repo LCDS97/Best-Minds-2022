@@ -32,11 +32,20 @@ public with sharing class DesafioApexCorreto {
             List<Opportunity> oportunidades = [SELECT Id, AccountId FROM Opportunity]; // Aqui eu retorno o Id da Oportunidade e Id da Conta
     
                 for(Opportunity oportunidade : oportunidades) {
+
                         listaContas.add(oportunidade.AccountId);
+
                         if(listaContas.contains(oportunidade.AccountId)){
-                            mapQtdePorConta.get(oportunidade.AccountId);
-                            contador++;
-                            //contador = 0;
+
+                            if(mapQtdePorConta.containsKey(oportunidade.AccountId)){
+                                mapQtdePorConta.get(oportunidade.AccountId);
+                                contador++;
+                            }
+                            else {
+
+                                contador = 0;
+                            }
+                            
                         }
                         mapQtdePorConta.put(oportunidade.AccountId,contador);
                     }
