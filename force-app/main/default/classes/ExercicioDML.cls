@@ -67,17 +67,17 @@ public with sharing class ExercicioDML {
                             String dataNascimentoContato,
                             String emailContato){
                     Boolean contactWasCreated;
-                    Contact novoContato = new Contact();
                     try {
                         if (
-                            String.IsBlank(clientePJ) == false ||
-                            String.isBlank(nomeContato) == false ||
-                            String.isBlank(sobrenomeContato) == false ||
-                            String.isBlank(cargoContato) == false ||
-                            String.isBlank(dataNascimentoContato) == false ||
+                            String.IsBlank(clientePJ) == false &&
+                            String.isBlank(nomeContato) == false &&
+                            String.isBlank(sobrenomeContato) == false &&
+                            String.isBlank(cargoContato) == false &&
+                            String.isBlank(dataNascimentoContato) == false &&
                             String.isBlank(emailContato) == false ){
-                            
-                            
+                                
+                                
+                                Contact novoContato = new Contact();
                                 Date dataConvertida = Date.valueOf(dataNascimentoContato);
                                 novoContato.AccountId = clientePJ;
                                 novoContato.FirstName = nomeContato;
@@ -89,8 +89,10 @@ public with sharing class ExercicioDML {
     
                                 insert novoContato;
                             
-                            }
+                            }else{
                                 throw new CampoVazioException('Preencher todos os campos por favor!!');
+
+                            }
                    
                         }
                     catch (CampoVazioException e) {

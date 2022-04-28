@@ -5,6 +5,10 @@
 // You can also execute the entire file by running the command:
 //     SFDX: Execute Anonymous Apex with Editor Contents
 
-string tempvar = 'Enter_your_name_here';
-System.debug('Hello World!');
-System.debug('My name is ' + tempvar);
+//List<Opportunity> lstOportunidades = [SELECT Id, Amount FROM Opportunity];
+
+
+
+
+Boolean resultado = ExercicioDML.contatoClientePJ('0018b00001xpUKLAA2','','Ribeiro do Lol','Lolzeiro','2000-01-01','nicolaskadosheira@gmail.com');
+System.debug('###################################### resultado deu :' + resultado);
