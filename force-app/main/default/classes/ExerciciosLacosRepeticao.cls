@@ -165,8 +165,10 @@ public with sharing class ExerciciosLacosRepeticao {
         Integer quantidadeOportunidades = 0;
 
         // Vou percorrer a lista para separar as oportunidades por id e armanezar numa nova lista/map
-        for(Account conta : [SELECT Id FROM Account LIMIT 100]){
-            for(Opportunity oportunidade : [SELECT Id, AccountId FROM Opportunity WHERE AccountId =: conta.Id LIMIT 100]){
+
+        // Vou refazer esse método, mas primeiro vou entender como posso achar essa relação de Id de conta com outra forma para ligar com a oportunidade
+        for(Account conta : [SELECT Id FROM Account]){
+            for(Opportunity oportunidade : [SELECT Id, AccountId FROM Opportunity WHERE AccountId =: conta.Id]){
 
                 mapOportunidadesPorIdClientePj.put(oportunidade.AccountId, quantidadeOportunidades);
                 quantidadeOportunidades++;
