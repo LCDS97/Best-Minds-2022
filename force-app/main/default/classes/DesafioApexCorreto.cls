@@ -23,28 +23,22 @@ public with sharing class DesafioApexCorreto {
             System.debug('####### MAp =>' + mapQtdePorConta);
         }
         public static Map<Id,Integer> mapDesafioBruno(){
-            Set<String> listaContas = new Set<String>();
-            Integer contador = 0;
+            Integer contador;
             
             Map<Id, Integer> mapQtdePorConta = new Map<Id, Integer>();
             List<Opportunity> oportunidades = [SELECT Id, AccountId FROM Opportunity]; // Aqui eu retorno o Id da Oportunidade e Id da Conta
     
                 for(Opportunity oportunidade : oportunidades) {
 
-                        listaContas.add(oportunidade.AccountId);
-
-                        if(listaContas.contains(oportunidade.AccountId)){
-
-                            if(mapQtdePorConta.containsKey(oportunidade.AccountId)){
-                                contador = mapQtdePorConta.get(oportunidade.AccountId);
-                                contador++;
-                            }
-                            else {
-
-                                contador = 0;
-                            }
-                            
+                        
+                        if(mapQtdePorConta.containsKey(oportunidade.AccountId)){
+                            contador = mapQtdePorConta.get(oportunidade.AccountId);
                         }
+                        else {
+                            
+                            contador = 0;
+                        }
+                        contador++;
                         mapQtdePorConta.put(oportunidade.AccountId,contador);
                     }
             
