@@ -22,12 +22,10 @@ public with sharing class DesafioApexCorreto {
             System.debug('####### Lista Contas =>' + JSON.serialize(listaContas));
             System.debug('####### MAp =>' + mapQtdePorConta);
         }
-        public static void outraLogicaForDentroDeFor(){
+        public static Map<Id,Integer> mapDesafioBruno(){
             Set<String> listaContas = new Set<String>();
-            List<Opportunity> listaOportunidades = new List<Opportunity>();
             Integer contador = 0;
             
-            // mapContasComOportunidades.put('<ID_DA_CONTA>', <LISTA_DE_OPORTUNIDADES>);
             Map<Id, Integer> mapQtdePorConta = new Map<Id, Integer>();
             List<Opportunity> oportunidades = [SELECT Id, AccountId FROM Opportunity]; // Aqui eu retorno o Id da Oportunidade e Id da Conta
     
@@ -38,7 +36,7 @@ public with sharing class DesafioApexCorreto {
                         if(listaContas.contains(oportunidade.AccountId)){
 
                             if(mapQtdePorConta.containsKey(oportunidade.AccountId)){
-                                mapQtdePorConta.get(oportunidade.AccountId);
+                                contador = mapQtdePorConta.get(oportunidade.AccountId);
                                 contador++;
                             }
                             else {
@@ -50,7 +48,7 @@ public with sharing class DesafioApexCorreto {
                         mapQtdePorConta.put(oportunidade.AccountId,contador);
                     }
             
-                System.debug('####### Lista Contas =>' + JSON.serialize(listaContas));
                 System.debug('####### MAp =>' + mapQtdePorConta);
+                return mapQtdePorConta;
     }}
 
