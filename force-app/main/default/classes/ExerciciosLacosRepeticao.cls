@@ -121,6 +121,7 @@ public with sharing class ExerciciosLacosRepeticao {
     */
     public static Integer comparacaoItensLista(List<String> lista1,List<String> lista2){
         Set<String> valoresUnicos = new Set<String>();
+        
         try {
             if(lista1.isEmpty()){
                 throw new ListaVaziaException('A lista esta vazia! A lista vazia é a Lista 1');
@@ -148,4 +149,35 @@ public with sharing class ExerciciosLacosRepeticao {
         System.debug('Itens iguais é ' + valoresRepetidos);
         return valoresRepetidos;
     }
+
+    // 5 - Criar um método que retorne um mapa da quantidade de Oportunidades por Id de Cliente PJ
+    /* O que eu preciso buscar? Mapa Quantidade Oportunidade - Valores
+       O que eu preciso filtrar? Id de Cliente PJ - Chave
+       Map < Id, Integer > - Sendo Id do Conta / O integer é a quantidade de oportundiades do id
+    
+    */
+    public static void mapOportunidadesPorIdClientePj(){
+
+        Map<Id, Integer> mapOportunidadesPorIdClientePj = new Map<Id, Integer>();
+        //List<Opportunity> oportunidadesClientePJ = [SELECT id, AccountId FROM Opportunity WHERE AccountId != null];
+
+
+        Integer quantidadeOportunidades = 0;
+
+        // Vou percorrer a lista para separar as oportunidades por id e armanezar numa nova lista/map
+        for(Account conta : [SELECT Id FROM Account LIMIT 100]){
+            for(Opportunity oportunidade : [SELECT Id, AccountId FROM Opportunity WHERE AccountId =: conta.Id LIMIT 100]){
+
+                mapOportunidadesPorIdClientePj.put(oportunidade.AccountId, quantidadeOportunidades);
+                quantidadeOportunidades++;
+
+                }
+                mapOportunidadesPorIdClientePj.put(conta.Id, quantidadeOportunidades);
+                quantidadeOportunidades = 0;
+            }
+            System.debug('### fora do FOR: =>' + JSON.serialize(mapOportunidadesPorIdClientePj));
+    }
+
+    // 6 - Criar um método que retorne um mapa com os Dados Bancários de por Id de Cliente PJ
+
 }

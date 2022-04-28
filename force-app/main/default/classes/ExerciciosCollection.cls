@@ -13,6 +13,11 @@ public with sharing class ExerciciosCollection {
         return listaVencidas;
     }
 
+    public static List<AgreggateResult> oportunidadeMaiorValorId(Id Account Id){
+        List<AgreggateResult> listMaiorValor = [SELECT MAX(Amount) FROM Opportunity];
+
+    }
+
     // 3 - Criar um método que retorne a Oportunidade de Maior Valor
     public static Opportunity oportunidadeMaiorValor(){
         Opportunity oportunidadeComMaiorValor = [SELECT Id, Amount, Name FROM Opportunity ORDER BY Amount DESC NULLS LAST LIMIT 1];
