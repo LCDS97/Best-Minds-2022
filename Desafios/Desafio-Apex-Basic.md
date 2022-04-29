@@ -1,4 +1,16 @@
-## Exercícios
+## DML
+
+- [ ] Revisar conteúdo e mandar hoje
+
+## Laço de Repetição e Collections
+
+- [ ] 5 - Revisar para confirmar
+
+- [ ] 6 - Fazer Mapa dos Dados Bancários com um Boolean aplicado na aula de hoje
+
+
+
+## Conceitos Básicos da Linguagem
 
 - [ ] 1 - Crie um método que retorne um mapa com os dados bancários por CNPJ de conta.
 
@@ -23,3 +35,35 @@ Retorno do método:
 
 
 - [ ] 5 - Crie um método que receba uma lista de inteiro e retorne uma outra lista com todos os valores multiplicados por 2
+
+## Triggers
+
+- [ ] 1 - Refazer desafio do Trailhead de Trigger de uma maneira nova utilizando coleções
+
+Exercícios - Apex Trigger
+
+
+
+- [ ] 1 - Crie um Apex Trigger que, ao criar um registro de Contrato (Contract), crie um registro de Tarefa (Task), caso a Conta (Account) vinculada não possua um registro de Dados Bancários (DadosBancarios__c):
+* OwnerId = Proprietário da conta vinculado no caso
+* WhatId = Conta vinculada ao caso
+* ActivityDate = Data atual
+* Subject = Necessário cadastrar os dados bancários do cliente
+
+
+
+- [ ] 2 - Crie um Apex Trigger que, ao ativar um Contrato (Contract) (Status = Activated), valide se a Conta (Account) vinculada possui um registro de Dados Bancários (DadosBancarios__c) ativo. Caso não possua, exibir uma mensagem que ele não pode ativar um Contrato (Contract) sem ter um registro de Dados Bancários (DadosBancarios__c) ativo. Obs.: Utilizar o método addError.
+
+
+
+- [ ] 3 - Crie um Apex Trigger que, ao criar ou atualizar um registro de Caso (Case) com o tipo “Sinistro”, valide se a conta vinculada possui um Contrato (Contract) ativo. Caso não possua, exibir uma mensagem que ele não pode abrir um sinistro sem um Contrato (Contract) ativo. Obs.: Utilizar o método addError.
+
+
+
+- [ ] 4 - Crie um Apex Trigger que, ao criar um registro de Dados Bancários (DadosBancarios__c) ativo, inative todos os outros registros de Dados Bancários ativos do cliente, menos o que acabou de ser ativado.
+
+
+
+- [ ] 5 - Crie um Apex Trigger que, ao criar um registro de oportunidade (Opportunity), verifique se o Contato (Contact) não foi preenchido e se a Conta (Account) vinculada possui apenas 1 Contato (Contact). Caso isso aconteça, vincule automaticamente esse Contato (Contact) na Oportunidade (Opportunity).
+
+
