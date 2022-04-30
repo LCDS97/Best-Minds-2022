@@ -1,5 +1,5 @@
 ## DML
-[Classe da Atividade](../force-app/main/default/classes/ExercicioDML.cls)
+[Classe da Atividade](force-app/main/default/classes/ExercicioDML.cls)
 
 - [x] 1 - Criar um Método que atualize o valor da Oportunidade
 - [x] 2 - Criar um método que receba o Id de um Cliente PJ e mude o campo Ativo para false
@@ -9,7 +9,7 @@
 
 ## Collections
 
-[Classe da Atividade](../force-app/main/default/classes/ExerciciosCollection.cls)
+[Classe da Atividade](force-app/main/default/classes/ExerciciosCollection.cls)
 
 - [x] 1 - Criar um método que retorne os Clientes PJ Ativos
 
@@ -23,7 +23,7 @@
 
 ## Laços de Repetição
 
-[Classe da Atividade](../force-app/main/default/classes/ExerciciosLacosRepeticao.cls)
+[Classe da Atividade](force-app/main/default/classes/ExerciciosLacosRepeticao.cls)
 
 - [x] 1 - Criar um método que insira vários registros de Oportunidade.
 > Este método deve receber um valor inteiro que representará a quantidade de Oportunidade a serem criadas
