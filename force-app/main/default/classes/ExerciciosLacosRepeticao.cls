@@ -174,17 +174,28 @@ public with sharing class ExerciciosLacosRepeticao {
     public static Map<Id,List<DadosBancarios__c>> mapDadosBancarios(){
         List<Account> contasClientePJ = [SELECT Id From Account];
 
-        Map<Id,Integer> mapDadosBancariosExiste = new Map<Id,Boolean>();
+        Map<Id,List<DadosBancarios__c>> mapDadosBancariosClientePJ = new Map<Id,List<DadosBancarios__c>>();
 
         for(Account conta : contasClientePJ){
-            mapDadosBancariosExiste.put(conta.Id,false);
+            mapDadosBancariosClientePJ.put(conta.Id,new List<DadosBancarios__c>());
         }
 
-        List<DadosBancarios__c> lstDadosBancarios = [SELECT Id, Conta__c FROM DadosBancarios__c IN :mapDadosBancariosExiste.keySet()];
+        List<DadosBancarios__c> lstDadosBancarios = [SELECT 
+                                                        Id, 
+                                                        Conta__c 
+                                                    FROM 
+                                                        DadosBancarios__c  
+                                                    WHERE
+                                                        Conta__c
+                                                    IN  :mapDadosBancariosClientePJ.keySet()];
 
-        for(DadosBancarios__c db : lstDadosBancarios){
-
+        for(DadosBancarios__c dadoBancario : lstDadosBancarios){
+            mapDadosBancariosClientePJ.get(dadoBancario.Conta__c).add(dadoBancario);
         }
+
+        return mapDadosBancariosClientePJ;
+
+
     }
 
 }

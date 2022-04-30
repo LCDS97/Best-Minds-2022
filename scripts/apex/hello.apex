@@ -1,3 +1,4 @@
-Map<Id, Integer> mapResultado = DesafioApexCorreto.mapDesafioBruno();
+Map<Id, DadosBancarios__c> mapResultado = ExerciciosLacosRepeticao.mapDadosBancarios();
 
-System.debug(mapResultado);
+System.debug(JSON.serialize(mapResultado));
+System.debug(mapResultado.size());

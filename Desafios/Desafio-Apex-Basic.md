@@ -44,7 +44,7 @@
             2. Caso a lista recebida no paramêtro não possua nenhum item, lançar uma exceção informando que não possui Contatos
             3. Caso o valor da proposta seja menor ou igual a zero, lançar uma exceção informando o valor deve ser maior que zero
 
-- [ ] 4 - Criar um método que faça a comparação dos itens de duas listas e retorne a quantidade de itens que são comuns entre as duas listas
+- [x] 4 - Criar um método que faça a comparação dos itens de duas listas e retorne a quantidade de itens que são comuns entre as duas listas
 >>            1. Paramêtros:
                 1. lista1 (List <String>)
                 2. lista2 (List <String>)
@@ -52,8 +52,9 @@
                 1. Se uma das listas estiver vazia, lançar uma exceção informando qual lista está vazia
 >>            3. Retorno do Método:
                 1. Um número que indica a quantidade de itens repetidos
-        
-- [ ] 6 - Fazer Mapa dos Dados Bancários com um Boolean aplicado na aula de hoje
+- [x] 5 - Criar um método que retorne um mapa da quantidade de Oportunidades por Id de Cliente PJ
+
+- [x] 6 - Fazer Mapa dos Dados Bancários com um Boolean aplicado na aula de hoje
 
 
 
