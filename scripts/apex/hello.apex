@@ -8,7 +8,7 @@
 //List<Opportunity> lstOportunidades = [SELECT Id, Amount FROM Opportunity];
 
 
+//SELECT id FROM Opportunity WHERE AMOUNT > 50000
 
-
-Boolean resultado = ExercicioDML.contatoClientePJ('0018b00001xpUKLAA2','','Ribeiro do Lol','Lolzeiro','2000-01-01','nicolaskadosheira@gmail.com');
-System.debug('###################################### resultado deu :' + resultado);
+Boolean resultado = ExercicioDML.contatoClientePJ('0018b00001xUIAIAA4', 'nome', 'contato', 'blz', '1997-02-02', 'email@email.com.br');
+System.debug(resultado);

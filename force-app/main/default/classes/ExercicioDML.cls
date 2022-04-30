@@ -9,6 +9,7 @@ public with sharing class ExercicioDML {
         Opportunity oportunidadeAtualizar = new Opportunity();
         oportunidadeAtualizar.Id = idOportunidade;
         oportunidadeAtualizar.Amount = valorOportunidade;
+
         
         update oportunidadeAtualizar;
 
@@ -18,12 +19,9 @@ public with sharing class ExercicioDML {
     public static void clientePJAtualizarCampo(Id idAccount){
         Account clientePj = [SELECT Id, Ativo__c FROM Account WHERE Id =: idAccount];
         
-        System.debug('Antes do IF = VerificarCampo igual a ' + clientePj.Ativo__c);
         if (clientePj.Ativo__c){
             clientePj.Ativo__c = false;
-            System.debug('Dentro do IF = VerificarCampo igual a ' + clientePj.Ativo__c);
         }
-        System.debug('Fora do IF = VerificarCampo igual a ' + clientePj.Ativo__c);
 
         update clientePj;
     }
@@ -89,7 +87,8 @@ public with sharing class ExercicioDML {
     
                                 insert novoContato;
                             
-                            }else{
+                            }
+                            else{
                                 throw new CampoVazioException('Preencher todos os campos por favor!!');
 
                             }
@@ -99,6 +98,7 @@ public with sharing class ExercicioDML {
                         contactWasCreated = false;
                         System.debug('### Exception Personalizado => ' + e.getMessage());
                     }
+                    
                     catch(Exception e){
                         contactWasCreated = false;
                         System.debug('### Exception Padrão => ' + e.getMessage());

@@ -1,6 +1,11 @@
 ## DML
+[Classe da Atividade](../force-app/main/default/classes/ExercicioDML.cls)
 
-- [ ] Revisar conteúdo e mandar hoje
+- [x] 1 - Criar um Método que atualize o valor da Oportunidade
+- [x] 2 - Criar um método que receba o Id de um Cliente PJ e mude o campo Ativo para false
+- [x] 3 - Criar um método que receba o Id de uma Parcela e atualize o campo Status para Paga
+- [x] 4 - Criar um método que receba o Id de uma Parcela e delete o registro
+- [x] 5 - Criar um método que crie um Contato para o Cliente PJ
 
 ## Laço de Repetição e Collections
 
