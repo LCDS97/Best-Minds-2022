@@ -26,4 +26,6 @@ trigger TriggerExample on Account (after insert, after update) {
             
         }
         insert lstOppDevoCriar;
+
+        
 }
