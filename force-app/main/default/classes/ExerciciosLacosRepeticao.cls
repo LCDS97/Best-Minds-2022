@@ -20,7 +20,6 @@ public with sharing class ExerciciosLacosRepeticao {
         Account nomeOportunidade = [SELECT Id, Name FROM Account WHERE Id =: idCliente ];
 
         List<Opportunity> oportunidadesParaCadastrar = new List<Opportunity>();
-        System.debug('Lista antes do While:' + oportunidadesParaCadastrar);
         
         Integer contador = 1;
         while(contador <= numeroOportunidades){
@@ -32,10 +31,8 @@ public with sharing class ExerciciosLacosRepeticao {
             novaOportunidadeClientePJ.CloseDate = date.today().addMonths(2);
             oportunidadesParaCadastrar.add(novaOportunidadeClientePJ);
             contador++;
-            System.debug('Lista :' + oportunidadesParaCadastrar);
-            System.debug('Oportunidade :' + novaOportunidadeClientePJ);
         }
-        System.debug('Lista depois do While:' + oportunidadesParaCadastrar);
+        System.debug('Lista para cadastrar depois do While:' + oportunidadesParaCadastrar);
         insert oportunidadesParaCadastrar;
 
     }
@@ -50,7 +47,7 @@ public with sharing class ExerciciosLacosRepeticao {
                 quantidadeOportunidades++;
             }
         }
-        System.debug(quantidadeOportunidades);
+        System.debug('O número de oportunidades retornada é ' + quantidadeOportunidades);
         return quantidadeOportunidades;
     }
     
@@ -92,8 +89,7 @@ public with sharing class ExerciciosLacosRepeticao {
                 listaBonus.add(bonusParaContato);
             }
 
-            System.debug(listaBonus);
-
+            System.debug('A lista de bonus a ser criada é ' + listaBonus);
             insert listaBonus;
             
         } catch (ContaInativaException e) {
@@ -133,7 +129,6 @@ public with sharing class ExerciciosLacosRepeticao {
             for(String item1 : lista1){
                 for(String item2: lista2){
                     if(item1 == item2){
-                        System.debug('O item 1: ' + item1 + ' é igual ao item 2: ' + item2);
                         valoresUnicos.add(item1);
                     }
                 }
@@ -151,35 +146,45 @@ public with sharing class ExerciciosLacosRepeticao {
     }
 
     // 5 - Criar um método que retorne um mapa da quantidade de Oportunidades por Id de Cliente PJ
-    /* O que eu preciso buscar? Mapa Quantidade Oportunidade - Valores
-       O que eu preciso filtrar? Id de Cliente PJ - Chave
-       Map < Id, Integer > - Sendo Id do Conta / O integer é a quantidade de oportundiades do id
-    
-    */
-    public static void mapOportunidadesPorIdClientePj(){
+    public static Map<Id,Integer> mapOportunidadesPorIdClientePj(){
+        Integer contador;
+        
+        Map<Id, Integer> mapQtdePorConta = new Map<Id, Integer>();
+        List<Opportunity> oportunidades = [SELECT Id, AccountId FROM Opportunity]; // Aqui eu retorno o Id da Oportunidade e Id da Conta
 
-        Map<Id, Integer> mapOportunidadesPorIdClientePj = new Map<Id, Integer>();
-        //List<Opportunity> oportunidadesClientePJ = [SELECT id, AccountId FROM Opportunity WHERE AccountId != null];
+            for(Opportunity oportunidade : oportunidades) {
 
-
-        Integer quantidadeOportunidades = 0;
-
-        // Vou percorrer a lista para separar as oportunidades por id e armanezar numa nova lista/map
-
-        // Vou refazer esse método, mas primeiro vou entender como posso achar essa relação de Id de conta com outra forma para ligar com a oportunidade
-        for(Account conta : [SELECT Id FROM Account]){
-            for(Opportunity oportunidade : [SELECT Id, AccountId FROM Opportunity WHERE AccountId =: conta.Id]){
-
-                mapOportunidadesPorIdClientePj.put(oportunidade.AccountId, quantidadeOportunidades);
-                quantidadeOportunidades++;
-
+                    
+                    if(mapQtdePorConta.containsKey(oportunidade.AccountId)){
+                        contador = mapQtdePorConta.get(oportunidade.AccountId);
+                    }
+                    else {
+                        
+                        contador = 0;
+                    }
+                    contador++;
+                    mapQtdePorConta.put(oportunidade.AccountId,contador);
                 }
-                mapOportunidadesPorIdClientePj.put(conta.Id, quantidadeOportunidades);
-                quantidadeOportunidades = 0;
-            }
-            System.debug('### fora do FOR: =>' + JSON.serialize(mapOportunidadesPorIdClientePj));
+        
+            System.debug('####### MAp =>' + mapQtdePorConta);
+            return mapQtdePorConta;
     }
 
     // 6 - Criar um método que retorne um mapa com os Dados Bancários de por Id de Cliente PJ
+    public static Map<Id,List<DadosBancarios__c>> mapDadosBancarios(){
+        List<Account> contasClientePJ = [SELECT Id From Account];
+
+        Map<Id,Integer> mapDadosBancariosExiste = new Map<Id,Boolean>();
+
+        for(Account conta : contasClientePJ){
+            mapDadosBancariosExiste.put(conta.Id,false);
+        }
+
+        List<DadosBancarios__c> lstDadosBancarios = [SELECT Id, Conta__c FROM DadosBancarios__c IN :mapDadosBancariosExiste.keySet()];
+
+        for(DadosBancarios__c db : lstDadosBancarios){
+
+        }
+    }
 
 }

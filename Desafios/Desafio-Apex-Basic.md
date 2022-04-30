@@ -7,10 +7,52 @@
 - [x] 4 - Criar um método que receba o Id de uma Parcela e delete o registro
 - [x] 5 - Criar um método que crie um Contato para o Cliente PJ
 
-## Laço de Repetição e Collections
+## Collections
 
-- [ ] 5 - Revisar para confirmar
+- [x] 1 - Criar um método que retorne os Clientes PJ Ativos
 
+- [x] 2 - Criar um método que retorne uma lista de parcelas vencidas
+
+- [x] 3 - Criar um método que retorne a Oportunidade de Maior Valor
+
+- [x] 4 - Criar um método que receba um campo String referente ao Campo Setor do objeto Cliente PJ e retorne todos os clientes com aquele setor em específico
+
+- [x] 5 - Criar um método que receba um Id de Contrato e retorne a quantidade de parcelas do mesmo Contrato
+
+## Laços de Repetição
+
+- [x] 1 - Criar um método que insira vários registros de Oportunidade.
+> Este método deve receber um valor inteiro que representará a quantidade de Oportunidade a serem criadas
+>>        1. Paramêtros:
+            a. Id do Cliente (Id)
+            b. Id do Contato (Id)
+            c. Número de Oportunidades (Integer)
+            d. Valor das Oportunidades (Decimal)
+>>        2. Regras:
+            a. O Nome da Oportunidade deve ser o número da Oportunidade que está sendo criada + nome da Conta,
+            por exemplo: 1 - Conta Teste, 2 - Conta Teste...
+
+- [x] 2 - Criar um método que receba uma lista de Oportunidades e retorna a quantidade de oportunidades que possui o valor maior que R$10.000,00
+
+- [x] 3 - Criar um método que cria um registro no Objeto Bonûs para uma lista de contatos para uma lista de contatos de uma Conta
+>>        1. Paramêtros: 
+            1. Id da Conta (Id)
+            2. Lista de Contatos (List<Contact>)
+            3. Valor (Decimal)
+>>        2. Validações
+            1. Se a conta estiver inativa, é necessário lançar uma exceção indicando o erro
+            2. Caso a lista recebida no paramêtro não possua nenhum item, lançar uma exceção informando que não possui Contatos
+            3. Caso o valor da proposta seja menor ou igual a zero, lançar uma exceção informando o valor deve ser maior que zero
+
+- [ ] 4 - Criar um método que faça a comparação dos itens de duas listas e retorne a quantidade de itens que são comuns entre as duas listas
+>>            1. Paramêtros:
+                1. lista1 (List <String>)
+                2. lista2 (List <String>)
+>>            2. Validações:
+                1. Se uma das listas estiver vazia, lançar uma exceção informando qual lista está vazia
+>>            3. Retorno do Método:
+                1. Um número que indica a quantidade de itens repetidos
+        
 - [ ] 6 - Fazer Mapa dos Dados Bancários com um Boolean aplicado na aula de hoje
 
 
