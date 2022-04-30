@@ -35,28 +35,50 @@
 - [x] 2 - Criar um método que receba uma lista de Oportunidades e retorna a quantidade de oportunidades que possui o valor maior que R$10.000,00
 
 - [x] 3 - Criar um método que cria um registro no Objeto Bonûs para uma lista de contatos para uma lista de contatos de uma Conta
->>        1. Paramêtros: 
-            1. Id da Conta (Id)
-            2. Lista de Contatos (List<Contact>)
-            3. Valor (Decimal)
->>        2. Validações
-            1. Se a conta estiver inativa, é necessário lançar uma exceção indicando o erro
-            2. Caso a lista recebida no paramêtro não possua nenhum item, lançar uma exceção informando que não possui Contatos
-            3. Caso o valor da proposta seja menor ou igual a zero, lançar uma exceção informando o valor deve ser maior que zero
+*        1. Paramêtros: 
+            a. Id da Conta (Id)
+            b. Lista de Contatos (List<Contact>)
+            c. Valor (Decimal)
+*        2. Validações
+            a. Se a conta estiver inativa, é necessário lançar uma exceção indicando o erro
+            b. Caso a lista recebida no paramêtro não possua nenhum item, lançar uma exceção informando que não possui Contatos
+            c. Caso o valor da proposta seja menor ou igual a zero, lançar uma exceção informando o valor deve ser maior que zero
 
 - [x] 4 - Criar um método que faça a comparação dos itens de duas listas e retorne a quantidade de itens que são comuns entre as duas listas
->>            1. Paramêtros:
-                1. lista1 (List <String>)
-                2. lista2 (List <String>)
->>            2. Validações:
-                1. Se uma das listas estiver vazia, lançar uma exceção informando qual lista está vazia
->>            3. Retorno do Método:
-                1. Um número que indica a quantidade de itens repetidos
+*            1. Paramêtros:
+                a. lista1 (List <String>)
+                b. lista2 (List <String>)
+*            2. Validações:
+                a. Se uma das listas estiver vazia, lançar uma exceção informando qual lista está vazia
+*            3. Retorno do Método:
+                b. Um número que indica a quantidade de itens repetidos
 - [x] 5 - Criar um método que retorne um mapa da quantidade de Oportunidades por Id de Cliente PJ
 
 - [x] 6 - Fazer Mapa dos Dados Bancários com um Boolean aplicado na aula de hoje
 
+## Apex Trigger
 
+- [ ] 1 - Crie um Apex Trigger que, ao criar um registro de Contrato (Contract), crie um registro de Tarefa (Task), caso a Conta (Account) vinculada não possua um registro de Dados Bancários (DadosBancarios__c):
+*     OwnerId = Proprietário da conta vinculado no caso
+*     WhatId = Conta vinculada ao caso
+*     ActivityDate = Data atual
+*     Subject = Necessário cadastrar os dados bancários do cliente
+
+
+
+- [ ] 2 - Crie um Apex Trigger que, ao ativar um Contrato (Contract) (Status = Activated), valide se a Conta (Account) vinculada possui um registro de Dados Bancários (DadosBancarios__c) ativo. Caso não possua, exibir uma mensagem que ele não pode ativar um Contrato (Contract) sem ter um registro de Dados Bancários (DadosBancarios__c) ativo. Obs.: Utilizar o método addError.
+
+
+
+- [ ] 3 - Crie um Apex Trigger que, ao criar ou atualizar um registro de Caso (Case) com o tipo “Sinistro”, valide se a conta vinculada possui um Contrato (Contract) ativo. Caso não possua, exibir uma mensagem que ele não pode abrir um sinistro sem um Contrato (Contract) ativo. Obs.: Utilizar o método addError.
+
+
+
+- [ ] 4 - Crie um Apex Trigger que, ao criar um registro de Dados Bancários (DadosBancarios__c) ativo, inative todos os outros registros de Dados Bancários ativos do cliente, menos o que acabou de ser ativado.
+
+
+
+- [ ] 5 - Crie um Apex Trigger que, ao criar um registro de oportunidade (Opportunity), verifique se o Contato (Contact) não foi preenchido e se a Conta (Account) vinculada possui apenas 1 Contato (Contact). Caso isso aconteça, vincule automaticamente esse Contato (Contact) na Oportunidade (Opportunity).
 
 ## Conceitos Básicos da Linguagem
 
@@ -88,30 +110,6 @@ Retorno do método:
 
 - [ ] 1 - Refazer desafio do Trailhead de Trigger de uma maneira nova utilizando coleções
 
-Exercícios - Apex Trigger
 
-
-
-- [ ] 1 - Crie um Apex Trigger que, ao criar um registro de Contrato (Contract), crie um registro de Tarefa (Task), caso a Conta (Account) vinculada não possua um registro de Dados Bancários (DadosBancarios__c):
-* OwnerId = Proprietário da conta vinculado no caso
-* WhatId = Conta vinculada ao caso
-* ActivityDate = Data atual
-* Subject = Necessário cadastrar os dados bancários do cliente
-
-
-
-- [ ] 2 - Crie um Apex Trigger que, ao ativar um Contrato (Contract) (Status = Activated), valide se a Conta (Account) vinculada possui um registro de Dados Bancários (DadosBancarios__c) ativo. Caso não possua, exibir uma mensagem que ele não pode ativar um Contrato (Contract) sem ter um registro de Dados Bancários (DadosBancarios__c) ativo. Obs.: Utilizar o método addError.
-
-
-
-- [ ] 3 - Crie um Apex Trigger que, ao criar ou atualizar um registro de Caso (Case) com o tipo “Sinistro”, valide se a conta vinculada possui um Contrato (Contract) ativo. Caso não possua, exibir uma mensagem que ele não pode abrir um sinistro sem um Contrato (Contract) ativo. Obs.: Utilizar o método addError.
-
-
-
-- [ ] 4 - Crie um Apex Trigger que, ao criar um registro de Dados Bancários (DadosBancarios__c) ativo, inative todos os outros registros de Dados Bancários ativos do cliente, menos o que acabou de ser ativado.
-
-
-
-- [ ] 5 - Crie um Apex Trigger que, ao criar um registro de oportunidade (Opportunity), verifique se o Contato (Contact) não foi preenchido e se a Conta (Account) vinculada possui apenas 1 Contato (Contact). Caso isso aconteça, vincule automaticamente esse Contato (Contact) na Oportunidade (Opportunity).
 
 
