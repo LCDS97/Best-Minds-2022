@@ -9,6 +9,8 @@
 
 ## Collections
 
+[Classe da Atividade](../force-app/main/default/classes/ExerciciosCollection.cls)
+
 - [x] 1 - Criar um método que retorne os Clientes PJ Ativos
 
 - [x] 2 - Criar um método que retorne uma lista de parcelas vencidas
@@ -20,6 +22,8 @@
 - [x] 5 - Criar um método que receba um Id de Contrato e retorne a quantidade de parcelas do mesmo Contrato
 
 ## Laços de Repetição
+
+[Classe da Atividade](../force-app/main/default/classes/ExerciciosLacosRepeticao.cls)
 
 - [x] 1 - Criar um método que insira vários registros de Oportunidade.
 > Este método deve receber um valor inteiro que representará a quantidade de Oportunidade a serem criadas
