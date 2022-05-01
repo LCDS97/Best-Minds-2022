@@ -68,10 +68,12 @@
 *     ActivityDate = Data atual
 *     Subject = Necessário cadastrar os dados bancários do cliente
 
+[Trigger da Atividade](./force-app/main/default/triggers/ContractCreateTask.trigger)
+
 
 
 - [x] 2 - Crie um Apex Trigger que, ao ativar um Contrato (Contract) (Status = Activated), valide se a Conta (Account) vinculada possui um registro de Dados Bancários (DadosBancarios__c) ativo. Caso não possua, exibir uma mensagem que ele não pode ativar um Contrato (Contract) sem ter um registro de Dados Bancários (DadosBancarios__c) ativo. Obs.: Utilizar o método addError.
-
+[Trigger da Atividade](./force-app/main/default/triggers/ContractNaoAtivarSemDadosBancariosTrigger.trigger)
 
 
 - [ ] 3 - Crie um Apex Trigger que, ao criar ou atualizar um registro de Caso (Case) com o tipo “Sinistro”, valide se a conta vinculada possui um Contrato (Contract) ativo. Caso não possua, exibir uma mensagem que ele não pode abrir um sinistro sem um Contrato (Contract) ativo. Obs.: Utilizar o método addError.
