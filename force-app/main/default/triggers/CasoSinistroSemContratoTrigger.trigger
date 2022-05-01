@@ -1,49 +1,68 @@
 trigger CasoSinistroSemContratoTrigger on Case (before insert, before update) {
 /*
-    3 - Crie um Apex Trigger que, ao criar ou atualizar um registro de Caso (Case) com o tipo “Sinistro”, valide se a conta vinculada possui um Contrato (Contract) ativo. Caso não possua, exibir uma mensagem que ele não pode abrir um sinistro sem um Contrato (Contract) ativo. Obs.: Utilizar o método addError.*/
+    3 - Crie um Apex Trigger que, ao criar ou atualizar um registro de Caso (Case) com o tipo “Sinistro”, valide se a conta vinculada
+        possui um Contrato (Contract) ativo. Caso não possua, exibir uma mensagem que ele não pode abrir um sinistro sem um Contrato (Contract) ativo.
+        Obs.: Utilizar o método addError.
+*/
     
-    List<Case> lstContratosAtivado = new List<Case>();
+    
+    List<Case> lstCasosAtivado = new List<Case>();
     List<Task> lstTaskParaCriar = new List<Task>();
-    Set<Id> setIdContratosAtivo = new Set<Id>();
-    Map<Id,Boolean> mapEstaComDadosBancarios = new Map<Id,Boolean>();
-    Map<Id, List<DadosBancarios__c>> mapDadosPorContrato = new Map<Id, List<DadosBancarios__c>>();
+    Set<Id> setIdCasos = new Set<Id>();
+    Map<Id,Boolean> mapEstaComContratos = new Map<Id,Boolean>();
+    Map<Id, List<Contract>> mapCasosComContrato = new Map<Id, List<Contract>>();
 
-    for(Case contratoNovo : Trigger.New){
-        Case contratoAntigo = Trigger.oldMap.get(contratoNovo.Id);
-        if(contratoAntigo.Status != 'Activated' && contratoNovo.Status == 'Activated'){
-            lstContratosAtivado.add(contratoNovo);
+    if(!Trigger.isInsert){
+        for(Case casoNovo : Trigger.New){
+            Case casoAntigo = Trigger.oldMap.get(casoNovo.Id);
+            if(casoAntigo.Type != 'Sinistro' && casoNovo.Type == 'Sinistro'){
+                lstCasosAtivado.add(casoNovo);
+                System.debug(lstCasosAtivado);
+            }
         }
+    }else {
+        for(Case casoNovo : Trigger.New){
+            if(casoNovo.Type == 'Sinistro') lstCasosAtivado.add(casoNovo);
+        }
+        
+      
     }
+
     
 
-    if(lstContratosAtivado.isEmpty()){
+    if(lstCasosAtivado.isEmpty()){
         return;
     }
 
     
-    for(Contract contratoAtivado : lstContratosAtivado){
-        setIdContratosAtivo.add(contratoAtivado.AccountId);
+    for(Case casoAtivado : lstCasosAtivado){
+        setIdCasos.add(casoAtivado.AccountId);
+        System.debug('#### => ' + setIdCasos);
     }
 
-    List<DadosBancarios__c> lstDadosBancarios = [SELECT
+    List<Contract> lstContratos = [SELECT
                                                     Id,
-                                                    Conta__c
+                                                    AccountId
                                                 FROM
-                                                    DadosBancarios__c
+                                                    Contract
                                                 WHERE
-                                                    Conta__c
+                                                    AccountId
                                                 IN
-                                                    :setIdContratosAtivo];
-    for(DadosBancarios__c db : lstDadosBancarios){
-        if(!mapEstaComDadosBancarios.containsKey(db.Conta__c)){
-            mapDadosPorContrato.put(db.Conta__c, new List<DadosBancarios__c>());
+                                                    :setIdCasos];
+    for(Contract contrato : lstContratos){
+        if(!mapEstaComContratos.containsKey(contrato.AccountId)){
+            mapCasosComContrato.put(contrato.AccountId, new List<Contract>());
+            System.debug('#### => Dentro do IF: ' + mapCasosComContrato);
         }
-        mapDadosPorContrato.get(db.Conta__c).add(db);
+        mapCasosComContrato.get(contrato.AccountId).add(contrato);
+        System.debug('#### => Fora do IF: ' + mapCasosComContrato);
     }
-
-    for(Contract contratoAtivo : lstContratosAtivado){
-        if(!mapEstaComDadosBancarios.containsKey(contratoAtivo.Id)){
-            contratoAtivo.addError('Você não pode mudar a fase do Contrato sem um dado bancário, preencha uma por favor!');
+    
+    for(Case caso : lstCasosAtivado){
+        if(!mapCasosComContrato.containsKey(caso.accountId)){
+            caso.addError('Não é possível ter um Caso do Tipo Sinistro sem um Contrato, por favor, revise essa informação!');
+            System.debug('#### => Dentro do ultimo IF: ' + mapCasosComContrato);
         }
+        System.debug('#### => Fora do ultimo IF: ' + mapCasosComContrato);
     }
 }
