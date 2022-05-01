@@ -1,3 +1,3 @@
-trigger contactTrigger on SOBJECT (before insert) {
+trigger contactTrigger on contact (before insert) {
 
 }
