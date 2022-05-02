@@ -38,7 +38,7 @@ trigger ContractNaoAtivarSemDadosBancariosTrigger on Contract (before update) {
                                                 WHERE
                                                     Conta__c
                                                 IN
-                                                    :setIdContratosAtivo];
+                                                    :setIdContratosAtivo AND Ativo__c = true];
     for(DadosBancarios__c db : lstDadosBancarios){
         if(!mapEstaComDadosBancarios.containsKey(db.Conta__c)){
             mapDadosPorContrato.put(db.Conta__c, new List<DadosBancarios__c>());
