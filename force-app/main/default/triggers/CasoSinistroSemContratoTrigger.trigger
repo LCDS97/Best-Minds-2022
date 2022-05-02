@@ -17,7 +17,6 @@ trigger CasoSinistroSemContratoTrigger on Case (before insert, before update) {
             Case casoAntigo = Trigger.oldMap.get(casoNovo.Id);
             if(casoAntigo.Type != 'Sinistro' && casoNovo.Type == 'Sinistro'){
                 lstCasosAtivado.add(casoNovo);
-                System.debug(lstCasosAtivado);
             }
         }
     }else {
@@ -37,7 +36,6 @@ trigger CasoSinistroSemContratoTrigger on Case (before insert, before update) {
     
     for(Case casoAtivado : lstCasosAtivado){
         setIdCasos.add(casoAtivado.AccountId);
-        System.debug('#### => ' + setIdCasos);
     }
 
     List<Contract> lstContratos = [SELECT
@@ -52,17 +50,13 @@ trigger CasoSinistroSemContratoTrigger on Case (before insert, before update) {
     for(Contract contrato : lstContratos){
         if(!mapEstaComContratos.containsKey(contrato.AccountId)){
             mapCasosComContrato.put(contrato.AccountId, new List<Contract>());
-            System.debug('#### => Dentro do IF: ' + mapCasosComContrato);
         }
         mapCasosComContrato.get(contrato.AccountId).add(contrato);
-        System.debug('#### => Fora do IF: ' + mapCasosComContrato);
     }
     
     for(Case caso : lstCasosAtivado){
         if(!mapCasosComContrato.containsKey(caso.accountId)){
             caso.addError('Não é possível ter um Caso do Tipo Sinistro sem um Contrato, por favor, revise essa informação!');
-            System.debug('#### => Dentro do ultimo IF: ' + mapCasosComContrato);
         }
-        System.debug('#### => Fora do ultimo IF: ' + mapCasosComContrato);
     }
 }

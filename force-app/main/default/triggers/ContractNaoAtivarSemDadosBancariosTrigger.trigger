@@ -1,4 +1,4 @@
-trigger ContractNaoAtivarSemDadosBancariosTrigger on Contract (before update) {
+trigger ContractNaoAtivarSemDadosBancariosTrigger on Contract (before insert, before update) {
 /*
     2 - Crie um Apex Trigger que, ao ativar um Contrato (Contract) (Status = Activated), valide se a Conta (Account) vinculada possui um
             registro de Dados Bancários (DadosBancarios__c) ativo. Caso não possua, exibir uma mensagem que ele não pode ativar um Contrato (Contract)
@@ -11,11 +11,20 @@ trigger ContractNaoAtivarSemDadosBancariosTrigger on Contract (before update) {
     Map<Id,Boolean> mapEstaComDadosBancarios = new Map<Id,Boolean>();
     Map<Id, List<DadosBancarios__c>> mapDadosPorContrato = new Map<Id, List<DadosBancarios__c>>();
 
-    for(Contract contratoNovo : Trigger.New){
-        Contract contratoAntigo = Trigger.oldMap.get(contratoNovo.Id);
-        if(contratoAntigo.Status != 'Activated' && contratoNovo.Status == 'Activated'){
-            lstContratosAtivado.add(contratoNovo);
-            System.debug(lstContratosAtivado);
+    if(!Trigger.isInsert){
+        for(Contract contratoNovo : Trigger.New){
+            Contract contratoAntigo = Trigger.oldMap.get(contratoNovo.Id);
+            if(contratoAntigo.Status != 'Activated' && contratoNovo.Status == 'Activated'){
+                lstContratosAtivado.add(contratoNovo);
+                setIdContratosAtivo.add(contratoNovo.AccountId);
+            }
+        }
+    } else {
+        for(Contract contratoNovo : Trigger.New){
+            if(contratoNovo.Status == 'Activated'){
+                lstContratosAtivado.add(contratoNovo);
+                setIdContratosAtivo.add(contratoNovo.AccountId);
+            }
         }
     }
     
@@ -24,11 +33,6 @@ trigger ContractNaoAtivarSemDadosBancariosTrigger on Contract (before update) {
         return;
     }
 
-    
-    for(Contract contratoAtivado : lstContratosAtivado){
-        setIdContratosAtivo.add(contratoAtivado.AccountId);
-        System.debug('#### => ' + setIdContratosAtivo);
-    }
 
     List<DadosBancarios__c> lstDadosBancarios = [SELECT
                                                     Id,
@@ -47,8 +51,11 @@ trigger ContractNaoAtivarSemDadosBancariosTrigger on Contract (before update) {
     }
 
     for(Contract contratoAtivo : lstContratosAtivado){
-        if(!mapDadosPorContrato.containsKey(contratoAtivo.accountId)){
+        if(!mapDadosPorContrato.containsKey(contratoAtivo.accountId) && !Trigger.isInsert){
             contratoAtivo.addError('Você não pode mudar a fase do Contrato sem um dado bancário, preencha uma por favor!');
+        }
+        if(!mapDadosPorContrato.containsKey(contratoAtivo.accountId) && Trigger.isInsert){
+            contratoAtivo.addError('Você não pode criar um contrato já ativado sem um dado bancário, preencha uma por favor!');
         }
     }
 }
