@@ -10,17 +10,17 @@ trigger ContractCreateTask on Contract (after insert) {
     List<Task> lstTaskParaCriar = new List<Task>();
     Set<Id> setIdsContasAtivadas = new Set<Id>();
     Map<Id,Boolean> mapDevoCriarTask = new Map<Id,Boolean>();
-    Map<Id, List<DadosBancarios__c>> mapDadosPorConta = new Map<Id, List<DadosBancarios__c>>();
 
     for(Contract contrato : Trigger.new){
         lstContasAtivada.add(contrato);
         mapDevoCriarTask.put(contrato.AccountId, true);
+        setIdsContasAtivadas.add(contrato.AccountId);
     }
     
-    for(Contract contaAtivada : lstContasAtivada){
-        setIdsContasAtivadas.add(contaAtivada.AccountId);
-    }
+ /*    for(Contract contaAtivada : lstContasAtivada){
+    } */
 
+    List<Account> lstContas = [SELECT Id, OwnerId FROM Account WHERE Id IN :setIdsContasAtivadas];
     List<DadosBancarios__c> lstDadosBancarios = [SELECT
                                                     Id,
                                                     Conta__c
@@ -34,21 +34,28 @@ trigger ContractCreateTask on Contract (after insert) {
         mapDevoCriarTask.put(db.Conta__c,false);
     }
 
+
+
     for(Contract contrato : Trigger.New){
         Boolean devoCriar = mapDevoCriarTask.get(contrato.AccountId);
 
-        if(devoCriar){
-            
-            Task task = new Task();
-                
-            task.WhatId = contrato.AccountId;
-            task.ActivityDate = Date.today();
-            task.OwnerId = contrato.CreatedById;
-            task.Priority = 'High';
-            task.Status = 'Not Started';
-            task.Subject = 'Necessário cadastrar os dados bancários do cliente';
-            lstTaskParaCriar.add(task);
+
+        for(Account conta: lstContas){
+            if(mapDevoCriarTask.get(conta.Id)){
+                Task task = new Task();
+                task.WhatId = conta.Id;
+                task.ActivityDate = Date.today();
+                task.OwnerId = conta.OwnerId;
+                task.Priority = 'High';
+                task.Status = 'Not Started';
+                task.Subject = 'Necessário cadastrar os dados bancários do cliente';
+                lstTaskParaCriar.add(task);
+            }
         }
+
+
     }
     insert lstTaskParaCriar;
 }
+
+// Pegar o OwnerId da conta para criar a Task
