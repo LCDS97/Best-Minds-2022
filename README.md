@@ -27,7 +27,9 @@
 
 ---
 
-- [ ] 4 - Crie um Apex Trigger que, ao criar um registro de Dados Bancários (DadosBancarios__c) ativo, inative todos os outros registros de Dados Bancários ativos do cliente, menos o que acabou de ser ativado.
+- [x] 4 - Crie um Apex Trigger que, ao criar um registro de Dados Bancários (DadosBancarios__c) ativo, inative todos os outros registros de Dados Bancários ativos do cliente, menos o que acabou de ser ativado.
+
+##### [Trigger da Atividade](./force-app/main/default/triggers/SomenteUmDadoBancarioTrigger.trigger)
 
 ---
 
