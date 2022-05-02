@@ -36,12 +36,11 @@ trigger ContractCreateTask on Contract (after insert) {
 
 
 
-    for(Contract contrato : Trigger.New){
-        Boolean devoCriar = mapDevoCriarTask.get(contrato.AccountId);
+    for(Account conta : lstContas){
+        Boolean devoCriar = mapDevoCriarTask.get(conta.Id);
 
-
-        for(Account conta: lstContas){
-            if(mapDevoCriarTask.get(conta.Id)){
+        if(devoCriar){
+            
                 Task task = new Task();
                 task.WhatId = conta.Id;
                 task.ActivityDate = Date.today();
@@ -50,7 +49,7 @@ trigger ContractCreateTask on Contract (after insert) {
                 task.Status = 'Not Started';
                 task.Subject = 'Necessário cadastrar os dados bancários do cliente';
                 lstTaskParaCriar.add(task);
-            }
+            
         }
 
 
