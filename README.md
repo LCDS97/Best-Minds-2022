@@ -4,6 +4,29 @@
 - Cada desafio contém no final o local aonde esta seu arquivo
 
 ---
+## Boas Práticas de Programação
+
+- [ ] 1 - Serena Williams precisa que toda vez que alterar o domínio de email de uma de suas contas, todos os responsáveis tenham seu e-mail atualizado de acordo com o novo domínio.
+> Sejam livres para trazer a melhor solução que atenda ao pedido da Serena Williams colocando em ação as boas práticas de programação
+-       Os responsáveis da Conta são os Contatos
+-       A Serena Williams são donos dessas contas ( Owner Id)
+-       Somente para alterar campo de @dominio.com.br
+-       Manter o e-mail e somente alterar domínio
+-       Alterar somente quem tiver e-mail, quem não tiver eliminar da Trigger
+
+> Passo-a-Passo
+-       1. Criar campo de domínio de e-mail
+-       2. A Trigger em Account deve executar no After Update ( Passar a Trigger.Old também )
+-       3. Trigger valida se o campo criado no item 1 foi alterado ( Validar evento do campo Trigger.Old)
+-       4. Armazenar os id de Uma Conta em uma varíavel
+-       5. Laço de repetição da Trigger para Adicionar na varíavel do item 4 no Id de Cada Conta
+-       6. Buscar contatos relacionado a conta que tem e-mail
+-       7. Laço de repetição pra atualizar o e-mail de cada contato com o domínio da conta
+-       8. Criar uma varíavel que armazena os contatos
+-       9. Atualiza a DML a varíavel dos contatos
+
+
+---
 ## Apex Trigger
 
 - [x] 1 - Crie um Apex Trigger que, ao criar um registro de Contrato (Contract), crie um registro de Tarefa (Task), caso a Conta (Account) vinculada não possua um registro de Dados Bancários (DadosBancarios__c):
