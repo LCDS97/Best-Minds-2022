@@ -50,6 +50,7 @@ trigger DesafioMapCreateTaskForContractTrigger on Contract (after insert) {
                 task.Status = 'Not Started';
                 task.Subject = 'Necessário cadastrar os dados bancários do cliente';
                 lstTaskParaCriar.add(task);
+                
             }
         }
 

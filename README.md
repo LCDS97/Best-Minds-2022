@@ -138,5 +138,9 @@ Retorno do método:
 
 - [ ] 2 - Refazer conceito do DesafioMapCreateTaskForContract para atribuir valor do map de chave Id e valores com a lista de Conta para retira ForEach dentro da Trigger, aonde acontece de eu chamar o For de Contract da Trigger.new e percorrendo pela lista de Conta
 
+- [ ] 3 - Reforça conceitos com Map
+
+- [ ] 4 - Organizar minha Org, com as boas praticas de arquitetura - DAO / TO / BO
+
 
 

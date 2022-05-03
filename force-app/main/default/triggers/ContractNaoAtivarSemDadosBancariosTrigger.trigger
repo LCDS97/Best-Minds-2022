@@ -11,7 +11,7 @@ trigger ContractNaoAtivarSemDadosBancariosTrigger on Contract (before insert, be
     Map<Id,Boolean> mapEstaComDadosBancarios = new Map<Id,Boolean>();
     Map<Id, List<DadosBancarios__c>> mapDadosPorContrato = new Map<Id, List<DadosBancarios__c>>();
 
-    if(!Trigger.isInsert){
+    if(Trigger.isUpdate){
         for(Contract contratoNovo : Trigger.New){
             Contract contratoAntigo = Trigger.oldMap.get(contratoNovo.Id);
             if(contratoAntigo.Status != 'Activated' && contratoNovo.Status == 'Activated'){
@@ -19,14 +19,17 @@ trigger ContractNaoAtivarSemDadosBancariosTrigger on Contract (before insert, be
                 setIdContratosAtivo.add(contratoNovo.AccountId);
             }
         }
-    } else {
+    }
+
+    if(Trigger.isInsert){
         for(Contract contratoNovo : Trigger.New){
             if(contratoNovo.Status == 'Activated'){
                 lstContratosAtivado.add(contratoNovo);
                 setIdContratosAtivo.add(contratoNovo.AccountId);
             }
-        }
     }
+}
+    
     
 
     if(lstContratosAtivado.isEmpty()){
@@ -51,7 +54,7 @@ trigger ContractNaoAtivarSemDadosBancariosTrigger on Contract (before insert, be
     }
 
     for(Contract contratoAtivo : lstContratosAtivado){
-        if(!mapDadosPorContrato.containsKey(contratoAtivo.accountId) && !Trigger.isInsert){
+        if(!mapDadosPorContrato.containsKey(contratoAtivo.accountId) && Trigger.isUpdate){
             contratoAtivo.addError('Você não pode mudar a fase do Contrato sem um dado bancário, preencha uma por favor!');
         }
         if(!mapDadosPorContrato.containsKey(contratoAtivo.accountId) && Trigger.isInsert){
