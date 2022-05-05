@@ -12,6 +12,13 @@
 
 ##### [Classe da Atividade](./force-app/main/default/classes/AtualizarContrato.cls)
 
+- [ ] 2 - Crie um Batch Apex para atualizar o status do caso para fechado quando ele não conter nenhum contato associado.
+##### [Classe da Atividade](./force-app/main/default/classes/SchuduledApex.cls)
+
+- [ ] 3 - Criar Scheduled Apex para adicionar um comentário nos casos que estão fechados - “Caso Fechado por ausência de contato”.
+
+##### [Classe da Atividade](./force-app/main/default/classes/SchuduledApex.cls)
+
 
 ---
 
