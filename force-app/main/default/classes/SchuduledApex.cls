@@ -18,16 +18,5 @@ public class SchuduledApex implements Schedulable {
 
     }
 
-    public class ChamarLista implements Schedulable {
-        public void execute (SchedulableContext ctx){
-            List<Trainee> lstDosTrainess = ([SELECT Id From Everymind WHERE Role = 'Dev Trainee']);
-            List<Kamilist> lstDaKamila = ([SELECT Id From Everymind WHERE Surname = 'Kamilista']);
-            for(Trainee trainee : lstDosTrainess ){
-                trainee.Presenca = 'Ok';
-                trainee.Aula = 'Apex Async';
-            }
 
-            insert lstDaKamila;
-        }
-    }
 }
