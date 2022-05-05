@@ -14,6 +14,7 @@
 
 
 ---
+
 ## Boas Práticas de Programação
 
 ### Entregar até terça-feira
@@ -39,11 +40,14 @@
 - [ ]   9. Atualiza a DML a varíavel dos contatos
 
 </details>
-<br>
+
+---
 
 - [ ] 2. Megan Rapinoe contratou uma consultoria para desenvolver um código que identificasse a quantidade de jogadoras homossexuais de cada time da National Women's Soccer League, entretanto, o código não está funcionando. Você como desenvolver e consultor Salesforce da Everymind, ajude a Megan a alcançar seu objetivo.
 
 ![Código do Desafio para arrumar](./images/codigoMeganRapinoe.png)
+
+---
 
 - [ ] 3. Agora que o Max Verstappen é o novo campeão da Fórmula 1, ele está mais do que nunca preocupado com o salário dos principais sócios (Contatos) de seus patrocínios. O desejo dele é identificar quais contas tem um faturamente maior que 1 milhão e pegar 50% desse faturamento e distrubuir de forma igualitária para cada sócio da Conta.
 
@@ -82,16 +86,17 @@
 
 - [ ] 5 - Crie um Apex Trigger que, ao criar um registro de oportunidade (Opportunity), verifique se o Contato (Contact) não foi preenchido e se a Conta (Account) vinculada possui apenas 1 Contato (Contact). Caso isso aconteça, vincule automaticamente esse Contato (Contact) na Oportunidade (Opportunity).
 ---
+
 ## Conceitos Básicos da Linguagem - EXTRAS
 
 - [ ] 1 - Crie um método que retorne um mapa com os dados bancários por CNPJ de conta.
 
-
+---
 
 - [ ] 2 - Crie um método que receba uma lista de inteiros e devolva uma lista com os valores pares. Ex.: Use o método Math.mod que retorna o resto de uma divisão.
 [Salesforce Help](https://developer.salesforce.com/docs/atlas.en-us.apexref.meta/apexref/apex_methods_system_math.htm#apex_System_Math_mod)
 
-
+---
 
 - [ ] 3 - Crie um método que faça a comparação dos itens de dois sets e retorne a quantidade de itens que são comuns entre elas.
 Parâmetros do método
@@ -100,17 +105,18 @@ Parâmetros do método
 Retorno do método:
 - Um número que indica a quantidade de itens repetidos
 
-
+---
 
 - [ ] 4 - Crie um método que receba uma lista de inteiro como parâmetro e retorne o maior valor dessa lista.
 
-
+---
 
 - [ ] 5 - Crie um método que receba uma lista de inteiro e retorne uma outra lista com todos os valores multiplicados por 2
 
-## Laços de Repetição
+---
 
-##### [Classe Apex de todas as Atividades](force-app/main/default/classes/ExerciciosLacosRepeticao.cls)
+## Laços de Repetição ✅
+
 
 - [x] 1 - Criar um método que insira vários registros de Oportunidade.
 > Este método deve receber um valor inteiro que representará a quantidade de Oportunidade a serem criadas
@@ -148,9 +154,10 @@ Retorno do método:
 ---
 - [x] 6 - Fazer Mapa dos Dados Bancários com um Boolean aplicado na aula de hoje
 ---
-## Collections
+##### [Classe Apex de todas as Atividades](force-app/main/default/classes/ExerciciosLacosRepeticao.cls)
 
-##### [Classe Apex de todas as Atividades](force-app/main/default/classes/ExerciciosCollection.cls)
+## Collections ✅
+
 
 - [x] 1 - Criar um método que retorne os Clientes PJ Ativos
 
@@ -162,9 +169,10 @@ Retorno do método:
 
 - [x] 5 - Criar um método que receba um Id de Contrato e retorne a quantidade de parcelas do mesmo Contrato
 
+##### [Classe Apex de todas as Atividades](force-app/main/default/classes/ExerciciosCollection.cls)
+
 ---
-## DML
-##### [Classe da Atividade](force-app/main/default/classes/ExercicioDML.cls)
+## DML ✅
 
 - [x] 1 - Criar um Método que atualize o valor da Oportunidade
 ---
@@ -177,15 +185,23 @@ Retorno do método:
 - [x] 5 - Criar um método que crie um Contato para o Cliente PJ
 ---
 
+##### [Classe da Atividade](force-app/main/default/classes/ExercicioDML.cls)
+
 ## Desafios Pessoais
 
 - [x] 1 - Refazer desafio do Trailhead de Trigger de uma maneira nova utilizando coleções
 
 ##### [Classe do Desafio](./force-app/main/default/classes/DesafioApexCorreto.cls)
 
+---
+
 - [ ] 2 - Refazer conceito do DesafioMapCreateTaskForContract para atribuir valor do map de chave Id e valores com a lista de Conta para retira ForEach dentro da Trigger, aonde acontece de eu chamar o For de Contract da Trigger.new e percorrendo pela lista de Conta
 
+---
+
 - [ ] 3 - Reforça conceitos com Map
+
+---
 
 - [ ] 4 - Organizar minha Org, com as boas praticas de arquitetura - DAO / TO / BO
 
