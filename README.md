@@ -15,15 +15,15 @@ Serena Williams precisa que toda vez que alterar o domínio de email de uma de s
 -       Alterar somente quem tiver e-mail, quem não tiver eliminar da Trigger
 
 ### Passo-a-Passo
-[ ]   1. Criar campo de domínio de e-mail
-[ ]   2. A Trigger em Account deve executar no After Update ( Passar a Trigger.Old também )
-[ ]   3. Trigger valida se o campo criado no item 1 foi alterado ( Validar evento do campo Trigger.Old)
-[ ]   4. Armazenar os id de Uma Conta em uma varíavel
-[ ]   5. Laço de repetição da Trigger para Adicionar na varíavel do item 4 no Id de Cada Conta
-[ ]   6. Buscar contatos relacionado a conta que tem e-mail
-[ ]   7. Laço de repetição pra atualizar o e-mail de cada contato com o domínio da conta
-[ ]   8. Criar uma varíavel que armazena os contatos
-[ ]   9. Atualiza a DML a varíavel dos contatos
+- [x]   1. Criar campo de domínio de e-mail
+- [x]   2. A Trigger em Account deve executar no After Update ( Passar a Trigger.Old também )
+- [x]   3. Trigger valida se o campo criado no item 1 foi alterado ( Validar evento do campo Trigger.Old)
+- [x]   4. Armazenar os id de Uma Conta em uma varíavel
+- [x]   5. Laço de repetição da Trigger para Adicionar na varíavel do item 4 no Id de Cada Conta
+- [ ]   6. Buscar contatos relacionado a conta que tem e-mail
+- [ ]   7. Laço de repetição pra atualizar o e-mail de cada contato com o domínio da conta
+- [ ]   8. Criar uma varíavel que armazena os contatos
+- [ ]   9. Atualiza a DML a varíavel dos contatos
 
 
 ---
