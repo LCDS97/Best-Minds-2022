@@ -6,6 +6,8 @@
 
 ## Apex Async
 
+### Entregar até terça-feira
+
 - [x] 1 - Criar um campo no objeto Contract, chamado Número de Parcelas do type Number, e criar um método fúturo para atualizar esse campo verificando quantas parcelas aquele contrato possui.
 
 ##### [Classe da Atividade](./force-app/main/default/classes/AtualizarContrato.cls)
@@ -13,6 +15,8 @@
 
 ---
 ## Boas Práticas de Programação
+
+### Entregar até terça-feira
 
 - [ ] 1. Serena Williams precisa que toda vez que alterar o domínio de email de uma de suas contas, todos os responsáveis tenham seu e-mail atualizado de acordo com o novo domínio.
 > Sejam livres para trazer a melhor solução que atenda ao pedido da Serena Williams colocando em ação as boas práticas de programação
@@ -22,7 +26,8 @@
 -       Manter o e-mail e somente alterar domínio
 -       Alterar somente quem tiver e-mail, quem não tiver eliminar da Trigger
 
-### Passo-a-Passo
+<details><summary>Passo-a-Passo</summary>
+
 - [x]   1. Criar campo de domínio de e-mail
 - [x]   2. A Trigger em Account deve executar no After Update ( Passar a Trigger.Old também )
 - [x]   3. Trigger valida se o campo criado no item 1 foi alterado ( Validar evento do campo Trigger.Old)
@@ -33,11 +38,20 @@
 - [ ]   8. Criar uma varíavel que armazena os contatos
 - [ ]   9. Atualiza a DML a varíavel dos contatos
 
-### Colocar as atividades restantes que tem no Notion
+</details>
+<br>
+
+- [ ] 2. Megan Rapinoe contratou uma consultoria para desenvolver um código que identificasse a quantidade de jogadoras homossexuais de cada time da National Women's Soccer League, entretanto, o código não está funcionando. Você como desenvolver e consultor Salesforce da Everymind, ajude a Megan a alcançar seu objetivo.
+
+![Código do Desafio para arrumar](./images/codigoMeganRapinoe.png)
+
+- [ ] 3. Agora que o Max Verstappen é o novo campeão da Fórmula 1, ele está mais do que nunca preocupado com o salário dos principais sócios (Contatos) de seus patrocínios. O desejo dele é identificar quais contas tem um faturamente maior que 1 milhão e pegar 50% desse faturamento e distrubuir de forma igualitária para cada sócio da Conta.
 
 
 ---
 ## Apex Trigger
+
+### Entregar até segunda-feira
 
 - [x] 1 - Crie um Apex Trigger que, ao criar um registro de Contrato (Contract), crie um registro de Tarefa (Task), caso a Conta (Account) vinculada não possua um registro de Dados Bancários (DadosBancarios__c):
 *     OwnerId = Proprietário da conta vinculado no caso
