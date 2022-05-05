@@ -4,7 +4,6 @@ trigger SomenteUmDadoBancarioTrigger on DadosBancarios__c (after insert) {
             inative todos os outros registros de Dados Bancários ativos do cliente, menos o que acabou de ser ativado.
     */
 
-    Map<Id,Boolean> mapUnicoDadoBancarioAtivo = new Map<Id,Boolean>();
     Set<Id> setDadosBancariosAtivo = new Set<Id>();
     Set<Id> setFiltrarContaPorId = new Set<Id>();
     List<DadosBancarios__c> lstAdicionarDadoBancario = new List<DadosBancarios__c>();
@@ -46,8 +45,6 @@ trigger SomenteUmDadoBancarioTrigger on DadosBancarios__c (after insert) {
         
         
     }
-    System.debug('####### lstTodosDadosBancariosPorIdConta => ' + lstTodosDadosBancariosPorIdConta);
-    System.debug('####### lstAdicionarDadoBancario => ' + lstAdicionarDadoBancario);
     update lstTodosDadosBancariosPorIdConta;
 
 }
