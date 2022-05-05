@@ -3,10 +3,18 @@
 - Do mais recente para o mais antigo
 - Cada desafio contém no final o local aonde esta seu arquivo
 
+
+## Apex Async
+
+- [x] 1 - Criar um campo no objeto Contract, chamado Número de Parcelas do type Number, e criar um método fúturo para atualizar esse campo verificando quantas parcelas aquele contrato possui.
+
+##### [Classe da Atividade](./force-app/main/default/classes/AtualizarContrato.cls)
+
+
 ---
 ## Boas Práticas de Programação
 
-Serena Williams precisa que toda vez que alterar o domínio de email de uma de suas contas, todos os responsáveis tenham seu e-mail atualizado de acordo com o novo domínio.
+- [ ] 1. Serena Williams precisa que toda vez que alterar o domínio de email de uma de suas contas, todos os responsáveis tenham seu e-mail atualizado de acordo com o novo domínio.
 > Sejam livres para trazer a melhor solução que atenda ao pedido da Serena Williams colocando em ação as boas práticas de programação
 -       Os responsáveis da Conta são os Contatos
 -       A Serena Williams são donos dessas contas ( Owner Id)
@@ -24,6 +32,8 @@ Serena Williams precisa que toda vez que alterar o domínio de email de uma de s
 - [ ]   7. Laço de repetição pra atualizar o e-mail de cada contato com o domínio da conta
 - [ ]   8. Criar uma varíavel que armazena os contatos
 - [ ]   9. Atualiza a DML a varíavel dos contatos
+
+### Colocar as atividades restantes que tem no Notion
 
 
 ---
