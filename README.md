@@ -62,7 +62,7 @@
 
 
 ---
-## Apex Trigger
+## Apex Trigger ✅
 
 ### Entregar até segunda-feira
 
