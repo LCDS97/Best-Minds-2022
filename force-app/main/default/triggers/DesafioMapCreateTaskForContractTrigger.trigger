@@ -1,6 +1,7 @@
 trigger DesafioMapCreateTaskForContractTrigger on Contract (after insert) {
     /*
-    1. Crie um Apex Trigger que, ao criar um registro de Contrato (Contract), crie um registro de Tarefa (Task), caso a Conta (Account) vinculada não possua um registro de Dados Bancários (DadosBancarios__c):
+    1. Crie um Apex Trigger que, ao criar um registro de Contrato (Contract), crie um registro de Tarefa (Task),
+    caso a Conta (Account) vinculada não possua um registro de Dados Bancários (DadosBancarios__c):
         OwnerId = Proprietário da conta vinculado no caso
         WhatId = Conta vinculada ao caso
         ActivityDate = Data atual

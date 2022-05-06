@@ -93,7 +93,10 @@
 
 ---
 
-- [ ] 5 - Crie um Apex Trigger que, ao criar um registro de oportunidade (Opportunity), verifique se o Contato (Contact) não foi preenchido e se a Conta (Account) vinculada possui apenas 1 Contato (Contact). Caso isso aconteça, vincule automaticamente esse Contato (Contact) na Oportunidade (Opportunity).
+- [x] 5 - Crie um Apex Trigger que, ao criar um registro de oportunidade (Opportunity), verifique se o Contato (Contact) não foi preenchido e se a Conta (Account) vinculada possui apenas 1 Contato (Contact). Caso isso aconteça, vincule automaticamente esse Contato (Contact) na Oportunidade (Opportunity).
+
+##### [Trigger da Atividade](./force-app/main/default/triggers/VincularContatoUnicoPorOportunidadeTrigger.trigger)
+
 ---
 
 ## Conceitos Básicos da Linguagem - EXTRAS
