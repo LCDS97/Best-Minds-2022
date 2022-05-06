@@ -15,6 +15,7 @@ trigger SomenteUmDadoBancarioTrigger on DadosBancarios__c (after insert) {
                 setDadosBancariosAtivo.add(dadosBancarios.Id);
                 setFiltrarContaPorId.add(dadosBancarios.Conta__c);
                 lstAdicionarDadoBancario.add(dadosBancarios);
+
            } else{
                return;
            }
@@ -29,17 +30,18 @@ trigger SomenteUmDadoBancarioTrigger on DadosBancarios__c (after insert) {
         List<DadosBancarios__c> lstTodosDadosBancariosPorIdConta = [SELECT 
                                                                     Id,
                                                                     Conta__c, 
-                                                                    Ativo__c
+                                                                    Ativo__c,
+                                                                    Banco__c
                                                                 FROM
                                                                     DadosBancarios__c
                                                                 WHERE
                                                                     Conta__c
                                                                 IN 
                                                                     :setFiltrarContaPorId];
-    for (DadosBancarios__c db : lstTodosDadosBancariosPorIdConta){
+    for (DadosBancarios__c db : lstTodosDadosBancariosPorIdConta){ 
         
-            if(!setDadosBancariosAtivo.contains(db.Id)){
-                db.Ativo__c = false;
+            if(!setDadosBancariosAtivo.contains(db.Id)){ 
+                db.Banco__c = 'Santander';
             }
         
         
