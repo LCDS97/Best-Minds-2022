@@ -39,7 +39,8 @@ trigger ContractNaoAtivarSemDadosBancariosTrigger on Contract (before insert, be
 
     List<DadosBancarios__c> lstDadosBancarios = [SELECT
                                                     Id,
-                                                    Conta__c
+                                                    Conta__c,
+                                                    Ativo__c
                                                 FROM
                                                     DadosBancarios__c
                                                 WHERE
@@ -47,7 +48,7 @@ trigger ContractNaoAtivarSemDadosBancariosTrigger on Contract (before insert, be
                                                 IN
                                                     :setIdContratosAtivo AND Ativo__c = true];
     for(DadosBancarios__c db : lstDadosBancarios){
-        if(!mapEstaComDadosBancarios.containsKey(db.Conta__c)){
+        if(!mapEstaComDadosBancarios.containsKey(db.Conta__c) || !db.Ativo__c){
             mapDadosPorContrato.put(db.Conta__c, new List<DadosBancarios__c>());
         }
         mapDadosPorContrato.get(db.Conta__c).add(db);
@@ -55,10 +56,10 @@ trigger ContractNaoAtivarSemDadosBancariosTrigger on Contract (before insert, be
 
     for(Contract contratoAtivo : lstContratosAtivado){
         if(!mapDadosPorContrato.containsKey(contratoAtivo.accountId) && Trigger.isUpdate){
-            contratoAtivo.addError('Você não pode mudar a fase do Contrato sem um dado bancário, preencha uma por favor!');
+            contratoAtivo.addError('Você não pode mudar a fase do Contrato sem um dado bancário ativo, preencha uma por favor!');
         }
         if(!mapDadosPorContrato.containsKey(contratoAtivo.accountId) && Trigger.isInsert){
-            contratoAtivo.addError('Você não pode criar um contrato já ativado sem um dado bancário, preencha uma por favor!');
+            contratoAtivo.addError('Você não pode criar um contrato já ativado sem um dado bancário ativo, preencha uma por favor!');
         }
     }
 }

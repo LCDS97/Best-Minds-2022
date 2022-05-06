@@ -30,8 +30,7 @@ trigger SomenteUmDadoBancarioTrigger on DadosBancarios__c (after insert) {
         List<DadosBancarios__c> lstTodosDadosBancariosPorIdConta = [SELECT 
                                                                     Id,
                                                                     Conta__c, 
-                                                                    Ativo__c,
-                                                                    Banco__c
+                                                                    Ativo__c
                                                                 FROM
                                                                     DadosBancarios__c
                                                                 WHERE
@@ -41,7 +40,7 @@ trigger SomenteUmDadoBancarioTrigger on DadosBancarios__c (after insert) {
     for (DadosBancarios__c db : lstTodosDadosBancariosPorIdConta){ 
         
             if(!setDadosBancariosAtivo.contains(db.Id)){ 
-                db.Banco__c = 'Santander';
+                db.Ativo__c = false;
             }
         
         
