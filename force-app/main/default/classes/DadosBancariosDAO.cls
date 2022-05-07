@@ -12,4 +12,10 @@ public with sharing class DadosBancariosDAO {
             ];
                                 
     }
+
+    public static List<DadosBancarios__c> pegarContasAtivosPorId(Set<Id> setIdContas){
+            return [
+                SELECT Id, Conta__c, Ativo__c FROM DadosBancarios__c WHERE Conta__c IN :setIdContas
+            ];
+    }
 }
