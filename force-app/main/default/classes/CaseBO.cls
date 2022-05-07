@@ -42,12 +42,10 @@ public with sharing class CaseBO {
     }
 
     
-    for(Case casoAtivado : lstCasosAtivado){
-    }
 
     List<Contract> lstContratos = ContractDAO.buscarCasosPorIdConta(setIdCasos);
     for(Contract contrato : lstContratos){
-        if(!mapEstaComContratos.containsKey(contrato.AccountId)){
+        if(!mapEstaComContratos.containsKey(contrato.AccountId) || contrato.Status != 'Activated'){
             mapCasosComContrato.put(contrato.AccountId, new List<Contract>());
         }
         mapCasosComContrato.get(contrato.AccountId).add(contrato);
