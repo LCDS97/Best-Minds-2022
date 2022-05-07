@@ -66,36 +66,38 @@
 
 ### Entregar até segunda-feira
 
+#### Refeito todos com as boas práticas caso o Bruno queira somente dentro da Trigger, enviar da pasta no gitIgnore
+
 - [x] 1 - Crie um Apex Trigger que, ao criar um registro de Contrato (Contract), crie um registro de Tarefa (Task), caso a Conta (Account) vinculada não possua um registro de Dados Bancários (DadosBancarios__c):
 *     OwnerId = Proprietário da conta vinculado no caso
 *     WhatId = Conta vinculada ao caso
 *     ActivityDate = Data atual
 *     Subject = Necessário cadastrar os dados bancários do cliente
 
-##### [Trigger da Atividade](./force-app/main/default/triggers/ContractCreateTask.trigger)
+##### [Trigger da Atividade](./force-app/main/default/triggers/TriggerContract.trigger)
 
 ---
 
 - [x] 2 - Crie um Apex Trigger que, ao ativar um Contrato (Contract) (Status = Activated), valide se a Conta (Account) vinculada possui um registro de Dados Bancários (DadosBancarios__c) ativo. Caso não possua, exibir uma mensagem que ele não pode ativar um Contrato (Contract) sem ter um registro de Dados Bancários (DadosBancarios__c) ativo. Obs.: Utilizar o método addError.
 
-##### [Trigger da Atividade](./force-app/main/default/triggers/ContractNaoAtivarSemDadosBancariosTrigger.trigger)
+##### [Trigger da Atividade](./force-app/main/default/triggers/TriggerContract.trigger)
 
 ---
 - [x] 3 - Crie um Apex Trigger que, ao criar ou atualizar um registro de Caso (Case) com o tipo “Sinistro”, valide se a conta vinculada possui um Contrato (Contract) ativo. Caso não possua, exibir uma mensagem que ele não pode abrir um sinistro sem um Contrato (Contract) ativo. Obs.: Utilizar o método addError.
 
-##### [Trigger da Atividade](./force-app/main/default/triggers/CasoSinistroSemContratoTrigger.trigger)
+##### [Trigger da Atividade](./force-app/main/default/triggers/TriggerCase.trigger)
 
 ---
 
 - [x] 4 - Crie um Apex Trigger que, ao criar um registro de Dados Bancários (DadosBancarios__c) ativo, inative todos os outros registros de Dados Bancários ativos do cliente, menos o que acabou de ser ativado.
 
-##### [Trigger da Atividade](./force-app/main/default/triggers/SomenteUmDadoBancarioTrigger.trigger)
+##### [Trigger da Atividade](./force-app/main/default/triggers/TriggerDadosBancarios.trigger)
 
 ---
 
 - [x] 5 - Crie um Apex Trigger que, ao criar um registro de oportunidade (Opportunity), verifique se o Contato (Contact) não foi preenchido e se a Conta (Account) vinculada possui apenas 1 Contato (Contact). Caso isso aconteça, vincule automaticamente esse Contato (Contact) na Oportunidade (Opportunity).
 
-##### [Trigger da Atividade](./force-app/main/default/triggers/VincularContatoUnicoPorOportunidadeTrigger.trigger)
+##### [Trigger da Atividade](./force-app/main/default/triggers/TriggerOpportunity.trigger)
 
 ---
 
@@ -211,11 +213,15 @@ Retorno do método:
 
 ---
 
-- [ ] 3 - Reforça conceitos com Map
+- [ ] 3 - Reforça conceitos com Map, Trigger, Trigger Handler ( Assistir vídeos do Force Noob )
 
 ---
 
-- [ ] 4 - Organizar minha Org, com as boas praticas de arquitetura - DAO / TO / BO
+- [x] 4 - Refatora minha Org, com todas as triggers - DAO / TO / BO
+
+---
+
+- [ ] 5 - Refatorar minha org com todas as classes - DAO / TO / BO
 
 
 
