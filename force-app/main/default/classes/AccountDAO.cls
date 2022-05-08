@@ -4,7 +4,7 @@ public with sharing class AccountDAO {
         return [SELECT Id, OwnerId FROM Account WHERE Id IN :setContasId];
     }
 
-    public static List<Account> buscarTodasContasAtivas(Set<Id> idAccount){
+    public static Account buscarContaAtivoPorID(Id idAccount){
         return [SELECT Id, Ativo__c FROM Account WHERE Id =: idAccount];
     }
 }

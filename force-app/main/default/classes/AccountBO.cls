@@ -82,7 +82,7 @@ public with sharing class AccountBO {
     }
 
     public static void clientePJAtualizarCampo(Id idAccount){
-        Account clientePj = AccountDAO.buscarContasPorId(idAccount);
+        Account clientePj = AccountDAO.buscarContaAtivoPorID(idAccount);
             
             if (clientePj.Ativo__c){
                 clientePj.Ativo__c = false;
