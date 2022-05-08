@@ -142,6 +142,9 @@ Retorno do método:
 >>        2. Regras:
             a. O Nome da Oportunidade deve ser o número da Oportunidade que está sendo criada + nome da Conta,
             por exemplo: 1 - Conta Teste, 2 - Conta Teste...
+
+##### [Classe Apex de todas as Atividades](./force-app/main/default/classes/OpportunityBO.cls#L73)
+
 ---
 - [x] 2 - Criar um método que receba uma lista de Oportunidades e retorna a quantidade de oportunidades que possui o valor maior que R$10.000,00
 ---
@@ -278,6 +281,7 @@ Retorno do método:
 ##### [Classe do Desafio](./force-app/main/default/classes/ContractBO.cls#L136)
 
 ---
+
 
 ## Desafios Pessoais
 

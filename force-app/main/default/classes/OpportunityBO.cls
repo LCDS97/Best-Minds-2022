@@ -69,4 +69,30 @@ public with sharing class OpportunityBO {
         update oportunidadeAtualizar;
                 
     }
+
+    public static void criarOportunidadePorQuantidade(Id idCliente, Id idContato, Integer numeroOportunidades, Decimal valorOportunidade){
+        
+        Account nomeOportunidade = AccountDAO.buscarContaPorId(idCliente);
+
+        List<Opportunity> oportunidadesParaCadastrar = new List<Opportunity>();
+        
+        Integer contador = 1;
+
+        while(contador <= numeroOportunidades){
+
+            Opportunity novaOportunidadeClientePJ = new Opportunity();
+            novaOportunidadeClientePJ.AccountId = idCliente;
+            novaOportunidadeClientePJ.Contato__c = idContato;
+            novaOportunidadeClientePJ.ContactId = idContato;
+            novaOportunidadeClientePJ.Name = contador + ' - ' + nomeOportunidade.Name;
+            novaOportunidadeClientePJ.StageName = 'Prospecting';
+            novaOportunidadeClientePJ.CloseDate = date.today().addMonths(2);
+            oportunidadesParaCadastrar.add(novaOportunidadeClientePJ);
+
+            contador++;
+        }
+
+        insert oportunidadesParaCadastrar;
+
+    }
 }

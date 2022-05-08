@@ -1,7 +1,11 @@
 public with sharing class AccountDAO {
     
-    public static List<Account> buscarContasPorId(Set<Id> setContasId){
-        return [SELECT Id, OwnerId FROM Account WHERE Id IN :setContasId];
+    public static List<Account> buscarContasPorId(Set<Id> setIdAccount){
+        return [SELECT Id, Name, OwnerId FROM Account WHERE Id IN :setIdAccount];
+    }
+
+    public static Account buscarContaPorId(Id idAccount){
+        return [SELECT Id, Name FROM Account WHERE Id =: idAccount];
     }
 
     public static Account buscarContaAtivoPorID(Id idAccount){
