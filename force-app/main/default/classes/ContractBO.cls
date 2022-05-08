@@ -122,4 +122,6 @@ public with sharing class ContractBO {
     public static void ChamarMetodoFeature(Id contrato){
         AtualizarContrato.ContarParcelas(idContrato);
     }
+
+    
 }
