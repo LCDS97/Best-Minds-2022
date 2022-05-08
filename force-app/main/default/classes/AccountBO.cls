@@ -1,4 +1,6 @@
 public with sharing class AccountBO {
+
+    public class CampoVazioException extends Exception {}
     
     
     public static void somenteAtivarContaComDadosBancarios(List<Account> lstTriggersAccount, Map<Id, Account> mapOldAccount){
@@ -79,7 +81,6 @@ public with sharing class AccountBO {
         insert lstOppDevoCriar;
     }
 
-    // 2 - Criar um método que receba o Id de um Cliente PJ e mude o campo Ativo para false
     public static void clientePJAtualizarCampo(Id idAccount){
         Account clientePj = AccountDAO.buscarContasPorId(idAccount);
             
@@ -87,7 +88,59 @@ public with sharing class AccountBO {
                 clientePj.Ativo__c = false;
             }
     
-            update clientePj;
+        update clientePj;
+    }
+
+    public static Boolean contatoClientePJ(
+        Id clientePJ,
+        String nomeContato,
+        String sobrenomeContato,
+        String cargoContato,
+        String dataNascimentoContato,
+        String emailContato)
+    {
+        Boolean contactWasCreated;
+
+        try {
+
+            if (
+                String.IsBlank(clientePJ) == false &&
+                String.isBlank(nomeContato) == false &&
+                String.isBlank(sobrenomeContato) == false &&
+                String.isBlank(cargoContato) == false &&
+                String.isBlank(dataNascimentoContato) == false &&
+                String.isBlank(emailContato) == false )
+            {
+                
+                Contact novoContato = new Contact();
+                Date dataConvertida = Date.valueOf(dataNascimentoContato);
+                novoContato.AccountId = clientePJ;
+                novoContato.FirstName = nomeContato;
+                novoContato.LastName = sobrenomeContato;
+                novoContato.Title = cargoContato;
+                novoContato.BirthDate = dataConvertida;
+                novoContato.Email = emailContato;
+                contactWasCreated = true;
+
+                insert novoContato;
+            
+            }
+                else{
+                    throw new CampoVazioException('Preencher todos os campos por favor!!');
+
+                }
+
+            }
+        catch (CampoVazioException e) {
+            contactWasCreated = false;
+            System.debug('### Exception Personalizado => ' + e.getMessage());
         }
+    
+        catch(Exception e){
+            contactWasCreated = false;
+            System.debug('### Exception Padrão => ' + e.getMessage());
+        }
+            return contactWasCreated;    
+    }          
 
 }

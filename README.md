@@ -190,28 +190,43 @@ Retorno do método:
 
 - [x] 1 - Criar um Método que atualize o valor da Oportunidade
 
-##### [Classe da Atividade](./force-app/main/default/classes/OpportunityBO.cls#L67)
+##### [Classe da Atividade](./force-app/main/default/classes/OpportunityBO.cls#L63)
 
 ---
 - [x] 2 - Criar um método que receba o Id de um Cliente PJ e mude o campo Ativo para false
 
-##### [Classe da Atividade](./force-app/main/default/classes/AccountBO.cls#L83)
+##### [Classe da Atividade](./force-app/main/default/classes/AccountBO.cls#L84)
 
 ---
 - [x] 3 - Criar um método que receba o Id de uma Parcela e atualize o campo Status para Paga
 
-##### [Classe da Atividade](./force-app/main/default/classes/ParcelaBO.cls#L4)
+##### [Classe da Atividade](./force-app/main/default/classes/ParcelaBO.cls#L3)
 
 ---
 - [x] 4 - Criar um método que receba o Id de uma Parcela e delete o registro
 
-##### [Classe da Atividade](./force-app/main/default/classes/ParcelaBO.cls#L15)
+##### [Classe da Atividade](./force-app/main/default/classes/ParcelaBO.cls#L11)
 
 ---
 - [x] 5 - Criar um método que crie um Contato para o Cliente PJ
+
+*        1. Paramêtros: 
+            a. Id do Cliente PJ (Id)
+            b. Nome do Contato (String)
+            c. Cargo do Contato (String)
+            d. Data de Nascimento do Contato (Date)
+            e. E-mail do Contato (String)
+*        2. Regras
+            a. O método deve retornar um valor Boolean que indicará se o contato foi criada ou não
+            b. Se algum dos campos não estiver preenchido é necessário retornar false
+            c. Se todos os campos estiverem preenchidos, é necessário criar um registro de contato para o Cliente e retornar true
+
+##### [Classe da Atividade](./force-app/main/default/classes/AccountBO.cls#L94)
+
+
+
 ---
 
-##### [Classe da Atividade](force-app/main/default/classes/ExercicioDML.cls)
 
 ## Desafios Pessoais
 
