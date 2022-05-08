@@ -160,6 +160,10 @@ Retorno do método:
             a. Se a conta estiver inativa, é necessário lançar uma exceção indicando o erro
             b. Caso a lista recebida no paramêtro não possua nenhum item, lançar uma exceção informando que não possui Contatos
             c. Caso o valor da proposta seja menor ou igual a zero, lançar uma exceção informando o valor deve ser maior que zero
+
+
+##### [Classe da Atividade](./force-app/main/default/classes/BonusBO.cls#L18)
+
 ---
 - [x] 4 - Criar um método que faça a comparação dos itens de duas listas e retorne a quantidade de itens que são comuns entre as duas listas
 *            1. Paramêtros:

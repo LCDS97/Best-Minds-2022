@@ -1,4 +1,4 @@
-trigger TriggerAccount on Account (after insert, after update) {
+trigger TriggerAccount on Account (before update, after insert, after update) {
 
     if(trigger.isAfter){
 
@@ -8,6 +8,12 @@ trigger TriggerAccount on Account (after insert, after update) {
         
         if(Trigger.isUpdate){
             AccountBO.criarOportunidadePadraoParaConta(Trigger.new);
+        }
+    }
+    
+    if(Trigger.isBefore){
+        
+        if(Trigger.isUpdate){
             AccountBO.somenteAtivarContaComDadosBancarios(Trigger.new, Trigger.oldMap);
         }
     }
