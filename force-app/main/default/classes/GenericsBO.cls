@@ -1,5 +1,7 @@
 public with sharing class GenericsBO {
-    
+
+    public class ListaVaziaException extends Exception{}
+
     public static Integer comparacaoItensLista(List<String> lista1,List<String> lista2){
         Set<String> valoresUnicos = new Set<String>();
         
