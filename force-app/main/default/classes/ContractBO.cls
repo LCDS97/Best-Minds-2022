@@ -106,4 +106,20 @@ public with sharing class ContractBO {
             }
         }
     }
+
+    // Exemplos da Aula sobre Método Future
+    private static void contarParcelas(Id idContrato){
+        List<Parcela__c> lstNumeroParcelasPorContrato = ParcelaDAO.buscarParcelasIdContrato(idContrato);
+        
+        Contract contratoAtualizar = new Contract();
+        contratoAtualizar.Id = idContrato;
+        contratoAtualizar.NumeroParcelas__c = lstNumeroParcelasPorContrato;
+
+        update contratoAtualizar;
+    
+    }
+
+    public static void ChamarMetodoFeature(Id contrato){
+        AtualizarContrato.ContarParcelas(idContrato);
+    }
 }
