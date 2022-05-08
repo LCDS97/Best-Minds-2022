@@ -239,16 +239,51 @@ Retorno do método:
 
 ##### [Classe da Atividade](./force-app/main/default/classes/AccountBO.cls#L94)
 
+---
 
+## SOQL
+
+- [x] 1 - Criar um método que retorne todos os registros do objeto Contrato ( Apólice ) cadastrados no Salesforce.
+
+##### [Classe do Desafio](./force-app/main/default/classes/ContractBO.cls#L116)
 
 ---
 
+- [x] 2 - Criar um método que retorne apenas os Contratos que estejam com o Status Finalizado ( Usei Draft para concluir o Desafio )
+
+##### [Classe do Desafio](./force-app/main/default/classes/ContractBO.cls#L122)
+
+---
+
+- [x] 3 - Cria um método que receberá o Id de um cliente e retornará a lista de Bônus para esse cliente
+
+##### [Classe do Desafio](./force-app/main/default/classes/BonusBO.cls#L3)
+
+---
+
+- [x] 4 - Cria um método que retornará apenas as Parcelas que o valor seja maior que 10 mil ( Alterei desafio para receber valor por paramêtro para filtrar )
+
+##### [Classe do Desafio](./force-app/main/default/classes/ParcelaBO.cls#L18)
+
+---
+
+- [x] 5 - Criar um método que retorne a quantidade de todos os Contratos ( Apólice ) com o status em Aberto
+
+##### [Classe do Desafio](./force-app/main/default/classes/ContractBO.cls#L128)
+
+---
+
+- [x] 6 - Criar um método que receba o Id de um Contrato ( Apólice ) e retorne a soma de todas as parcelas desse contrato
+
+##### [Classe do Desafio](./force-app/main/default/classes/ContractBO.cls#L136)
+
+---
 
 ## Desafios Pessoais
 
 - [x] 1 - Refazer desafio do Trailhead de Trigger de uma maneira nova utilizando coleções
 
-##### [Classe do Desafio](./force-app/main/default/classes/DesafioApexCorreto.cls)
+##### [Classe do Desafio](./force-app/main/default/classes/OpportunityBO.cls#L39)
 
 ---
 

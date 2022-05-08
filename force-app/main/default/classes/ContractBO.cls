@@ -113,6 +113,42 @@ public with sharing class ContractBO {
         return buscaParcelaPorContratoId;
     }
 
+    public static List<Contract> retornarApolices() {
+        List<Contract> contractList = ContractDAO.buscarTodosContratos();
+
+        return contractList;
+    }
+
+    public static List<Contract> retornarApoliceDraftLista(){
+        List<Contract> closedContracts = ContractDAO.buscarContratosPorStatus('Draft');
+
+        return closedContracts;
+    }    
+
+    public static List<AggregateResult> contratosEmAberto(){
+    	List<AggregateResult> contratosEmAberto = ContractDAO.buscarContratosEmAberto();
+        	for (AggregateResult contrato : contratosEmAberto){
+            	System.debug('O número total de contratos em aberto foi: ' + contrato.get('expr0'));
+        }
+        return contratosEmAberto;
+    }
+
+    public static Decimal retornaParcelasContratoPorId(Id idContrato){
+        
+        List<Parcela__c> parcelasContratoId = ParcelaDAO.retornarIdContratoValorNome(idContrato);
+		Decimal valorTotal = 0;
+        
+        for(Parcela__c parcela : parcelasContratoId){
+
+            valorTotal += parcela.Moeda__c;
+            System.debug('O valor atual da Parcela é de R$' + parcela.Moeda__c + ' da Conta ' + parcela.Contrato__r.Account.Name + ' com o total de R$' + valorTotal);
+        }
+        
+        return valorTotal;
+        
+    }
+    
+
     // Exemplos da Aula sobre Método Future
     @future
     private static void contarParcelas(Id idContrato){
