@@ -141,6 +141,18 @@ public with sharing class AccountBO {
             System.debug('### Exception Padrão => ' + e.getMessage());
         }
             return contactWasCreated;    
-    }          
+    }
+    
+    public static List<Account> buscarSetorClientePJ(String nomeSetor){
+        String nomeSetorString = '%' + nomeSetor + '%';
+
+        List<Account> buscarContasClientePj = AccountDAO.buscarContasSetor(nomeSetorString);
+
+        for(Account conta : buscarContasClientePj){
+            System.debug('Nome da conta é ' + conta.Name + ' e o Setor da conta é ' + conta.Industry);
+        }
+
+        return buscarContasClientePj;
+    }
 
 }

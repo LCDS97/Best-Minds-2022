@@ -10,5 +10,11 @@ public with sharing class OpportunityDAO {
             SELECT Id, AccountId FROM Opportunity
         ];
     }
+
+    public static Opportunity oportunidadeMaiorValor(){
+        Opportunity oportunidadeComMaiorValor = [SELECT Id, Amount, Name FROM Opportunity ORDER BY Amount DESC NULLS LAST LIMIT 1];
+        
+        return oportunidadeComMaiorValor;
+    }
 }
 

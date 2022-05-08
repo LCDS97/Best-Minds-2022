@@ -175,15 +175,31 @@ Retorno do método:
 
 - [x] 1 - Criar um método que retorne os Clientes PJ Ativos
 
+##### [Classe da Atividade](./force-app/main/default/classes/AccountDAO.cls#L11)
+
+---
+
 - [x] 2 - Criar um método que retorne uma lista de parcelas vencidas
+
+##### [Classe da Atividade](./force-app/main/default/classes/ParcelaDAO.cls#L8)
+
+---
 
 - [x] 3 - Criar um método que retorne a Oportunidade de Maior Valor
 
+##### [Classe da Atividade](./force-app/main/default/classes/OpportunityDAO.cls#L14)
+
+---
+
 - [x] 4 - Criar um método que receba um campo String referente ao Campo Setor do objeto Cliente PJ e retorne todos os clientes com aquele setor em específico
+
+##### [Classe da Atividade](./force-app/main/default/classes/AccountBO.cls#L146)
+
+---
 
 - [x] 5 - Criar um método que receba um Id de Contrato e retorne a quantidade de parcelas do mesmo Contrato
 
-##### [Classe Apex de todas as Atividades](force-app/main/default/classes/ExerciciosCollection.cls)
+##### [Classe Apex de todas as Atividades](./force-app/main/default/classes/ContractBO.cls#L110)
 
 ---
 ## DML ✅

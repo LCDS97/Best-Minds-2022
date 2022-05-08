@@ -107,6 +107,12 @@ public with sharing class ContractBO {
         }
     }
 
+    public static Integer buscarParcelasContrato(Id IdContrato){
+        Integer buscaParcelaPorContratoId = ParcelaDAO.buscarParcelasIdContrato(IdContrato).size();
+
+        return buscaParcelaPorContratoId;
+    }
+
     // Exemplos da Aula sobre Método Future
     @future
     private static void contarParcelas(Id idContrato){
