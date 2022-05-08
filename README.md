@@ -189,6 +189,9 @@ Retorno do método:
 ## DML ✅
 
 - [x] 1 - Criar um Método que atualize o valor da Oportunidade
+
+##### [Classe da Atividade](./force-app/main/default/classes/OpportunityBO.cls#67) - Linha 67
+
 ---
 - [x] 2 - Criar um método que receba o Id de um Cliente PJ e mude o campo Ativo para false
 ---
