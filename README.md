@@ -183,7 +183,7 @@ Retorno do método:
 ---
 - [x] 6 - Fazer Mapa dos Dados Bancários com um Boolean aplicado na aula de hoje
 ---
-##### [Classe Apex de todas as Atividades](force-app/main/default/classes/ExerciciosLacosRepeticao.cls)
+##### [Classe da Atividade](force-app/main/default/classes/DadosBancariosBO.cls#L39)
 
 ## Collections ✅
 
