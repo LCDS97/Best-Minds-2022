@@ -173,6 +173,8 @@ Retorno do método:
                 a. Se uma das listas estiver vazia, lançar uma exceção informando qual lista está vazia
 *            3. Retorno do Método:
                 b. Um número que indica a quantidade de itens repetidos
+
+##### [Classe da Atividade](./force-app/main/default/classes/GenericsBO.cls#L3)
 ---
 - [x] 5 - Criar um método que retorne um mapa da quantidade de Oportunidades por Id de Cliente PJ
 ---
