@@ -95,4 +95,17 @@ public with sharing class OpportunityBO {
         insert oportunidadesParaCadastrar;
 
     }
+
+    public static Integer listaOportunidadesMaior(List <Opportunity> oportunidadeParams, Integer valorFiltrar){
+        Integer quantidadeOportunidades = 0;
+        
+        for( Opportunity oportunidade : oportunidadeParams){
+
+            if( oportunidade.Amount > valorFiltrar){
+                quantidadeOportunidades++;
+            }
+        }
+
+        return quantidadeOportunidades;
+    }
 }

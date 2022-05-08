@@ -143,10 +143,13 @@ Retorno do método:
             a. O Nome da Oportunidade deve ser o número da Oportunidade que está sendo criada + nome da Conta,
             por exemplo: 1 - Conta Teste, 2 - Conta Teste...
 
-##### [Classe Apex de todas as Atividades](./force-app/main/default/classes/OpportunityBO.cls#L73)
+##### [Classe da Atividade](./force-app/main/default/classes/OpportunityBO.cls#L73)
 
 ---
-- [x] 2 - Criar um método que receba uma lista de Oportunidades e retorna a quantidade de oportunidades que possui o valor maior que R$10.000,00
+- [x] 2 - Criar um método que receba uma lista de Oportunidades e retorna a quantidade de oportunidades que possui o valor maior que R$10.000,00 ( Refatorei para filtrar o valor da Oportunidade como quiser )
+
+##### [Classe da Atividade](./force-app/main/default/classes/OpportunityBO.cls#L99)
+
 ---
 - [x] 3 - Criar um método que cria um registro no Objeto Bonûs para uma lista de contatos para uma lista de contatos de uma Conta
 *        1. Paramêtros: 
@@ -202,7 +205,7 @@ Retorno do método:
 
 - [x] 5 - Criar um método que receba um Id de Contrato e retorne a quantidade de parcelas do mesmo Contrato
 
-##### [Classe Apex de todas as Atividades](./force-app/main/default/classes/ContractBO.cls#L110)
+##### [Classe da Atividade](./force-app/main/default/classes/ContractBO.cls#L110)
 
 ---
 ## DML ✅
@@ -244,7 +247,7 @@ Retorno do método:
 
 ---
 
-## SOQL
+## SOQL ✅
 
 - [x] 1 - Criar um método que retorne todos os registros do objeto Contrato ( Apólice ) cadastrados no Salesforce.
 
