@@ -190,10 +190,13 @@ Retorno do método:
 
 - [x] 1 - Criar um Método que atualize o valor da Oportunidade
 
-##### [Classe da Atividade](./force-app/main/default/classes/OpportunityBO.cls#L67) - Linha 67
+##### [Classe da Atividade](./force-app/main/default/classes/OpportunityBO.cls#L67)
 
 ---
 - [x] 2 - Criar um método que receba o Id de um Cliente PJ e mude o campo Ativo para false
+
+##### [Classe da Atividade](./force-app/main/default/classes/AccountBO.cls#L83)
+
 ---
 - [x] 3 - Criar um método que receba o Id de uma Parcela e atualize o campo Status para Paga
 ---

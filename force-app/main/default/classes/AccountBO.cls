@@ -79,4 +79,15 @@ public with sharing class AccountBO {
         insert lstOppDevoCriar;
     }
 
+    // 2 - Criar um método que receba o Id de um Cliente PJ e mude o campo Ativo para false
+    public static void clientePJAtualizarCampo(Id idAccount){
+        Account clientePj = AccountDAO.buscarContasPorId(idAccount);
+            
+            if (clientePj.Ativo__c){
+                clientePj.Ativo__c = false;
+            }
+    
+            update clientePj;
+        }
+
 }

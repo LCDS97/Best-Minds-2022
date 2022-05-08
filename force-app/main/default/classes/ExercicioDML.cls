@@ -2,29 +2,9 @@ public with sharing class ExercicioDML {
 
     public class CampoVazioException extends Exception {}
 	
-    // 1 - Criar um Método que atualize o valor da Oportunidade
-                    // Paramêtros: Receber Id Oportunidade / Valor Decimal
-    public static void atualizarValorOpp(Id idOportunidade, Decimal valorOportunidade){
-        // Regra: O método deve buscar a oportunidade e atualizar o valor com o que foi recebido no método
-        Opportunity oportunidadeAtualizar = new Opportunity();
-        oportunidadeAtualizar.Id = idOportunidade;
-        oportunidadeAtualizar.Amount = valorOportunidade;
 
-        
-        update oportunidadeAtualizar;
 
-    }
 
-    // 2 - Criar um método que receba o Id de um Cliente PJ e mude o campo Ativo para false ( Verificar com o Arthur depois sobre o campo )
-    public static void clientePJAtualizarCampo(Id idAccount){
-        Account clientePj = [SELECT Id, Ativo__c FROM Account WHERE Id =: idAccount];
-        
-        if (clientePj.Ativo__c){
-            clientePj.Ativo__c = false;
-        }
-
-        update clientePj;
-    }
     // 3 - Criar um método que receba o Id de uma Parcela e atualize o campo Status para Paga
     public static void atualizeCampoParcela(Id idParcela){
         Parcela__c parcelaAtualizar = new Parcela__c();
