@@ -177,6 +177,9 @@ Retorno do método:
 ##### [Classe da Atividade](./force-app/main/default/classes/GenericsBO.cls#L3)
 ---
 - [x] 5 - Criar um método que retorne um mapa da quantidade de Oportunidades por Id de Cliente PJ
+
+##### [Classe da Atividade](./force-app/main/default/classes/OpportunityBO.cls#L39)
+
 ---
 - [x] 6 - Fazer Mapa dos Dados Bancários com um Boolean aplicado na aula de hoje
 ---

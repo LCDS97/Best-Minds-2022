@@ -35,4 +35,24 @@ public with sharing class DadosBancariosBO {
     update lstTodosDadosBancariosPorIdConta;
 
     }
+
+    public static Map<Id,List<DadosBancarios__c>> mapDadosBancarios(){
+        List<Account> contasClientePJ = AccountDAO.clientePjAtivos();
+
+        Map<Id,List<DadosBancarios__c>> mapDadosBancariosClientePJ = new Map<Id,List<DadosBancarios__c>>();
+
+        for(Account conta : contasClientePJ){
+            mapDadosBancariosClientePJ.put(conta.Id,new List<DadosBancarios__c>());
+        }
+
+        List<DadosBancarios__c> lstDadosBancarios = DadosBancariosDAO.pegarContasPorDadoBancarios(mapDadosBancariosClientePJ.keySet());
+
+        for(DadosBancarios__c dadoBancario : lstDadosBancarios){
+            mapDadosBancariosClientePJ.get(dadoBancario.Conta__c).add(dadoBancario);
+        }
+
+        return mapDadosBancariosClientePJ;
+
+
+    }
 }
