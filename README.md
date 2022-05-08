@@ -199,8 +199,14 @@ Retorno do método:
 
 ---
 - [x] 3 - Criar um método que receba o Id de uma Parcela e atualize o campo Status para Paga
+
+##### [Classe da Atividade](./force-app/main/default/classes/ParcelaBO.cls#L4)
+
 ---
 - [x] 4 - Criar um método que receba o Id de uma Parcela e delete o registro
+
+##### [Classe da Atividade](./force-app/main/default/classes/ParcelaBO.cls#L15)
+
 ---
 - [x] 5 - Criar um método que crie um Contato para o Cliente PJ
 ---

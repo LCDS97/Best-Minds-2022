@@ -5,24 +5,9 @@ public with sharing class ExercicioDML {
 
 
 
-    // 3 - Criar um método que receba o Id de uma Parcela e atualize o campo Status para Paga
-    public static void atualizeCampoParcela(Id idParcela){
-        Parcela__c parcelaAtualizar = new Parcela__c();
-        parcelaAtualizar.Id = idParcela;
-        parcelaAtualizar.Status__c = 'Paga';
-        
-        update parcelaAtualizar;
-    }
 
-    // 4 - Criar um método que receba o Id de uma Parcela e delete o registro
-    public static void deletarParcela(Id idParcela){
-        Parcela__c parcelaDeletar = new Parcela__c();
-        System.debug('Verificando antes de deletar a parcela' + idParcela);
-        parcelaDeletar.Id = idParcela;
-        
-        delete parcelaDeletar;
-        System.debug('Verificando depois de deletar a parcela' + idParcela);
-    }
+
+
 
     // 5 - Criar um método que crie um Contato para o Cliente PJ
     /* Paramêtros:
