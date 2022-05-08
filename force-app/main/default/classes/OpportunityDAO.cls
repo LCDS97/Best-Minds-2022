@@ -4,5 +4,11 @@ public with sharing class OpportunityDAO {
             SELECT Id, AccountId FROM Opportunity WHERE AccountId IN :setAccountsId
         ];
     }
+
+    public static List<Opportunity> buscarOportunidadesContas(){
+        return [
+            SELECT Id, AccountId FROM Opportunity
+        ];
+    }
 }
 

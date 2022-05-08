@@ -34,4 +34,28 @@ public with sharing class OpportunityBO {
             }
         }
     }
+
+    // Desafio de Map na Aula de Trigger
+    public static Map<Id,Integer> mapContaOportunidades(){
+        Integer contador;
+        
+        Map<Id, Integer> mapQtdePorConta = new Map<Id, Integer>();
+        List<Opportunity> oportunidades = OpportunityDAO.buscarOportunidadesContas(); // Aqui eu retorno o Id da Oportunidade e Id da Conta
+
+            for(Opportunity oportunidade : oportunidades) {
+
+                    
+                    if(mapQtdePorConta.containsKey(oportunidade.AccountId)){
+                        contador = mapQtdePorConta.get(oportunidade.AccountId);
+                    }
+                    else {
+                        
+                        contador = 0;
+                    }
+                    contador++;
+                    mapQtdePorConta.put(oportunidade.AccountId,contador);
+                }
+        
+            return mapQtdePorConta;
+}
 }
