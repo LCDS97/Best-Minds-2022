@@ -1,7 +1,9 @@
 public with sharing class AccountBO {
 
     public class CampoVazioException extends Exception {}
-    
+    public class ContaInativaException extends Exception{}
+    public class SemDadosBancariosNuloException extends Exception{}
+    public class SemContatosException extends Exception{}
     
     public static void somenteAtivarContaComDadosBancarios(List<Account> lstTriggersAccount, Map<Id, Account> mapOldAccount){
         List<Account> lstContasAtivadasAgora = new List<Account>();
@@ -154,5 +156,67 @@ public with sharing class AccountBO {
 
         return buscarContasClientePj;
     }
+
+    public static void ClientePJValidacoes(Id idContaPJ){
+
+        Account verificarContaPJ = AccountDAO.buscarValidacoesContaPJ(idContaPJ);
+
+        try {
+            if(!verificarContaPJ.Ativo__c){
+                    throw new ContaInativaException('Não é possível realizar operações com uma conta Inativa');
+                }
+            
+            if(
+                String.isBlank(verificarContaPJ.RazaoSocial__c) ||
+                String.isBlank(verificarContaPJ.CNPJ__c) ||
+                String.isBlank(verificarContaPJ.Type)){
+                    throw new CampoVazioException('Os campos CNPJ e Razão Social e Tipo devem ser preenchidos');
+                }
+            
+            System.debug('Todos os campos preenchidos');
+            
+           
+        } catch (ContaInativaException error) {
+            System.debug('### Exception ContaInativa: ' + error.getMessage());
+
+        } catch (CampoVazioException error) {
+            System.debug('### Exception CampoVazio: ' + error.getMessage());
+
+        } catch (Exception error) {
+            System.debug('### Exception Padrão: ' + error.getMessage());
+        }
+    }
+
+    public static void criarOportunidadeClientePJ(Id IdAccount){
+        List <DadosBancarios__c> dadosBancariosClientePJ = [SELECT Id FROM DadosBancarios__c WHERE Conta__c	 =: IdAccount];
+        List <Contact> contatosClientePJ = ContactDAO.buscarContatosPorIdConta(IdAccount);
+
+        try {
+            if(dadosBancariosClientePJ.isEmpty()){
+                throw new SemDadosBancariosNuloException('É Necessário ter pelo menos um Dado Bancário cadastrado na Conta!');
+            }
+            if(contatosClientePJ.isEmpty()){
+                throw new SemContatosException('É necessário a conta ter pelo menos um contato cadastrado!');
+            }
+            Opportunity novaOportunidadeClientePJ = new Opportunity();
+            Account nomeOportunidade = [SELECT Id, Name FROM Account WHERE Id =: IdAccount ];
+            
+            novaOportunidadeClientePJ.AccountId = IdAccount;
+            novaOportunidadeClientePJ.Name = 'Oportunidade da Conta ' + nomeOportunidade.Name;
+            novaOportunidadeClientePJ.StageName = 'Prospecting';
+            novaOportunidadeClientePJ.CloseDate = date.today().addMonths(2);
+
+            insert novaOportunidadeClientePJ;
+
+        } catch (SemDadosBancariosNuloException error) {
+            System.debug('### SemDadosBancariosNuloException => ' + error.getMessage());
+        } catch (SemContatosException error) {
+            System.debug('### SemContatosException => ' + error.getMessage());
+        } catch (Exception error) {
+            System.debug('### Exception Padrão => ' + error.getMessage());   
+        }
+    }
+
+    
 
 }

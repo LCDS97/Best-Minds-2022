@@ -23,4 +23,10 @@ public with sharing class AccountDAO {
             SELECT Id, Name, Industry FROM Account WHERE Industry LIKE: nomeSetor
         ];
     }
+
+    public static Account buscarValidacoesContaPJ(Id idContaPJ){
+        return [
+            SELECT Id, Ativo__c, Type, RazaoSocial__c, CNPJ__c From Account WHERE Id =: idContaPJ
+        ];
+    }
 }

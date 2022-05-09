@@ -129,6 +129,38 @@ Retorno do método:
 
 ---
 
+## Condições ✅
+
+- [x] 1 - Criar um método que receba o Id de uma parcela como paramêtro e retorne o valor desta parcela adicionando um percentual
+> As condições devem ser:
+>>        1. Parcela fora da validade (10%) *0,10 > data de hoje
+>>        2. Parcelas antes da validade (-5%)* 0,95 - 27 < data de hoje
+>>        3. Parcela na validade (0%)
+
+#### [Classe da Atividade](./force-app/main/default/classes/ParcelaBO.cls#L20)
+
+---
+
+- [x] 2 - Criar um método que receba o Id de um Cliente PJ e faça as seguintes ações:
+> Regras:
+>>        1. Se o cliente PJ estiver inativo, deve ser lançada uma exceção informando que não é possível
+>>        2. Se algum dos campos do Cliente PJ estiverem vazios, é necessário lançar uma exceção indicando que todos os campos devem ser preenchidos
+
+#### [Classe da Atividade](./force-app/main/default/classes/ParcelaBO.cls#L20)
+
+---
+
+- [x] 3 - Criar um método que receba o Id de um Cliente PJ e faça as segiuntes ações:
+> Regras:
+>>         1. Se o Cliente PJ não tiver nenhum Dado Bancário cadastrado no sistema, é necessário lançar uma exceção indicando a falta de registro de Dados Bancários.
+>>         2. Se o Cliente PJ não tiver nenhum Contato cadastrado é necessário lançar uma exceção indicando a falta de registros Contato para a Conta.
+>>         3. Criar uma Oportunidade para o Cliente PJ caso nenhum dos tópicos anteriores for verdadeiro
+ 
+#### [Classe da Ativdade](./force-app/main/default/classes/AccountBO.cls#L190)
+
+
+---
+
 ## Laços de Repetição ✅
 
 
