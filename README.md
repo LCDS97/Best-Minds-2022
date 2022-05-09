@@ -64,7 +64,7 @@
 ---
 ## Apex Trigger ✅
 
-### Entregar até segunda-feira
+### Entregar até segunda-feira ✅
 
 #### Refeito todos com as boas práticas caso o Bruno queira somente dentro da Trigger, enviar da pasta no gitIgnore
 
