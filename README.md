@@ -153,6 +153,17 @@ Retorno do método:
 - [x] 3 - Criar um método que receba o Id de um Cliente PJ e faça as segiuntes ações:
 > Regras:
 >>         1. Se o Cliente PJ não tiver nenhum Dado Bancário cadastrado no sistema, é necessário lançar uma exceção indicando a falta de registro de Dados Bancários.
+>>         2. Se o cliente não tiver nenhum contato associado é necessário lançar uma excessão indicando a necessidade de um contato para o Caso
+>>         3. Se nenhuma das condições acima ocorrerem, é necessário criar um caso para o Cliente com o assunto
+                a. Sendo o nome do Cliente, concatenado com a palavra Sinistro, Ex: Cliente Teste - Sinistro
+ 
+#### [Classe da Ativdade](./force-app/main/default/classes/AccountBO.cls#L190)
+
+---
+
+- [x] 4 - Criar um método que receba o Id de um Cliente PJ e cria um Caso ( Sinistro ) com as seguintes condições:
+> Regras:
+>>         1. Se o cliente estiver inativo é necessário lançar uma exceção que indicando que o cliente deve estar ativo para criar um caso
 >>         2. Se o Cliente PJ não tiver nenhum Contato cadastrado é necessário lançar uma exceção indicando a falta de registros Contato para a Conta.
 >>         3. Criar uma Oportunidade para o Cliente PJ caso nenhum dos tópicos anteriores for verdadeiro
  

@@ -187,9 +187,9 @@ public with sharing class AccountBO {
         }
     }
 
-    public static void criarOportunidadeClientePJ(Id IdAccount){
-        List <DadosBancarios__c> dadosBancariosClientePJ = [SELECT Id FROM DadosBancarios__c WHERE Conta__c	 =: IdAccount];
-        List <Contact> contatosClientePJ = ContactDAO.buscarContatosPorIdConta(IdAccount);
+    public static void criarOportunidadeClientePJ(Id idAccount){
+        List <DadosBancarios__c> dadosBancariosClientePJ = DadosBancariosDAO.pegarContaPorDadoBancarios(idAccount);
+        List <Contact> contatosClientePJ = ContactDAO.buscarContatosPorIdConta(idAccount);
 
         try {
             if(dadosBancariosClientePJ.isEmpty()){
@@ -199,9 +199,9 @@ public with sharing class AccountBO {
                 throw new SemContatosException('É necessário a conta ter pelo menos um contato cadastrado!');
             }
             Opportunity novaOportunidadeClientePJ = new Opportunity();
-            Account nomeOportunidade = [SELECT Id, Name FROM Account WHERE Id =: IdAccount ];
+            Account nomeOportunidade = AccountDAO.buscarContaPorId(idAccount);
             
-            novaOportunidadeClientePJ.AccountId = IdAccount;
+            novaOportunidadeClientePJ.AccountId = idAccount;
             novaOportunidadeClientePJ.Name = 'Oportunidade da Conta ' + nomeOportunidade.Name;
             novaOportunidadeClientePJ.StageName = 'Prospecting';
             novaOportunidadeClientePJ.CloseDate = date.today().addMonths(2);
