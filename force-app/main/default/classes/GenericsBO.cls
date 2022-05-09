@@ -43,7 +43,7 @@ public with sharing class GenericsBO {
                 }
 
                 Decimal resultadoSoma = primeiroValor + segundoValor;
-        
+                
                 return resultadoSoma;
             }
             // 2 - Cria um método que receba dois valores numéricos e retorne a subtração dos dois valores
