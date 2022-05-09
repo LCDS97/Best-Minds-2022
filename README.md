@@ -362,7 +362,7 @@ Retorno do método:
 
 ---
 
-- [ ] 5 - Refatorar minha org com todas as classes - DAO / TO / BO
+- [x] 5 - Refatorar minha org com todas as classes - DAO / TO / BO
 
 
 
