@@ -1,6 +1,7 @@
 public with sharing class GenericsBO {
 
     public class ListaVaziaException extends Exception{}
+    public class CalculoNumero2 extends Exception{}
 
     public static Integer comparacaoItensLista(List<String> lista1,List<String> lista2){
         Set<String> valoresUnicos = new Set<String>();
@@ -34,6 +35,13 @@ public with sharing class GenericsBO {
 
             // 1 - Cria um método que receba dois valores numéricos e retorne a soma dos dois valores
             public static Decimal somarValores(Decimal primeiroValor, Decimal segundoValor) {
+
+                if(primeiroValor == null){
+                    AuraHandledException e = new AuraHandledException('O valor 1 não pode ser nulo');
+                    e.setMessage('O valor 1 não pode ser nulo');
+                    throw e;
+                }
+
                 Decimal resultadoSoma = primeiroValor + segundoValor;
         
                 return resultadoSoma;
