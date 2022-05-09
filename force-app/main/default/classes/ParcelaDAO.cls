@@ -23,4 +23,10 @@ public with sharing class ParcelaDAO {
         ];
     }
 
+    public static Parcela__c retornarParcelaIdValorVencimento(Id idParcela){
+        return [
+            SELECT Id, DataVencimento__c, Moeda__c FROM Parcela__c WHERE Id =: idParcela
+        ];
+    }
+
 }

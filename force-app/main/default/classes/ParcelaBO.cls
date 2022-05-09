@@ -1,4 +1,6 @@
 public with sharing class ParcelaBO {
+
+    public class DataVencimentoVazioException extends Exception{}
     
     public static void atualizeCampoParcela(Id idParcela){
         Parcela__c parcelaAtualizar = new Parcela__c();
@@ -33,6 +35,36 @@ public with sharing class ParcelaBO {
 
         return listParcelas;
 
+    }
 
+    public static Decimal verificarParcela(Id IdParcela){
+        Parcela__c pegarParcela = ParcelaDAO.retornarParcelaIdValorVencimento(IdParcela);
+        Date dataHoje = Date.Today();
+        Decimal valorParcelaAlterado = 0;
+
+        try {
+            Integer verificarVencimento = dataHoje.daysBetween(pegarParcela.DataVencimento__c);
+            
+            if( verificarVencimento > 0){
+                valorParcelaAlterado = pegarParcela.Moeda__c - (pegarParcela.Moeda__c * 0.05);
+        }   else if (verificarVencimento < 0 ){
+                valorParcelaAlterado = pegarParcela.Moeda__c + (pegarParcela.Moeda__c * 0.1);
+            
+        }   else if(verificarVencimento == 0){
+                valorParcelaAlterado = pegarParcela.Moeda__c;
+                System.debug('Sem desconto pois é o dia do Vencimento');
+        }   else {
+                throw new DataVencimentoVazioException('Valor do campo Date está Nulo');
+            } 
+        } catch (DataVencimentoVazioException error) {
+            System.debug('###Erro DataVencimentoException => :' + error.getMessage());
+        } catch (NullPointerException error) {
+            System.debug('###Erro Argumento Nulo => :' + error.getMessage());
+        } catch(Exception error) {
+            System.debug('###Erro Exception Padrão' + error.getMessage());
+        }
+        pegarParcela.Moeda__c = valorParcelaAlterado;
+        update pegarParcela;
+        return valorParcelaAlterado;
     }
 }
