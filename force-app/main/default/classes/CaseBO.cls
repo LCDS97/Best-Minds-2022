@@ -58,4 +58,24 @@ public with sharing class CaseBO {
     }
 
     }
+
+    public static Boolean casoCriado(Id IdAccount, String nomeConta){
+        Boolean casoCriado = false;
+
+        try {
+            Case novoCaso = new Case();
+            novoCaso.AccountId = IdAccount;
+            novoCaso.Status = 'New';
+            novoCaso.Origin = 'Apex';
+            novoCaso.Type = 'Sinistro';
+            novoCaso.Subject = 'Cliente ' + nomeConta + ' - Sinistro';
+            casoCriado = true;
+            insert novoCaso;
+               
+        } catch (Exception error) {
+            System.Debug('### Exception padrão: ' + error);
+        }
+        return casoCriado;
+
+    }
 }

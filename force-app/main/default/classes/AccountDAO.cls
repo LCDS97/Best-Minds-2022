@@ -9,7 +9,7 @@ public with sharing class AccountDAO {
     }
 
     public static Account buscarContaAtivoPorID(Id idAccount){
-        return [SELECT Id, Ativo__c FROM Account WHERE Id =: idAccount];
+        return [SELECT Id, Name, Ativo__c FROM Account WHERE Id =: idAccount];
     }
 
     public static List<Account> clientePjAtivos(){

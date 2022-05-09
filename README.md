@@ -157,7 +157,7 @@ Retorno do método:
 >>         3. Se nenhuma das condições acima ocorrerem, é necessário criar um caso para o Cliente com o assunto
                 a. Sendo o nome do Cliente, concatenado com a palavra Sinistro, Ex: Cliente Teste - Sinistro
  
-#### [Classe da Ativdade](./force-app/main/default/classes/AccountBO.cls#L190)
+#### [Classe da Ativdade](./force-app/main/default/classes/AccountBO.cls#L192)
 
 ---
 
@@ -167,8 +167,12 @@ Retorno do método:
 >>         2. Se o Cliente PJ não tiver nenhum Contato cadastrado é necessário lançar uma exceção indicando a falta de registros Contato para a Conta.
 >>         3. Criar uma Oportunidade para o Cliente PJ caso nenhum dos tópicos anteriores for verdadeiro
  
-#### [Classe da Ativdade](./force-app/main/default/classes/AccountBO.cls#L190)
+#### [Classe da Ativdade](./force-app/main/default/classes/AccountBO.cls#L222)
 
+- [x] 5 - Para o exercício anterior, faça a criação do caso em um método separado, ou seja, ao invés de criar o caso diretamente no método anterior
+>   Deve se chamar um novo método para a criação do caso.
+
+#### [Classe da Ativdade](./force-app/main/default/classes/CaseBO.cls#L62)
 
 ---
 

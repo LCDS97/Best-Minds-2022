@@ -4,6 +4,8 @@ public with sharing class AccountBO {
     public class ContaInativaException extends Exception{}
     public class SemDadosBancariosNuloException extends Exception{}
     public class SemContatosException extends Exception{}
+    public class CasoNaoCriadoException extends Exception{}
+
     
     public static void somenteAtivarContaComDadosBancarios(List<Account> lstTriggersAccount, Map<Id, Account> mapOldAccount){
         List<Account> lstContasAtivadasAgora = new List<Account>();
@@ -216,6 +218,37 @@ public with sharing class AccountBO {
             System.debug('### Exception Padrão => ' + error.getMessage());   
         }
     }
+
+    public static void criarCasoClientePJ(Id idAccount){
+        Account verificarContaPJ = AccountDAO.buscarContaPorId(idAccount);
+        List <Contact> contatosClientePJ = ContactDAO.buscarContatosPorIdConta(idAccount);
+
+        try {
+            if(!verificarContaPJ.Ativo__c){
+                throw new ContaInativaException('É Necessário a Conta estar ativa para criar o caso!');
+            }
+            if(contatosClientePJ.isEmpty()){
+                throw new SemContatosException('É necessário a conta ter pelo menos um contato cadastrado!');
+            }
+
+            Boolean resultadoCaso = CaseBO.casoCriado(idAccount,verificarContaPJ.Name);
+            if(!resultadoCaso){
+                throw new CasoNaoCriadoException('Ocorreu um erro, seu caso não foi criado');
+            }
+            System.debug('Seu caso foi criado');
+
+        } catch (ContaInativaException error) {
+            System.debug('### ContaInativaException => ' + error.getMessage());
+        } catch (SemContatosException error) {
+            System.debug('### SemContatosException => ' + error.getMessage());
+        } catch (CasoNaoCriadoException error) {
+            System.debug('### CasoNaoCriadoException => ' + error.getMessage());
+        } catch (Exception error) {
+            System.debug('### Exception Padrão => ' + error.getMessage());   
+        }
+    }
+
+
 
     
 
