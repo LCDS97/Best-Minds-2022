@@ -149,10 +149,11 @@ public class AccountBOTest{
 
         Account conta = [SELECT id, Industry, Ativo__c From Account LIMIT 1];
         conta.Industry='Education';
+        update conta;
         
 
         Test.startTest();
-            List<Account> buscarContasClientePj = AccountDAO.buscarContasSetor(setorName);
+            List<Account> buscarContasClientePj = AccountBO.buscarSetorClientePJ(setorName);
         Test.stopTest();
     }
 } 
