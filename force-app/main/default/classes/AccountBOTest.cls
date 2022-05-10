@@ -93,4 +93,66 @@ public class AccountBOTest{
         AccountBO.clientePJAtualizarCampo(conta.Id);
         Test.stopTest();
     }
+
+    @isTest
+    private static void contatoClientePJSucesso(){
+
+        Account conta = [SELECT id, Ativo__c From Account LIMIT 1];
+        
+
+        Test.startTest();
+            AccountBO.contatoClientePJ(conta.Id, 'nomeTeste', 'sobrenomeTeste', 'cargoTeste', '2000-01-01', 'lucas.cds1997@gmail.com');
+        Test.stopTest();
+    }
+
+    @isTest
+    private static void contatoClientePJCampoVazio(){
+        String messageError;
+
+        Account conta = [SELECT id, Ativo__c From Account LIMIT 1];
+        
+
+        Test.startTest();
+
+        try {
+            AccountBO.contatoClientePJ(conta.Id, 'nomeTeste', 'sobrenomeTeste', '', '2000-01-01', 'lucas.cds1997@gmail.com');
+        } catch (Exception e) {
+            messageError = e.getMessage();
+            System.assertEquals(messageError, e.getMessage(), 'Preencher todos os campos por favor!!');
+        }
+
+        Test.stopTest();
+    }
+
+    @isTest
+    private static void contatoClientePJCampoNulo(){
+        String messageError;
+
+        Account conta = [SELECT id, Ativo__c From Account LIMIT 1];
+        
+
+        Test.startTest();
+
+        try {
+            AccountBO.contatoClientePJ(conta.Id, 'nomeTeste', 'sobrenomeTeste', 'cargoTeste', '2000-201-01', 'lucas.cds1997@gmail.com');
+        } catch (Exception e) {
+            messageError = e.getMessage();
+            System.assertEquals(messageError, e.getMessage(), 'Preencher todos os campos por favor!!');
+        }
+
+        Test.stopTest();
+    }
+
+    @isTest
+    private static void buscarSetorClientePJSucesso(){
+        String setorName = 'Education';
+
+        Account conta = [SELECT id, Industry, Ativo__c From Account LIMIT 1];
+        conta.Industry='Education';
+        
+
+        Test.startTest();
+            List<Account> buscarContasClientePj = AccountDAO.buscarContasSetor(setorName);
+        Test.stopTest();
+    }
 } 

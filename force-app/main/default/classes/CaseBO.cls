@@ -1,4 +1,6 @@
 public with sharing class CaseBO {
+
+    public class AtualizarStatusCasoException extends Exception {}
     
     public static void naoAtivarContratoTipoSinistro(List<Case> lstCasosTriggers, Map<Id,Case> mapOldCase){
         /*
@@ -78,4 +80,21 @@ public with sharing class CaseBO {
         return casoCriado;
 
     }
+
+
+    public static void atualizaStatusCaso(Id caseId, String Status){
+        Set<String> setStatus = new Set<String>{'New', 'Working','Escalated','Closed'};
+        if(!setStatus.Contains(Status)){ //Se não conter o status na lista.
+            throw new AtualizarStatusCasoException('Status inserido é inválido!');
+        }
+        Case objCase = [SELECT Id FROM Case WHERE Id = :caseId];
+        if(objCase == null){
+            throw new AtualizarStatusCasoException('Não encontrado nenhum caso para esse Id.');
+        }
+        objCase.Status = Status;
+        objCase.Origin = 'Email';
+        update objCase;
+    }
+
+
 }
