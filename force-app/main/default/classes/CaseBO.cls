@@ -87,12 +87,12 @@ public with sharing class CaseBO {
         if(!setStatus.Contains(Status)){ //Se não conter o status na lista.
             throw new AtualizarStatusCasoException('Status inserido é inválido!');
         }
-        Case objCase = [SELECT Id FROM Case WHERE Id = :caseId];
-        if(objCase == null){
+        List<Case> objCase = [SELECT Id FROM Case WHERE Id = :caseId];
+        if(objCase.isEmpty()){
             throw new AtualizarStatusCasoException('Não encontrado nenhum caso para esse Id.');
         }
-        objCase.Status = Status;
-        objCase.Origin = 'Email';
+        objCase[0].Status = Status;
+        objCase[0].Origin = 'Email';
         update objCase;
     }
 
