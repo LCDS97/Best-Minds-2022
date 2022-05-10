@@ -73,8 +73,8 @@ public with sharing class DadosBancariosBO {
         if(!setBancos.contains(banco)){
             throw new AtualizaDadosBancariosException('Banco não disponível para inserção!');
         }
-        if(agencia == null || numeroConta == null){
-            throw new AtualizaDadosBancariosException('Angência e Número de Conta não podem ser nulos!');
+        if(agencia == 0 || numeroConta == 0){
+            throw new AtualizaDadosBancariosException('Agência e Número de Conta não podem ser igual a zero!');
         }
     }
  
