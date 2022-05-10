@@ -1,20 +1,7 @@
 @isTest
 private class GenericsBOTest {
 
-    @TestSetup
-    static void makeData(){
-        List<String> lst1 = new List<String>();
-        List<String> lst2 = new List<String>();
 
-        lst1.add('OK');
-        lst1.add('Okay');
-        lst1.add('Okay');
-
-        lst2.add('OK');
-        lst2.add('Okay');
-        lst2.add('Okay');
-        lst2.add('veremos');
-    }
 
     @isTest
     static void comparaListasSucesso(){
