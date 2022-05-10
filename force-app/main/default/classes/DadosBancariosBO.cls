@@ -1,4 +1,6 @@
 public with sharing class DadosBancariosBO {
+
+    public class AtualizaDadosBancariosException extends Exception {}   
     
     public static void somenteUmDadoBancarioAtivo(List<DadosBancarios__c> lstDadosBancariosTrigger){
         /* 
@@ -55,4 +57,25 @@ public with sharing class DadosBancariosBO {
 
 
     }
+
+    public void insereDadosBancarios(Id accountId, String banco, Integer agencia, Integer numeroConta){
+        AtualizaDadosBancarios.checarDadosBancarios(banco,agencia,numeroConta);
+        DadosBancarios__c dadosbancarios = new DadosBancarios__c(
+            Agencia__c = agencia,
+            Banco__c = banco,
+            Conta__c = accountId,
+            NumeroConta__c = numeroConta
+        );
+        insert dadosbancarios;
+    }
+    private static void checarDadosBancarios(String banco, Integer agencia, Integer numeroConta){
+        Set<String> setBancos = new Set<String>{'Itaú', 'Bradesco','Banco do Brasil','Caixa Econômica Federal','Santander'};
+        if(!setBancos.contains(banco)){
+            throw new AtualizaDadosBancariosException('Banco não disponível para inserção!');
+        }
+        if(agencia == null || numeroConta == null){
+            throw new AtualizaDadosBancariosException('Angência e Número de Conta não podem ser nulos!');
+        }
+    }
+ 
 }
