@@ -59,7 +59,7 @@ public with sharing class DadosBancariosBO {
     }
 
     public void insereDadosBancarios(Id accountId, String banco, Integer agencia, Integer numeroConta){
-        AtualizaDadosBancarios.checarDadosBancarios(banco,agencia,numeroConta);
+        checarDadosBancarios(banco,agencia,numeroConta);
         DadosBancarios__c dadosbancarios = new DadosBancarios__c(
             Agencia__c = agencia,
             Banco__c = banco,
