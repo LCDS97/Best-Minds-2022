@@ -16,28 +16,18 @@ public with sharing class CaseBO {
     Map<Id,Boolean> mapEstaComContratos = new Map<Id,Boolean>();
     Map<Id, List<Contract>> mapCasosComContrato = new Map<Id, List<Contract>>();
 
-    if(!Trigger.isInsert){
-        for(Case casoNovo : lstCasosTriggers){
-            Case casoAntigo = mapOldCase.get(casoNovo.Id);
-            if(casoAntigo.Type != 'Sinistro' && casoNovo.Type == 'Sinistro'){
-                lstCasosAtivado.add(casoNovo);
-                setIdCasos.add(casoNovo.AccountId);
-            }
+    if(Trigger.isInsert){
+        for(Case caso : lstCasosTriggers){
+
+            if(caso.Type != 'Sinistro') continue;
+            if(caso.AccountId == null) continue;
+
+            setIdCasos.add(caso.AccountId);
+            lstCasosAtivado.add(caso);
+
         }
-    }else {
-        for(Case casoNovo : lstCasosTriggers){
-
-            if(casoNovo.Type == 'Sinistro'){
-
-                lstCasosAtivado.add(casoNovo);
-                setIdCasos.add(casoNovo.AccountId);
-
-            } 
-        }
-
     }
 
-    
 
     if(lstCasosAtivado.isEmpty()){
         return;
@@ -45,9 +35,9 @@ public with sharing class CaseBO {
 
     
 
-    List<Contract> lstContratos = ContractDAO.buscarCasosPorIdConta(setIdCasos);
+    List<Contract> lstContratos = ContractDAO.buscarContratosPorIdContaSomenteAtivos(setIdCasos);
     for(Contract contrato : lstContratos){
-        if(!mapEstaComContratos.containsKey(contrato.AccountId) || contrato.Status != 'Activated'){
+        if(!mapEstaComContratos.containsKey(contrato.AccountId)){
             mapCasosComContrato.put(contrato.AccountId, new List<Contract>());
         }
         mapCasosComContrato.get(contrato.AccountId).add(contrato);

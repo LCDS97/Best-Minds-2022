@@ -1,8 +1,8 @@
 public with sharing class ContractDAO {
     
-    public static List<Contract> buscarCasosPorIdConta(Set<Id> setIdContas){
+    public static List<Contract> buscarContratosPorIdContaSomenteAtivos(Set<Id> setIdContas){
         return [
-            SELECT Id, AccountId FROM Contract WHERE AccountId IN :setIdContas
+            SELECT Id, AccountId FROM Contract WHERE AccountId IN :setIdContas AND Status = 'Activated'
         ];
     }
 
