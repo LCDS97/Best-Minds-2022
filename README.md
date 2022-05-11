@@ -4,25 +4,79 @@
 - Cada desafio contém no final o local aonde esta seu arquivo
 
 
-## Apex Async
+## Classe de Teste
 
-### Entregar até terça-feira
+### Entregar até 16/05/2022
+
+[ ] 1 - Crie uma classe de teste para a classe ContractBO, mapeei todos os cenários de testes para o método **criarTarefa** e crie todos os métodos necessários para cobrir 100% desse método específico, esse teste deve rodar no contesto de um usuário com perfil diferente.
+
+
+
+## Apex Async
 
 - [x] 1 - Criar um campo no objeto Contract, chamado Número de Parcelas do type Number, e criar um método fúturo para atualizar esse campo verificando quantas parcelas aquele contrato possui.
 
 ##### [Classe da Atividade](./force-app/main/default/classes/AtualizarContrato.cls)
 
+---
+
 - [x] 2 - Crie um Batch Apex para atualizar o status do caso para fechado quando ele não conter nenhum contato associado.
 ##### [Classe da Atividade](./force-app/main/default/classes/SchuduledApex.cls)
+
+---
 
 - [x] 3 - Criar Scheduled Apex para adicionar um comentário nos casos que estão fechados - “Caso Fechado por ausência de contato”.
 
 ##### [Classe da Atividade](./force-app/main/default/classes/SchuduledApex.cls)
 
-## Rever Aula de Hoje - 6 de Maio
+---
+
+### Entregar até terça-feira
+
+
+#### Métodos Futuros
+
+- [ ] 1 - Crie um método futuro que receba uma lista de IDs de Casos, atualize o campo Status para "Escalado", o campo Prioridade para "Alto" e adicione um comentário no caso ( Object CommentCase ) " Exercício método futuro Best Minds - Atualizando Casos.";
+
+---
+
+- [ ] 2 - Crie um método futuro que recebe um parâmetro do tipo Id, e que chame o método fictício "service.enviarNotificao('Passe aqui o Id recebido no método')" *( A linha de chamada desse método pode estar comentado pois esse método não existe )* simulando que esse método seja um callout
+
+---
+
+#### Batch Apex
+
+- [ ] 1 - Crie uma Batch para preencher o endereço dos contatos de contas, com o endereço das contas *( Fazer com o que endereço dos contatos seja o mesmo que os da contas que estão associados)*, porém essas contas a serem atualizadas devem ter no mínimo 2 contatos associados.
+
+- [ ] 2 - Crie um Contato com o seu nome, depois crie uma Batch para buscar todos os Casos criado nos últimos 5 dias e que estão sem nenhum contato associado e associe todos os Casos encontrados a esse contato criado.
+
+---
+
+#### Schedule Apex
+
+- [ ] 1 - Crie um Schedule que busque todas as oportundiades que estão com Estágio em "Close Won" ou com a quantia da oportunidade acima de 100 mil reais e crie um contrato para essa oportunidade, usa a mesma Conta da oportunidade para criar o Contrato.
+
+---
+
+- [ ] 2 - Crie um Schedule que chama o Batch criado na Atividade anterior que atualiza os Casos sem Contatos. *2 - Atividade*
+
+---
+
+- [ ] 3 - Faça o agendamento dos Schedules criados através do **Open Execute Anonymous** para rodar todos os dias às 22 horas ( Mande um print do agendamento junto ao arquivo).
+
+[Salesforce Help](https://developer.salesforce.com/docs/atlas.en-us.apexcode.meta/apexcode/apex_scheduler.htm)
 
 
 ---
+
+#### Queueable Apex
+
+- [ ] 1 - Crie uma Queuable que receba uma lista de Oportunidades e verifique se alguma dessas oportunidades não possuem contato, após atualizar essas oportunidades sem contato com o primeiro Contato encontrado da Conta em que a Oportunidade está associada.
+
+- [ ] 2 - Crie uma Queuable que busque oportundiades com a Data de Fechamento maior que a data atual, e atualize o campo Descrição para "Oportunidades com contato associado". Após isso chame a Queuable criada na atividade anterior passando para ela a lista de Oportunidade buscadas
+
+**Isso fará o encadeamento de Duas Queueables**
+
 
 ## Boas Práticas de Programação
 
@@ -366,3 +420,4 @@ Retorno do método:
 
 
 
+## Rever Aula de Queuebla Apex - 6 de Maio
