@@ -13,6 +13,32 @@ public class TestDataFactory{
         insert conta;
     }
 
+    public static List<Account> criarContaComContato(Integer numAccts, Integer numCttsPerAcct){
+      
+      List<Account> accts = new List<Account>();
+      for(Integer i=0;i<numAccts;i++) {
+          Account a = new Account(Name='TestAccount' + i);
+          accts.add(a);
+      }
+      insert accts;
+
+      List<Contact> ctts = new List<Contact>();
+
+      for(Integer c = 0; c < numAccts; c++){
+        Account acct = accts[c];
+
+        for(Integer k = 0; k < numCttsPerAcct; k++){
+          ctts.add(new Contact(
+            FirstName='Contato',
+            LastName='Sobrenome ' + k,
+            AccountId=acct.Id));
+        }
+      }
+      insert ctts;
+      return accts;
+      
+    }
+
     public static User gerarUsuario(Boolean opcaoDml, String strPerfil) {
         Profile objPerfil =[SELECT Id, Name FROM Profile WHERE Name =: strPerfil LIMIT 1 ];
         Long currentTimeMillis = System.currentTimeMillis();
