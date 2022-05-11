@@ -10,6 +10,7 @@ public with sharing class DadosBancariosBO {
 
     Set<Id> setDadosBancariosAtivo = new Set<Id>();
     Set<Id> setFiltrarContaPorId = new Set<Id>();
+    List<DadosBancarios__c> lstDadosBancariosParaInativar = new List<DadosBancarios__c>(); 
 
     for(DadosBancarios__c dadosBancarios : lstDadosBancariosTrigger){
 
@@ -18,7 +19,6 @@ public with sharing class DadosBancariosBO {
             setFiltrarContaPorId.add(dadosBancarios.Conta__c);
 
         }
-        else return;
     
         }
 
@@ -29,12 +29,13 @@ public with sharing class DadosBancariosBO {
         
             if(!setDadosBancariosAtivo.contains(db.Id)){ 
                 db.Ativo__c = false;
+                lstDadosBancariosParaInativar.add(db);
             }
         
         
         
     }
-    update lstTodosDadosBancariosPorIdConta;
+    update lstDadosBancariosParaInativar;
 
     }
 
