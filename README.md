@@ -8,7 +8,7 @@
 
 ### Entregar até 16/05/2022
 
-[ ] 1 - Crie uma classe de teste para a classe ContractBO, mapeei todos os cenários de testes para o método **criarTarefa** e crie todos os métodos necessários para cobrir 100% desse método específico, esse teste deve rodar no contesto de um usuário com perfil diferente.
+- [ ] 1 - Crie uma classe de teste para a classe ContractBO, mapeei todos os cenários de testes para o método **criarTarefa** e crie todos os métodos necessários para cobrir 100% desse método específico, esse teste deve rodar no contesto de um usuário com perfil diferente.
 
 
 
@@ -108,9 +108,11 @@
 
 ---
 
-- [ ] 2. Megan Rapinoe contratou uma consultoria para desenvolver um código que identificasse a quantidade de jogadoras homossexuais de cada time da National Women's Soccer League, entretanto, o código não está funcionando. Você como desenvolver e consultor Salesforce da Everymind, ajude a Megan a alcançar seu objetivo.
+- [x] 2. Megan Rapinoe contratou uma consultoria para desenvolver um código que identificasse a quantidade de jogadoras homossexuais de cada time da National Women's Soccer League, entretanto, o código não está funcionando. Você como desenvolver e consultor Salesforce da Everymind, ajude a Megan a alcançar seu objetivo.
 
 ![Código do Desafio para arrumar](./images/codigoMeganRapinoe.png)
+
+#### Separar os arquivos para enviar, Feito uma TriggerContact acionado a partir do picklist igual = "Homossexual" a contagem de contatos naquela conta
 
 ---
 
