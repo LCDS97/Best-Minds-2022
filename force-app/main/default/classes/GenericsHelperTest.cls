@@ -1,5 +1,5 @@
 @isTest
-private class GenericsBOTest {
+private class GenericsHelperTest {
 
 
 

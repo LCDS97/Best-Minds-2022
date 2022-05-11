@@ -2,7 +2,7 @@ public with sharing class CaseBO {
 
     public class AtualizarStatusCasoException extends Exception {}
     
-    public static void naoAtivarContratoTipoSinistro(List<Case> lstCasosTriggers, Map<Id,Case> mapOldCase){
+    public static void naoAtivarContratoTipoSinistro(List<Case> lstCasosTriggers){
         /*
     3 - Crie um Apex Trigger que, ao criar ou atualizar um registro de Caso (Case) com o tipo “Sinistro”, valide se a conta vinculada
         possui um Contrato (Contract) ativo. Caso não possua, exibir uma mensagem que ele não pode abrir um sinistro sem um Contrato (Contract) ativo.
@@ -16,7 +16,7 @@ public with sharing class CaseBO {
     Map<Id,Boolean> mapEstaComContratos = new Map<Id,Boolean>();
     Map<Id, List<Contract>> mapCasosComContrato = new Map<Id, List<Contract>>();
 
-    if(Trigger.isInsert){
+
         for(Case caso : lstCasosTriggers){
 
             if(caso.Type != 'Sinistro') continue;
@@ -26,7 +26,7 @@ public with sharing class CaseBO {
             lstCasosAtivado.add(caso);
 
         }
-    }
+
 
 
     if(lstCasosAtivado.isEmpty()){

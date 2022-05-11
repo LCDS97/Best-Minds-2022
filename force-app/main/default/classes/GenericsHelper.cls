@@ -1,4 +1,4 @@
-public with sharing class GenericsBO {
+public with sharing class GenericsHelper {
 
     public class ListaVaziaException extends Exception{}
     public class CalculoNumero2 extends Exception{}
