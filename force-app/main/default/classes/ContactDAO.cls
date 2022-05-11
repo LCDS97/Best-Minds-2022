@@ -7,6 +7,7 @@ public with sharing class ContactDAO {
         ];
     }
 
+
     public static List<Contact> buscarContatosPorIdConta(Id idConta){
 
         return [

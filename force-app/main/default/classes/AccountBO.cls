@@ -248,6 +248,52 @@ public with sharing class AccountBO {
         }
     }
 
+    public static void alterarDominioEmail(List<Account> lstTriggersAccount,Map<Id, Account> mapNewAccount,  Map<Id, Account> mapOldAccount){
+        
+        Set<Id> setIdContas = new Set<Id>();
+        List<Account> lstContasAlterarEmail = new List<Account>();
+        List<Contact> lstContatosAtualizarEmail = new List<Contact>();
+
+        for(Account conta : lstTriggersAccount){
+            Account contaAntiga = mapOldAccount.get(conta.Id);
+            
+            if(contaAntiga.Dominio__c != conta.Dominio__c){
+                setIdContas.add(conta.Id);
+                lstContasAlterarEmail.add(conta);
+                System.debug('Ver se entrou no lst Contas no criterio => ' + lstContasAlterarEmail);
+                System.debug('Ver se entrou set Id Contas no criterio => ' + setIdContas);
+            }
+        }
+
+        if(lstContasAlterarEmail.isEmpty()) return;
+
+        List<Account> lstContasComDominio = AccountDAO.buscarContasComContatosComEmail(setIdContas);
+
+        for(Account conta : lstContasComDominio){
+
+
+            for(Contact contato : conta.Contacts){
+                System.debug('Email Antes =>' + contato.Email);
+                if(String.isNotBlank(contato.Email)){
+                    Integer indiceArroba = contato.Email.indexOf('@');
+                    String inicioEmail = contato.Email.mid(0, indiceArroba);
+                    String dominioEmail = conta.Dominio__c;
+                    String montarEmail = inicioEmail + '@' + dominioEmail;
+                    System.debug('Email montado =>' + montarEmail);
+                    contato.Email = montarEmail;
+                    System.debug('Email atual do contato =>' + contato.Email);
+                    lstContatosAtualizarEmail.add(contato);
+                }
+            }
+        }
+
+        update lstContatosAtualizarEmail;
+        
+
+
+    }
+
+
 
 
     

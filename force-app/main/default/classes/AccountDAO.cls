@@ -36,4 +36,11 @@ public with sharing class AccountDAO {
             SELECT Id, Ativo__c, Type, RazaoSocial__c, CNPJ__c From Account WHERE Id =: idContaPJ
         ];
     }
+
+    public static List<Account> buscarContasComContatosComEmail(Set<Id> setIdContas){
+
+        return [
+            SELECT Id, Dominio__c, (SELECT Email FROM Contacts) FROM Account WHERE Id =: setIdContas AND Dominio__c != null
+        ];
+    }
 }
