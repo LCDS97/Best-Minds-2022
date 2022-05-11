@@ -43,4 +43,10 @@ public with sharing class AccountDAO {
             SELECT Id, Dominio__c, (SELECT Email FROM Contacts) FROM Account WHERE Id =: setIdContas AND Dominio__c != null
         ];
     }
+
+    public static List<Account> buscarContasPorSexualidadeHomossexual(Set<Id> setIdContas){
+        return [ 
+            SELECT Id, (SELECT Id FROM Contacts WHERE Sexualidade__c = 'Homossexual') FROM Account WHERE Id IN :setIdContas
+        ];
+    }
 }

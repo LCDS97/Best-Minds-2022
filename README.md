@@ -82,7 +82,7 @@
 
 ### Entregar até terça-feira
 
-- [ ] 1. Serena Williams precisa que toda vez que alterar o domínio de email de uma de suas contas, todos os responsáveis tenham seu e-mail atualizado de acordo com o novo domínio.
+- [x] 1. Serena Williams precisa que toda vez que alterar o domínio de email de uma de suas contas, todos os responsáveis tenham seu e-mail atualizado de acordo com o novo domínio.
 > Sejam livres para trazer a melhor solução que atenda ao pedido da Serena Williams colocando em ação as boas práticas de programação
 -       Os responsáveis da Conta são os Contatos
 -       A Serena Williams são donos dessas contas ( Owner Id)
@@ -97,12 +97,14 @@
 - [x]   3. Trigger valida se o campo criado no item 1 foi alterado ( Validar evento do campo Trigger.Old)
 - [x]   4. Armazenar os id de Uma Conta em uma varíavel
 - [x]   5. Laço de repetição da Trigger para Adicionar na varíavel do item 4 no Id de Cada Conta
-- [ ]   6. Buscar contatos relacionado a conta que tem e-mail
-- [ ]   7. Laço de repetição pra atualizar o e-mail de cada contato com o domínio da conta
-- [ ]   8. Criar uma varíavel que armazena os contatos
-- [ ]   9. Atualiza a DML a varíavel dos contatos
+- [x]   6. Buscar contatos relacionado a conta que tem e-mail
+- [x]   7. Laço de repetição pra atualizar o e-mail de cada contato com o domínio da conta
+- [x]   8. Criar uma varíavel que armazena os contatos
+- [x]   9. Atualiza a DML a varíavel dos contatos
 
 </details>
+
+#### Confirmar questões sobre a Regra de Validação e tirar prints dela ao enviar atividade
 
 ---
 
