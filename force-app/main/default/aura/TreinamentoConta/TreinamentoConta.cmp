@@ -1,7 +1,8 @@
 <aura:component controller="TreinamentoController" implements="flexipage:availableForAllPageTypes, force:hasRecordId" access="global">
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
     <aura:attribute name="recordId" type="String" />
-    <aura:attribute name="nomeConta" type="String" />
+    <aura:attribute name="valorConta" type="String" />
 
-    <lightning:input name="nomeConta" aura:id="nomeConta" value="" label="Nome da Conta"></lightning:input>
-    <lightning:button label="Salvar"></lightning:button>
+    <lightning:input name="nomeConta" aura:id="nomeConta" value="{!v.valorConta}" label="Nome da Conta"></lightning:input>
+    <lightning:button label="Salvar" onclick="{!c.salvarConta}"></lightning:button>
 </aura:component>	

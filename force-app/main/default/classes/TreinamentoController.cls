@@ -17,4 +17,31 @@ public with sharing class TreinamentoController {
 
         return retorno;
     }
+
+    @AuraEnabled
+    public static string getAccount(String Id){
+        String nomeConta = '';
+
+        try {
+            nomeConta = [SELECT Id, Name FROM Account WHERE Id = :id].Name;
+        } catch (Exception e) {
+            throw new AuraHandledException(e.getMessage());
+        }
+
+        return nomeConta;
+    }
+
+    @AuraEnabled
+    public static Boolean updateAccount(String Id, String nomeAtualizado){
+        try {
+            Account objAccount = [SELECT Id FROM Account WHERE Id =: Id];
+            objAccount.Name = nomeAtualizado;
+
+            update objAccount;
+            return true;
+        } catch (Exception e) {
+            //throw new AuraHandledException(e.getMessage());
+            return false;
+        }
+    }
 }
