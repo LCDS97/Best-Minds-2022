@@ -1,0 +1,6 @@
+<aura:component controller="TreinamentoController" implements="flexipage:availableForAllPageTypes,flexipage:availableForRecordHome">
+    <aura:attribute name ="resultado" type="String" default=""/>
+    <lightning:input name ="entrada" aura:id="entrada" label="Texto de entrada" onchange="{!c.atualizarValor}"></lightning:input>
+    <br />
+    <label>{!v.resultado}</label>
+</aura:component>	
