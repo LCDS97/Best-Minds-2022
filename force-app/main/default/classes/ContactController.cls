@@ -7,7 +7,7 @@ public with sharing class ContactController {
 
         try {
 
-            sobrenomeContato = ContactDAO.buscarUnicoContatoPorId(Id).LastName;
+            sobrenomeContato = ContactDAO.buscarUnicoContatoPorId(Id).Name;
 
             
         } catch (Exception e) {
@@ -18,7 +18,7 @@ public with sharing class ContactController {
     }
 
     @AuraEnabled
-    public static Boolean updateContact(String Id, String sobrenomeContatoAtualizado){
+    public static Boolean updateContact (String Id, String sobrenomeContatoAtualizado){
         try {
             Contact objContact = ContactDAO.buscarUnicoContatoPorId(Id);
             objContact.LastName = sobrenomeContatoAtualizado;

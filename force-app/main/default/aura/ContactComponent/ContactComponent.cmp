@@ -5,4 +5,5 @@
 
     <lightning:input name="nomeContato" aura:id="nomeContato" value="{!v.valorNomeContato}" label="Nome do Contato"></lightning:input>
     <lightning:button label="Salvar" onclick="{!c.salvarContato}"></lightning:button>
+    <lightning:button label="Limpar" onclick="{!c.limparLabel}"></lightning:button>
 </aura:component>	
