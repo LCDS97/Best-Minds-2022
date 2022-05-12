@@ -1,0 +1,8 @@
+<aura:component controller="ContactController" implements="flexipage:availableForAllPageTypes, force:hasRecordId" access="global">
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:attribute name="recordId" type="String" />
+    <aura:attribute name="valorNomeContato" type="String" />
+
+    <lightning:input name="nomeContato" aura:id="nomeContato" value="{!v.valorNomeContato}" label="Nome do Contato"></lightning:input>
+    <lightning:button label="Salvar" onclick="{!c.salvarContato}"></lightning:button>
+</aura:component>	

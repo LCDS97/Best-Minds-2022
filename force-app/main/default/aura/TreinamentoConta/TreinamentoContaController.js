@@ -22,7 +22,7 @@
 
         var nomedaConta = component.find("nomeConta").get("v.value");
 
-        action.setParams({Id : recordId, nomeAtualizado : nomedaConta});
+        action.setParams({Id : recordId, nomeContaAtualizado : nomedaConta});
 
         action.setCallback(this, function(response){
 

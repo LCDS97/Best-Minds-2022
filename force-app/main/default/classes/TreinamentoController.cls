@@ -32,10 +32,10 @@ public with sharing class TreinamentoController {
     }
 
     @AuraEnabled
-    public static Boolean updateAccount(String Id, String nomeAtualizado){
+    public static Boolean updateAccount(String Id, String nomeContaAtualizado){
         try {
             Account objAccount = [SELECT Id FROM Account WHERE Id =: Id];
-            objAccount.Name = nomeAtualizado;
+            objAccount.Name = nomeContaAtualizado;
 
             update objAccount;
             return true;

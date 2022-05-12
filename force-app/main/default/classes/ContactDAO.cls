@@ -15,5 +15,11 @@ public with sharing class ContactDAO {
         ];
 
     }
+
+    public static Contact buscarUnicoContatoPorId(Id idContato){
+        return [
+            SELECT Id, FirstName, LastName FROM Contact WHERE Id = :idContato
+        ];
+    }
 }
 
