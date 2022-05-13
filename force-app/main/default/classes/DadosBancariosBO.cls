@@ -78,5 +78,42 @@ public with sharing class DadosBancariosBO {
             throw new AtualizaDadosBancariosException('Agência e Número de Conta não podem ser igual a zero!');
         }
     }
+
+
+    public static List<DadoBancarioTO> buscarDadosBancarios(Id idConta){
+        List<DadosBancarios__c> lstDadosBancarios = DadosBancariosDAO.pegarContaPorDadoBancarios(idConta);
+        List<DadoBancarioTO> lstDadosBancariosTO = transformarDadosBancariosEmDadoBancarioTO(lstDadosBancarios);
+        
+        
+        return lstDadosBancariosTO;
+    }
+    
+    private static List<DadoBancarioTO> transformarDadosBancariosEmDadoBancarioTO(List<DadosBancarios__c> lstDadosBancarios){
+        List<DadoBancarioTO> lstDadoBancarioTO = new List<DadoBancarioTO>();
+        for(DadosBancarios__c dadoBancario : lstDadosBancarios){
+            
+            DadoBancarioTO dadoBancarioTO = new DadoBancarioTO();
+            dadoBancarioTO.banco = String.valueOf(dadoBancario.Banco__c);
+            dadoBancarioTO.agencia = String.valueOf(dadoBancario.Agencia__c);
+            dadoBancarioTO.numeroConta = String.valueOf(dadoBancario.NumeroConta__c);
+            dadoBancarioTO.id = dadoBancario.Id;
+            lstDadoBancarioTO.add(dadoBancarioTO);
+
+        }
+
+        return lstDadoBancarioTO;
+
+    }
+
+    public class DadoBancarioTO {
+        @AuraEnabled
+        public String banco { get;set; }
+        @AuraEnabled
+        public String agencia { get;set; }
+        @AuraEnabled
+        public String numeroConta { get;set; }
+        @AuraEnabled
+        public String id { get;set; }
+    }
  
 }

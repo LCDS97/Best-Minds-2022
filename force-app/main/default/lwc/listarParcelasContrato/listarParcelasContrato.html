@@ -1,0 +1,23 @@
+<template>
+    <lightning-card title="Lista de Parcelas do Contrato">
+        <table>
+            <thead>
+                <th>Valor da Parcela</th>
+                <th>Status da Validade</th>
+                <th>Contrato</th>
+            </thead>
+            <tbody>
+                <template for:each={listaParcelasContrato} for:item="parcelaContratoAtual">
+                    <tr key={parcelaContratoAtual.id}>
+                        <td>{parcelaContratoAtual.moeda}</td>
+                        <td>{parcelaContratoAtual.statusValidade}</td>
+                        <td>{parcelaContratoAtual.contract}</td>
+                    </tr>
+                </template>
+            </tbody>
+        </table>
+    </lightning-card>
+</template>
+
+
+

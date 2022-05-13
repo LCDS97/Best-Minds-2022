@@ -166,5 +166,42 @@ public with sharing class ContractBO {
         contarParcelas(idContrato);
     }
 
+    public static List<ContractTO> buscarParcelasDoContrato(Id idContrato){
+
+        List<Parcela__c> lstParcelas = ParcelaDAO.buscarParcelasIdContrato(idContrato);
+        List<ContractTO> lstParcelasContratoTO = transformarContratosEmTO(lstParcelas);
+        return lstParcelasContratoTO;
+    }
+
+    private static List<ContractTO> transformarContratosEmTO(List<Parcela__c> lstParcelasDoContrato){
+        List<ContractTO> lstContratoTO = new List<ContractTO>();
+
+        for(Parcela__c parcela: lstParcelasDoContrato){
+            ContractTO ContractTO = new ContractTO();
+            ContractTO.id = parcela.Id;
+            ContractTO.moeda = String.valueOf(parcela.Moeda__c);
+            ContractTO.contract = String.valueOf(parcela.Contrato__c);
+            ContractTO.statusValidade = String.valueOf(parcela.Status_Validade__c);
+            lstContratoTO.add(ContractTO);
+        }
+
+        return lstContratoTO;
+    }
+
+    
+
+
+    public class ContractTO{
+        @AuraEnabled
+        public String id {get;set;}
+        @AuraEnabled
+        public String moeda {get;set;}
+        @AuraEnabled
+        public String contract {get;set;}
+        @AuraEnabled
+        public String statusValidade {get;set;}
+    }
+
+
 
 }

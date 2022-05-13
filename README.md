@@ -4,6 +4,12 @@
 - Cada desafio contém no final o local aonde esta seu arquivo
 
 
+## LWC
+
+- [ ] 1. Criar um componente LWC para Contratos que apresente uma tabela com todas as parcelas do Contrato.
+
+---
+
 ## Classe de Teste
 
 ### Entregar até 16/05/2022

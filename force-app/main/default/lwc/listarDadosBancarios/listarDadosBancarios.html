@@ -1,0 +1,22 @@
+<template>
+    <lightning-card title="Lista de Dados Bancários">
+
+        <table>
+            <thead>
+                <th>Banco</th>
+                <th>Agência</th>
+                <th>Número da Conta</th>
+            </thead>
+            <tbody>
+                <template for:each={ListarDadosBancarios} for:item="dadoBancarioAtual">
+                    <tr key={dadoBancarioAtual.id}>
+                        <td>{dadoBancarioAtual.banco}</td>
+                        <td>{dadoBancarioAtual.agencia}</td>
+                        <td>{dadoBancarioAtual.numeroConta}</td>
+                    </tr>
+                </template>
+            </tbody>
+        </table>
+            
+    </lightning-card>
+</template>
