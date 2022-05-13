@@ -1,6 +1,6 @@
 import { LightningElement, api, track } from 'lwc';
 
-import buscarParcelasContratoService from '@salesforce/apex/ListarParcelasController.buscarParcelasContrato';
+import buscarParcelasContratoService from '@salesforce/apex/ControllerListarParcelas.buscarParcelasContrato';
 
 export default class ListarParcelasContrato extends LightningElement {
     @api recordId;

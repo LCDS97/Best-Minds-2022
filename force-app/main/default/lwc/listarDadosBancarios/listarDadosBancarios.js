@@ -1,5 +1,5 @@
 import { LightningElement, api, track } from 'lwc';
-import buscarDadosBancariosService from '@salesforce/apex/ListarDadosBancariosController.buscarDadosBancarios';
+import buscarDadosBancariosService from '@salesforce/apex/ControllerListarDadosBancarios.buscarDadosBancarios';
 
 export default class ListarDadosBancarios extends LightningElement {
     @api recordId;

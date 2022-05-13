@@ -1,4 +1,4 @@
-public with sharing class ListarDadosBancariosController {
+public with sharing class ControllerListarDadosBancarios {
     
     @AuraEnabled
     public static List<DadosBancariosBO.DadoBancarioTO> buscarDadosBancarios(Id idConta){
