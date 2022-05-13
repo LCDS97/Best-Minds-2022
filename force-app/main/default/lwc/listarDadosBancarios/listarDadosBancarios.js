@@ -1,10 +1,10 @@
 import { LightningElement, api, track } from 'lwc';
-import buscarDadosBancariosService from '@salesforce/apex/DadosBancariosBO.buscarDadosBancarios';
+import buscarDadosBancariosService from '@salesforce/apex/ListarDadosBancariosController.buscarDadosBancarios';
 
 export default class ListarDadosBancarios extends LightningElement {
     @api recordId;
     
-    @track lista = [];
+    @track listarDadosBancarios = [];
 
     connectedCallback(){
         this.buscarDadosBancariosSalesforce();
@@ -13,7 +13,7 @@ export default class ListarDadosBancarios extends LightningElement {
     buscarDadosBancariosSalesforce(){
         buscarDadosBancariosService({idConta: this.recordId})
             .then(response => {
-                this.lista = response;
+                this.listarDadosBancarios = response;
             })
             .catch(error => {
                 console.log(error);

@@ -2,7 +2,7 @@ public with sharing class DadosBancariosDAO {
     
     public static List<DadosBancarios__c> pegarContasPorDadoBancarios(Set<Id> setIdContas){
             return[
-				SELECT 	Id,	Conta__c, Agencia__c, Ativo__c, NumeroConta__c FROM DadosBancarios__c WHERE Conta__c IN  :setIdContas
+				SELECT 	Id,	Conta__c, Banco__c, Agencia__c, Ativo__c, NumeroConta__c FROM DadosBancarios__c WHERE Conta__c IN  :setIdContas
 			];
     }
 
