@@ -6,9 +6,21 @@
 
 ## LWC
 
-- [ ] 1. Criar um componente LWC para Contratos que apresente uma tabela com todas as parcelas do Contrato.
+- [x] 1. Criar um componente LWC para Contratos que apresente uma tabela com todas as parcelas do Contrato.
+
+##### [Componente da Atividade](./force-app/main/default/lwc/listarParcelasContrato/)
 
 ---
+
+## Aura
+
+- [x] 1. Criar Componente no contato que tenha os seguintes critérios:
+> Receba um texto através do input text
+> Botão para limpar o input text, e se o campo vazio não permitir salvar os dados.
+> Botão para salvar que realiza a chamada de um Apex e atualiza informação do contato.
+
+##### Gravar vídeo funcionando e enviar classes
+
 
 ## Classe de Teste
 
@@ -122,12 +134,16 @@
 
 ---
 
-- [ ] 3. Agora que o Max Verstappen é o novo campeão da Fórmula 1, ele está mais do que nunca preocupado com o salário dos principais sócios (Contatos) de seus patrocínios. O desejo dele é identificar quais contas tem um faturamente maior que 1 milhão e pegar 50% desse faturamento e distrubuir de forma igualitária para cada sócio da Conta.
+- [ ] 3. Agora que o Max Verstappen é o novo campeão da Fórmula 1, ele está mais do que nunca preocupado com o salário dos principais sócios (Contatos) de seus patrocínios. O desejo dele é identificar quais contas tem um faturamento maior que 1 milhão e pegar 50% desse faturamento e distrubuir de forma igualitária para cada sócio da Conta.
 
 - Vou criar a idéia baseado no campo faturamento Anual da Conta para uma contagem de todas as Oportunidades da Conta somar o valor do Faturamento de acordo com os valores das oportunidades
 - Fazer a soma do Faturamento Anual e dividir em 50% para distribuir
 - Ver quantos contatos possui essa conta
 - Após a divisão, criar um campo no Objeto Contato com para armazenar o valor recibido da Conta
+
+- Vou criar dois métodos, um para atualizar o Annual Revenue ( Receita Anual ) com os valores totais da oportunidade
+- Filtrar a condição dos contatos com base nesse campo
+- Verificar em trigger ou apex batch ainda
 
 
 

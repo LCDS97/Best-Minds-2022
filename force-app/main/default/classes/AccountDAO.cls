@@ -49,4 +49,5 @@ public with sharing class AccountDAO {
             SELECT Id, (SELECT Id FROM Contacts WHERE Sexualidade__c = 'Homossexual') FROM Account WHERE Id IN :setIdContas
         ];
     }
+
 }
