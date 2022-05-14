@@ -1,9 +1,13 @@
 public with sharing class MathiasExerccicio3 {
     
-    public static void DistribuirAltoFaturamento(List<Account> lstContas){
+    public static void DistribuirAltoFaturamento(){
         List<Account> lstContasParaSomar = new List<Account>();
         List<Account> lstContasParaDistribuir = new List<Account>();
         Set<Id> setIdContas = new Set<Id>();
+
+        List<Account> lstContas = [SELECT  Id, AnnualRevenue, Name, ( SELECT Id, Salario__c FROM Contacts ) FROM Account ];
+
+
 
         for(Account conta : lstContas){
             setIdContas.add(conta.Id);
@@ -11,18 +15,29 @@ public with sharing class MathiasExerccicio3 {
         }
 
         List<Opportunity> lstOportunidadesValores = OpportunityDAO.recuperarOportunidadesPorIdConta(setIdContas);
-        Decimal valorTotalConta = 0;
 
+        Decimal valorSomar = 0;
+        
         for(Account conta : lstContasParaSomar){
-            for(Opportunity oportunidade : lstOportunidadesValores){
-                valorTotalConta =+ oportunidade.Amount;
+            
+            System.debug(' Antes do FOR OPP Conta ANNUAL REVENUE R$' + conta.AnnualRevenue);
+            if(conta.AnnualRevenue == null){
+                for(Opportunity oportunidade : lstOportunidadesValores){
+                    System.debug(' DENTRO DO FOR OPPConta ANNUAL REVENUE R$' + conta.AnnualRevenue);
+                    if(oportunidade.Amount == null){
+                        conta.AnnualRevenue += oportunidade.Amount;
+                    }
+                    conta.AnnualRevenue += oportunidade.Amount;
+
+                }
             }
-            conta.AnnualRevenue = valorTotalConta;
-            if(conta.AnnualRevenue > 1000000 || valorTotalConta > 1000000){
+            conta.AnnualRevenue = valorSomar;
+
+            if(conta.AnnualRevenue > 1000000){
                 lstContasParaDistribuir.add(conta);
                 System.debug('Condição Annual Revenual maior que 1 milhao =' + lstContasParaDistribuir);
             }
-            //valorTotalConta = 0;
+            valorSomar = 0;
         }
 
         for(Account conta : lstContasParaDistribuir){
