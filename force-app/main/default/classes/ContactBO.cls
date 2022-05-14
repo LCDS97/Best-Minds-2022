@@ -28,4 +28,37 @@ public with sharing class ContactBO {
 
     
     }
+
+    public static void DistribuirAltoFaturamento(List<Account> lstContas){
+        Set<Contact> setContatosAtualizado = new Set<Contact>();
+        Set<Id> setIdContas = new Set<Id>();
+
+        for(Account conta : lstContas){
+            
+            Decimal dividirFaturamento = conta.AnnualRevenue / 2;
+            conta.AnnualRevenue = dividirFaturamento;
+
+            Decimal valorDistribuir = dividirFaturamento / conta.Contacts.size();
+            for(Contact contato : conta.Contacts){
+                if(contato.SalarioAnual__c == null){
+                    contato.SalarioAnual__c = 0;
+                    contato.SalarioMensal__c = 0;
+
+                    contato.SalarioAnual__c = valorDistribuir;
+                    contato.SalarioMensal__c = contato.SalarioAnual__c / 12;
+                    
+                    setContatosAtualizado.add(contato);
+                }
+
+                contato.SalarioAnual__c = valorDistribuir;
+                contato.SalarioMensal__c = contato.SalarioAnual__c / 12;
+                setContatosAtualizado.add(contato);
+            }
+            
+        }
+        List<Contact> lstContatosAtualizado = new List<Contact>(setContatosAtualizado);
+
+        update lstContatosAtualizado;
+
+    }
 }

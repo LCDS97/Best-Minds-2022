@@ -1,60 +1,73 @@
 public with sharing class MathiasExerccicio3 {
-    
+
+
     public static void DistribuirAltoFaturamento(){
-        List<Account> lstContasParaSomar = new List<Account>();
-        List<Account> lstContasParaDistribuir = new List<Account>();
+        Set<Contact> setContatosAtualizado = new Set<Contact>();
         Set<Id> setIdContas = new Set<Id>();
+        atribuirAnnualRevenue();
 
-        List<Account> lstContas = [SELECT  Id, AnnualRevenue, Name, ( SELECT Id, Salario__c FROM Contacts ) FROM Account ];
-
-
+        List<Account> lstContas = [SELECT  Id, AnnualRevenue, Name, ( SELECT Id, SalarioAnual__c, SalarioMensal__c FROM Contacts ) FROM Account WHERE AnnualRevenue > 1000000];
 
         for(Account conta : lstContas){
-            setIdContas.add(conta.Id);
-            lstContasParaSomar.add(conta);
-        }
-
-        List<Opportunity> lstOportunidadesValores = OpportunityDAO.recuperarOportunidadesPorIdConta(setIdContas);
-
-        Decimal valorSomar = 0;
-        
-        for(Account conta : lstContasParaSomar){
             
-            System.debug(' Antes do FOR OPP Conta ANNUAL REVENUE R$' + conta.AnnualRevenue);
-            if(conta.AnnualRevenue == null){
-                for(Opportunity oportunidade : lstOportunidadesValores){
-                    System.debug(' DENTRO DO FOR OPPConta ANNUAL REVENUE R$' + conta.AnnualRevenue);
-                    if(oportunidade.Amount == null){
-                        conta.AnnualRevenue += oportunidade.Amount;
-                    }
-                    conta.AnnualRevenue += oportunidade.Amount;
-
-                }
-            }
-            conta.AnnualRevenue = valorSomar;
-
-            if(conta.AnnualRevenue > 1000000){
-                lstContasParaDistribuir.add(conta);
-                System.debug('Condição Annual Revenual maior que 1 milhao =' + lstContasParaDistribuir);
-            }
-            valorSomar = 0;
-        }
-
-        for(Account conta : lstContasParaDistribuir){
-            
-            System.debug('###### Conta' + conta.Id + '### Faturamento antes: ' + conta.AnnualRevenue);
             Decimal dividirFaturamento = conta.AnnualRevenue / 2;
-            System.debug('###### Conta' + conta.Id + '### Faturamento depois distribuição: ' + conta.AnnualRevenue);
+            conta.AnnualRevenue = dividirFaturamento;
+
             Decimal valorDistribuir = dividirFaturamento / conta.Contacts.size();
             for(Contact contato : conta.Contacts){
-                System.debug('###### Contato' + contato.Id + '### Salario antes: ' + contato.Salario__c);
-                contato.Salario__c = valorDistribuir;
-                System.debug('###### Contato' + contato.Id + '### Salario depois: ' + contato.Salario__c);
-            }
-            conta.AnnualRevenue = dividirFaturamento;
-            System.debug('###### Conta' + conta.Id + '### Faturamento no update: ' + conta.AnnualRevenue);
-        }
-        update lstContasParaDistribuir;
+                if(contato.SalarioAnual__c == null){
+                    contato.SalarioAnual__c = 0;
+                    contato.SalarioMensal__c = 0;
 
+                    contato.SalarioAnual__c = valorDistribuir;
+                    contato.SalarioMensal__c = contato.SalarioAnual__c / 12;
+                    
+                    setContatosAtualizado.add(contato);
+                }
+
+                contato.SalarioAnual__c = valorDistribuir;
+                contato.SalarioMensal__c = contato.SalarioAnual__c / 12;
+                setContatosAtualizado.add(contato);
+            }
+            
+        }
+        List<Contact> lstContatosAtualizado = new List<Contact>(setContatosAtualizado);
+
+        update lstContatosAtualizado;
+
+    }
+
+    private static void atribuirAnnualRevenue() {
+
+        List<Account> lstContasParaUpdate = new List<Account>();
+
+        List<Account> lstTodasContas = [SELECT Id, AnnualRevenue, Name, (SELECT Id, Amount FROM Opportunities) FROM Account];
+        for(Account conta : lstTodasContas){
+            if(conta.AnnualRevenue == null){
+                conta.AnnualRevenue = 0;
+                for(Opportunity oportunidade : conta.Opportunities){
+                    if(oportunidade.Amount == null){
+                        oportunidade.Amount = 0;
+                        conta.AnnualRevenue += oportunidade.Amount;
+                    }else {
+                        conta.AnnualRevenue += oportunidade.Amount;
+                    }
+                }
+            }else{
+                
+                for(Opportunity oportunidade : conta.Opportunities){
+                    if(oportunidade.Amount == null){
+                        oportunidade.Amount = 0;
+                        conta.AnnualRevenue += oportunidade.Amount;
+                    }else {
+                        conta.AnnualRevenue += oportunidade.Amount;
+                    }
+                }
+
+            }
+            lstContasParaUpdate.add(conta);
+        }
+
+        update lstContasParaUpdate;
     }
 }

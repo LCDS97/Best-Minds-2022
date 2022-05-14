@@ -50,4 +50,10 @@ public with sharing class AccountDAO {
         ];
     }
 
+    public static List<Account> buscarContasParaCalcularOportunidades(){
+        return [
+            SELECT Id, AnnualRevenue, Name, (SELECT Id, Amount FROM Opportunities) FROM Account
+        ];
+    }
+
 }

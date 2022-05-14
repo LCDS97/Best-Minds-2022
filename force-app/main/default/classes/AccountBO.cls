@@ -285,9 +285,40 @@ public with sharing class AccountBO {
         }
 
         update lstContatosAtualizarEmail;
-        
+    }
 
+    public static void atribuirAnnualRevenue() {
 
+        List<Account> lstContasParaUpdate = new List<Account>();
+
+        List<Account> lstTodasContas = AccountDAO.buscarContasParaCalcularOportunidades();
+        for(Account conta : lstTodasContas){
+            if(conta.AnnualRevenue == null){
+                conta.AnnualRevenue = 0;
+                for(Opportunity oportunidade : conta.Opportunities){
+                    if(oportunidade.Amount == null){
+                        oportunidade.Amount = 0;
+                        conta.AnnualRevenue += oportunidade.Amount;
+                    }else {
+                        conta.AnnualRevenue += oportunidade.Amount;
+                    }
+                }
+            }else{
+                
+                for(Opportunity oportunidade : conta.Opportunities){
+                    if(oportunidade.Amount == null){
+                        oportunidade.Amount = 0;
+                        conta.AnnualRevenue += oportunidade.Amount;
+                    }else {
+                        conta.AnnualRevenue += oportunidade.Amount;
+                    }
+                }
+
+            }
+            lstContasParaUpdate.add(conta);
+        }
+
+        update lstContasParaUpdate;
     }
 
 
