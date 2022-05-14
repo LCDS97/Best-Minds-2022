@@ -134,7 +134,7 @@
 
 ---
 
-- [ ] 3. Agora que o Max Verstappen é o novo campeão da Fórmula 1, ele está mais do que nunca preocupado com o salário dos principais sócios (Contatos) de seus patrocínios. O desejo dele é identificar quais contas tem um faturamento maior que 1 milhão e pegar 50% desse faturamento e distrubuir de forma igualitária para cada sócio da Conta.
+- [x] 3. Agora que o Max Verstappen é o novo campeão da Fórmula 1, ele está mais do que nunca preocupado com o salário dos principais sócios (Contatos) de seus patrocínios. O desejo dele é identificar quais contas tem um faturamento maior que 1 milhão e pegar 50% desse faturamento e distrubuir de forma igualitária para cada sócio da Conta.
 
 - Vou criar a idéia baseado no campo faturamento Anual da Conta para uma contagem de todas as Oportunidades da Conta somar o valor do Faturamento de acordo com os valores das oportunidades
 - Fazer a soma do Faturamento Anual e dividir em 50% para distribuir
@@ -145,7 +145,7 @@
 - Filtrar a condição dos contatos com base nesse campo
 - Verificar em trigger ou apex batch ainda
 
-
+### Organizar todas as classes para Enviar Para o Mathias
 
 ---
 ## Apex Trigger ✅
