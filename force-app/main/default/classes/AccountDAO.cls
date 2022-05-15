@@ -56,4 +56,10 @@ public with sharing class AccountDAO {
         ];
     }
 
+    public static List<Account> buscarContasComFaturamentoDeAcimaDeMilhao(){
+        return [
+            SELECT  Id, AnnualRevenue, Name, ( SELECT Id, SalarioAnual__c, SalarioMensal__c FROM Contacts ) FROM Account WHERE AnnualRevenue > 1000000
+        ];
+    }
+
 }

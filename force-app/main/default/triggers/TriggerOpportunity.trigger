@@ -6,4 +6,5 @@ trigger TriggerOpportunity on Opportunity (before insert) {
         }
     }
 
+
 }

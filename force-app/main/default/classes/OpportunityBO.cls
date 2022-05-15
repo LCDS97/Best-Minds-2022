@@ -109,5 +109,7 @@ public with sharing class OpportunityBO {
         return quantidadeOportunidades;
     }
 
+
+
     
 }
