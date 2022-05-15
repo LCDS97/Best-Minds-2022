@@ -80,24 +80,26 @@ public with sharing class ContactBO {
 
         for(Account conta : lstContas){
             
-            Decimal dividirFaturamento = conta.AnnualRevenue / 2;
-            conta.AnnualRevenue = dividirFaturamento;
-
-            Decimal valorDistribuir = dividirFaturamento / conta.Contacts.size();
-            for(Contact contato : conta.Contacts){
-                if(contato.SalarioAnual__c == null){
-                    contato.SalarioAnual__c = 0;
-                    contato.SalarioMensal__c = 0;
-
+            if(conta.AnnualRevenue > 1000000){
+                Decimal dividirFaturamento = conta.AnnualRevenue / 2;
+                conta.AnnualRevenue = dividirFaturamento;
+    
+                Decimal valorDistribuir = dividirFaturamento / conta.Contacts.size();
+                for(Contact contato : conta.Contacts){
+                    if(contato.SalarioAnual__c == null){
+                        contato.SalarioAnual__c = 0;
+                        contato.SalarioMensal__c = 0;
+    
+                        contato.SalarioAnual__c = valorDistribuir;
+                        contato.SalarioMensal__c = contato.SalarioAnual__c / 12;
+                        
+                        setContatosAtualizado.add(contato);
+                    }
+    
                     contato.SalarioAnual__c = valorDistribuir;
                     contato.SalarioMensal__c = contato.SalarioAnual__c / 12;
-                    
                     setContatosAtualizado.add(contato);
                 }
-
-                contato.SalarioAnual__c = valorDistribuir;
-                contato.SalarioMensal__c = contato.SalarioAnual__c / 12;
-                setContatosAtualizado.add(contato);
             }
             
         }
