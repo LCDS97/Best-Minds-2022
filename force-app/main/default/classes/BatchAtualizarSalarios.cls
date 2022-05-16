@@ -7,8 +7,8 @@ public class BatchAtualizarSalarios implements Database.Batchable<SObject>{
 
         public void execute(Database.BatchableContext bc, List<Account> lstContas){
             
-            AccountBO.atribuirAnnualRevenue();
-            ContactBO.DistribuirAltoFaturamento(lstContas);
+            //AccountBO.atribuirAnnualRevenue();
+            ContactBO.DistribuirAltoFaturamentoComQuery();
         }
 
         public void finish(Database.BatchableContext bc){
