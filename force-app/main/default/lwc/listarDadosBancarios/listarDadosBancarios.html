@@ -1,22 +1,42 @@
 <template>
     <lightning-card title="Lista de Dados Bancários">
-
-        <table>
-            <thead>
-                <th>Banco</th>
-                <th>Agência</th>
-                <th>Número da Conta</th>
-            </thead>
-            <tbody>
-                <template for:each={listarDadosBancarios} for:item="dadoBancarioAtual">
-                    <tr key={dadoBancarioAtual.id}>
-                        <td>{dadoBancarioAtual.banco}</td>
-                        <td>{dadoBancarioAtual.agencia}</td>
-                        <td>{dadoBancarioAtual.numeroConta}</td>
-                    </tr>
-                </template>
-            </tbody>
-        </table>
-            
+        <div class="container">
+            <div class="slds-grid slds-gutters">
+                <div class="slds-col">
+                    <lightning-input
+                                type="text"
+                                label="Buscar Banco"
+                                placeholder="Digite o nome do banco"
+                                value={valorFiltro}
+                                onchange={atualizarCampoHandler}>
+                    </lightning-input>
+                </div>
+                <div class="slds-col button-pesquisar">
+                    <lightning-button
+                                    variant="brand"
+                                    label="Pesquisar"
+                                    onclick={filtrarBancos}>
+                    </lightning-button>
+                </div>
+            </div>
+            <div class="espacamento-top-20">
+                <table>
+                    <thead>
+                        <th>Banco</th>
+                        <th>Agência</th>
+                        <th>Número da Conta</th>
+                    </thead>
+                    <tbody>
+                        <template for:each={listaFiltrada} for:item="dadoBancarioAtual">
+                            <tr key={dadoBancarioAtual.id}>
+                                <td>{dadoBancarioAtual.banco}</td>
+                                <td>{dadoBancarioAtual.agencia}</td>
+                                <td>{dadoBancarioAtual.numeroConta}</td>
+                            </tr>
+                        </template>
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </lightning-card>
 </template>

@@ -12,6 +12,23 @@
 
 ---
 
+- [x] 2. Criar um campo de pesquisa no componente para que seja possível filtrar as parcelas. (O filtro pode ser realizado com base em qualquer campo da parcela).
+> Ao digitar algum valor no campo, é necessário que as parcelas sejam filtradas.
+> Quando não houver valor nenhum no campo, deve ser apresentada a lista total de parcelasCriar um campo de pesquisa no componente para que seja possível filtrar as parcelas. (O filtro pode ser realizado com base em qualquer campo da parcela).
+> Ao digitar algum valor no campo, é necessário que as parcelas sejam filtradas. Quando não houver valor nenhum no campo, deve ser apresentada a lista total de parcelas
+
+---
+
+- [ ] 3. Criar um campo de pesquisa no componente para que seja possível filtrar as parcelas. (O filtro pode ser realizado com base em qualquer campo da parcela). Ao digitar algum valor no campo, é necessário que as parcelas sejam filtradas. Quando não houver valor nenhum no campo, deve ser apresentada a lista total de parcelas;
+
+
+- [ ] 4. Incluir uma coluna para apresentar o Valor da Parcela, esse valor deve ser editável utilizando o <lightning-input>
+
+
+- [ ] 5. Criar um botão de Salvar para salvar as alterações realizadas na tabela;
+
+- [ ] 6. Caso não exista nenhuma parcela, é necessário não apresentar a tabela e sim uma mensagem indicando que não existem parcelas para aquele contrato;
+
 ## Aura
 
 - [x] 1. Criar Componente no contato que tenha os seguintes critérios:

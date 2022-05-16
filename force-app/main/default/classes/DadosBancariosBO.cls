@@ -81,11 +81,14 @@ public with sharing class DadosBancariosBO {
 
 
     public static List<DadoBancarioTO> buscarDadosBancarios(Id idConta){
+        try {
         List<DadosBancarios__c> lstDadosBancarios = DadosBancariosDAO.pegarContaPorDadoBancarios(idConta);
         List<DadoBancarioTO> lstDadosBancariosTO = transformarDadosBancariosEmDadoBancarioTO(lstDadosBancarios);
-        
-        
+
         return lstDadosBancariosTO;
+        } catch (Exception e) {
+            throw new AuraHandledException(e.getMessage());
+        }
     }
     
     private static List<DadoBancarioTO> transformarDadosBancariosEmDadoBancarioTO(List<DadosBancarios__c> lstDadosBancarios){
