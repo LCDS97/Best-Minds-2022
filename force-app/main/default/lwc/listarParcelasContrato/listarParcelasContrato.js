@@ -8,6 +8,7 @@ export default class ListarParcelasContrato extends LightningElement {
     @track listaParcelasContrato = [];
     @track listaFiltrada = [];
     @track valorFiltro = '';
+    @track temParcelas = true;
 
     connectedCallback(){
         this.buscarParcelasContrato();
@@ -16,13 +17,21 @@ export default class ListarParcelasContrato extends LightningElement {
     buscarParcelasContrato(){
         buscarParcelasContratoService({idContrato : this.recordId})
             .then(response => {
-                this.listaParcelasContrato = response;
-                this.listaFiltrada = response;
+                if (response.length != 0) {
+                    this.listaParcelasContrato = response;
+                    this.listaFiltrada = response;
+                }else{
+                    this.listaParcelasContrato = response;
+                    this.listaFiltrada = response;
+                    this.temParcelas = false;
+                }
             })
             .catch(error => {
                 console.log(error);
             })
     }
+
+    
 
     atualizarCampoHandler( event ){
 
@@ -31,18 +40,14 @@ export default class ListarParcelasContrato extends LightningElement {
         
     }
 
-    filtrarBancos(event){
-        let nomeBanco = this.valorFiltro;
+    filtrarParcelas(event){
+        let nomeStatusValidade = this.valorFiltro;
         let listaFiltrar = this.listaParcelasContrato.map(value => Object.assign({}, value));
         this.listaFiltrada = [];
 
-        this.listaFiltrada = listaFiltrar.filter(element => { return element.banco == nomeBanco });
+        this.listaFiltrada = listaFiltrar.filter(element => { return element.statusValidade == nomeStatusValidade });
 
-/*         for(let itemLista of listaFiltrar){
-            if(itemLista.banco == nomeBanco){
-                this.listaFiltrada.push(itemLista);
-            }
-        } */
     }
+
 
 }

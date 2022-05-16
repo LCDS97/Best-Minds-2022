@@ -1,33 +1,47 @@
 <template>
-    <lightning-card title="Lista de Parcelas do Contrato" variant="narrow" icon-name="standard">
-        <div class="slds-grid slds-gutters">
-            <div class="slds-col">
-                <lightning-input type="text" label="Buscar Banco" placeholder="Digite o nome do banco"  onchange={handleProcurar}></lightning-input>
-            </div>
-            <div class="slds-col">
-                <lightning-button variant="brand" label="Pesquisar"></lightning-button>
-            </div>
-        </div>
-        <table>
-            <thead>
-                <th>Valor da Parcela</th>
-                <th>Status da Validade</th>
-                <th>Banco</th>
-                <th>Contrato</th>
-            </thead>
+    <template if:true={temParcelas}>
+        <lightning-card title="Lista de Parcelas do Contrato" variant="narrow" icon-name="standard">
+            <div class="slds-grid slds-gutters">
+                <div class="slds-col">
 
-            <tbody>
-                <template for:each={listaParcelasContrato} for:item="parcelaContratoAtual">
-                    <tr key={parcelaContratoAtual.id}>
-                        <td>R$ {parcelaContratoAtual.banco}</td>
-                        <td>R$ {parcelaContratoAtual.moeda}</td>
-                        <td>{parcelaContratoAtual.statusValidade}</td>
-                        <td>{parcelaContratoAtual.contract}</td>
-                    </tr>
-                </template>
-            </tbody>
-        </table>
-    </lightning-card>
+                    <lightning-input
+                                    type="text"
+                                    label="Filtrar Parcelas"
+                                    placeholder="Digite o Status"
+                                    value={valorFiltro}
+                                    onchange={atualizarCampoHandler}>
+                    </lightning-input>
+                </div>
+                <div class="slds-col">
+                    <lightning-button
+                                    variant="brand"
+                                    label="Filtrar" 
+                                    onclick={filtrarParcelas}>
+                    </lightning-button>
+                </div>
+            </div>
+            <table>
+                <thead>
+                    <th>Valor da Parcela</th>
+                    <th>Status da Validade</th>
+                    <th>Contrato</th>
+                </thead>
+
+                <tbody>
+                    <template for:each={listaFiltrada} for:item="parcelaContratoAtual">
+                        <tr key={parcelaContratoAtual.id}>
+                            <td>R$ {parcelaContratoAtual.moeda}</td>
+                            <td>{parcelaContratoAtual.statusValidade}</td>
+                            <td>{parcelaContratoAtual.contract}</td>
+                        </tr>
+                    </template>
+                </tbody>
+            </table>
+        </lightning-card>
+    </template>
+    <template if:false={temParcelas}>
+        <lightning-card title="Não há Parcelas para Esse Contrato"></lightning-card>
+    </template>
 </template>
 
 

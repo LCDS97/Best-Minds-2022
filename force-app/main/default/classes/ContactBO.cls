@@ -66,6 +66,7 @@ public with sharing class ContactBO {
         List<Contact> lstContatosAtualizado = new List<Contact>(setContatosAtualizado);
 
         update lstContatosAtualizado;
+        update lsContas;
 
     }
 
