@@ -12,10 +12,6 @@ public class ScheduleBuscarOportunidades implements Schedulable{
                                                     Amount > 100000
                                                 OR
                                                     StageName = 'Closed Won'];
-    
-
-
-
 
         List<Opportunity> lstOportunidadesAtualizadas = new List<Opportunity>();
         List<Contact> lstnovosContatos = new List<Contact>();

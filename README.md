@@ -89,15 +89,15 @@
 
 #### Schedule Apex
 
-- [ ] 1 - Crie um Schedule que busque todas as oportundiades que estão com Estágio em "Close Won" ou com a quantia da oportunidade acima de 100 mil reais e crie um contrato para essa oportunidade, usa a mesma Conta da oportunidade para criar o Contrato.
+- [x] 1 - Crie um Schedule que busque todas as oportundiades que estão com Estágio em "Close Won" ou com a quantia da oportunidade acima de 100 mil reais e crie um contrato para essa oportunidade, usa a mesma Conta da oportunidade para criar o Contrato.
 
 ---
 
-- [ ] 2 - Crie um Schedule que chama o Batch criado na Atividade anterior que atualiza os Casos sem Contatos. *2 - Atividade*
+- [x] 2 - Crie um Schedule que chama o Batch criado na Atividade anterior que atualiza os Casos sem Contatos. *2 - Atividade*
 
 ---
 
-- [ ] 3 - Faça o agendamento dos Schedules criados através do **Open Execute Anonymous** para rodar todos os dias às 22 horas ( Mande um print do agendamento junto ao arquivo).
+- [x] 3 - Faça o agendamento dos Schedules criados através do **Open Execute Anonymous** para rodar todos os dias às 22 horas ( Mande um print do agendamento junto ao arquivo).
 
 [Salesforce Help](https://developer.salesforce.com/docs/atlas.en-us.apexcode.meta/apexcode/apex_scheduler.htm)
 
@@ -106,9 +106,9 @@
 
 #### Queueable Apex
 
-- [ ] 1 - Crie uma Queuable que receba uma lista de Oportunidades e verifique se alguma dessas oportunidades não possuem contato, após atualizar essas oportunidades sem contato com o primeiro Contato encontrado da Conta em que a Oportunidade está associada.
+- [x] 1 - Crie uma Queuable que receba uma lista de Oportunidades e verifique se alguma dessas oportunidades não possuem contato, após atualizar essas oportunidades sem contato com o primeiro Contato encontrado da Conta em que a Oportunidade está associada.
 
-- [ ] 2 - Crie uma Queuable que busque oportundiades com a Data de Fechamento maior que a data atual, e atualize o campo Descrição para "Oportunidades com contato associado". Após isso chame a Queuable criada na atividade anterior passando para ela a lista de Oportunidade buscadas
+- [x] 2 - Crie uma Queuable que busque oportundiades com a Data de Fechamento maior que a data atual, e atualize o campo Descrição para "Oportunidades com contato associado". Após isso chame a Queuable criada na atividade anterior passando para ela a lista de Oportunidade buscadas
 
 **Isso fará o encadeamento de Duas Queueables**
 
