@@ -12,31 +12,56 @@
                                     onchange={atualizarCampoHandler}>
                     </lightning-input>
                 </div>
-                <div class="slds-col">
+                <div class="slds-col posicionamento-botao">
                     <lightning-button
                                     variant="brand"
-                                    label="Filtrar" 
+                                    label="Filtrar"
+                                    title="Filtrar"
+                                    class="slds-m-left_x-small"
                                     onclick={filtrarParcelas}>
                     </lightning-button>
                 </div>
+                <div class="slds-col posicionamento-botao">
+                    <lightning-button
+                                    variant="Sucess"
+                                    label="Salvar Parcelas"
+                                    title="Salvar"
+                                    class="slds-m-left_x-small"
+                                    onclick={salvarParcelas}>
+                    </lightning-button>
+                </div>
             </div>
-            <table>
-                <thead>
-                    <th>Valor da Parcela</th>
-                    <th>Status da Validade</th>
-                    <th>Contrato</th>
-                </thead>
+                <div class="espacamento-top-20">
+                    <table>
+                        <thead>
+                            <th>Status da Validade</th>
+                            <th>Contrato</th>
+                            <th>Valor da Parcela</th>
+                            <th>Editar Valor da Parcela</th>
+                        </thead>
 
-                <tbody>
-                    <template for:each={listaFiltrada} for:item="parcelaContratoAtual">
-                        <tr key={parcelaContratoAtual.id}>
-                            <td>R$ {parcelaContratoAtual.moeda}</td>
-                            <td>{parcelaContratoAtual.statusValidade}</td>
-                            <td>{parcelaContratoAtual.contract}</td>
-                        </tr>
-                    </template>
-                </tbody>
-            </table>
+                        <tbody>
+                            <template for:each={listaFiltrada} for:item="parcela">
+                                <tr key={parcela.id}>
+                                    <td>{parcela.statusValidade}</td>
+                                    <td>{parcela.contract}</td>
+                                    <td>R$ {parcela.moeda}</td>
+                                    <td><lightning-input
+                                                    type="number"
+                                                    label="Novo valor"
+                                                    variant="label-hidden"
+                                                    formatter="currency" 
+                                                    step="0.01"
+                                                    data-id={parcela.id}
+                                                    value={parcela.moeda}
+                                                    onchange={alterarValorParcelaHandler}>
+                                        </lightning-input>
+                                    </td>
+                                </tr>
+                            </template>
+                        </tbody>
+                </table>
+            </div>
         </lightning-card>
     </template>
     <template if:false={temParcelas}>
