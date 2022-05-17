@@ -166,50 +166,52 @@ public with sharing class ContractBO {
         contarParcelas(idContrato);
     }
 
-    public static List<ContractTO> buscarParcelasDoContrato(Id idContrato){
+    public static List<ParcelaTO> buscarParcelasDoContrato(Id idContrato){
 
         List<Parcela__c> lstParcelas = ParcelaDAO.buscarParcelasIdContrato(idContrato);
-        List<ContractTO> lstParcelasContratoTO = transformarContratosEmTO(lstParcelas);
+        List<ParcelaTO> lstParcelasContratoTO = transformarContratosEmTO(lstParcelas);
         return lstParcelasContratoTO;
     }
 
-    public static Boolean salvarParcelas(List<ContractTO> lstParcelaTO){
+    public static Boolean salvarParcelas(List<ParcelaTO> lstParcelaTO){
         Boolean sucesso = false;
         try {
             
             List<Parcela__c> lstParcela = transformarListContratoTOParaListParcela(lstParcelaTO);
             update lstParcela;
+            System.debug('######## lst parcelas dentro do boolean salvarParcelas' + lstParcela);
             sucesso = true;
 
         } catch (Exception e) {
+            System.debug(e.getMessage());
             throw new AuraHandledException(e.getMessage());
         }
 
         return sucesso;
     }
 
-    private static List<ContractTO> transformarContratosEmTO(List<Parcela__c> lstParcelasDoContrato){
-        List<ContractTO> lstContratoTO = new List<ContractTO>();
+    private static List<ParcelaTO> transformarContratosEmTO(List<Parcela__c> lstParcelasDoContrato){
+        List<ParcelaTO> lstContratoTO = new List<ParcelaTO>();
 
         for(Parcela__c parcela: lstParcelasDoContrato){
-            ContractTO ContractTO = new ContractTO();
-            ContractTO.id = parcela.Id;
-            ContractTO.moeda = String.valueOf(parcela.Moeda__c);
-            ContractTO.contract = String.valueOf(parcela.Contrato__c);
-            ContractTO.statusValidade = String.valueOf(parcela.Status_Validade__c);
-            lstContratoTO.add(ContractTO);
+            ParcelaTO ParcelaTO = new ParcelaTO();
+            ParcelaTO.id = parcela.Id;
+            ParcelaTO.moeda = parcela.Moeda__c;
+            ParcelaTO.contract = String.valueOf(parcela.Contrato__c);
+            ParcelaTO.statusValidade = String.valueOf(parcela.Status_Validade__c);
+            lstContratoTO.add(ParcelaTO);
         }
 
         return lstContratoTO;
     }
 
-    private static List<Parcela__c> transformarListContratoTOParaListParcela(List<ContractTO> lstParcelasTO){
+    private static List<Parcela__c> transformarListContratoTOParaListParcela(List<ParcelaTO> lstParcelasTO){
         List<Parcela__c> lstParcela = new List<Parcela__c>();
 
-        for(ContractTO parcelaTO : lstParcelasTO){
+        for(ParcelaTO parcelaTO : lstParcelasTO){
             Parcela__c parcela = new Parcela__c();
             parcela.Id = parcelaTO.id;
-            parcela.Moeda__c = Integer.valueOf(parcelaTO.moeda);
+            parcela.Moeda__c = parcelaTO.moeda;
 
             lstParcela.add(parcela);
         }
@@ -217,11 +219,11 @@ public with sharing class ContractBO {
         return lstParcela;
     }
 
-    public class ContractTO{
+    public class ParcelaTO{
         @AuraEnabled
         public String id {get;set;}
         @AuraEnabled
-        public String moeda {get;set;}
+        public Decimal moeda {get;set;}
         @AuraEnabled
         public String contract {get;set;}
         @AuraEnabled

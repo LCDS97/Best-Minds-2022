@@ -1,6 +1,6 @@
 <template>
     <template if:true={temParcelas}>
-        <template if:false={showHideSpinner}>
+        <template if:true={apresentarSpinner}>
             <lightning-spinner alternative-text="Loading"></lightning-spinner>
         </template>
         <lightning-card title="Lista de Parcelas do Contrato" variant="narrow" icon-name="standard">
@@ -40,7 +40,6 @@
                         <thead>
                             <th>Status da Validade</th>
                             <th>Contrato</th>
-                            <th>Valor da Parcela</th>
                             <th>Editar Valor da Parcela</th>
                         </thead>
 
@@ -49,7 +48,6 @@
                                 <tr key={parcela.id}>
                                     <td>{parcela.statusValidade}</td>
                                     <td>{parcela.contract}</td>
-                                    <td>R$ {parcela.moeda}</td>
                                     <td><lightning-input
                                                     type="number"
                                                     label="Novo valor"

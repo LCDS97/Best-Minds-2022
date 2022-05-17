@@ -15,6 +15,7 @@ export default class ListarParcelasContrato extends LightningElement {
 
     connectedCallback(){
         this.buscarParcelasContrato(this.recordId);
+ 
     }
 
     buscarParcelasContrato(idContrato){
@@ -32,7 +33,6 @@ export default class ListarParcelasContrato extends LightningElement {
                 this.showHideSpinner();
             })
             .catch(error => {
-                this.showHideSpinner();
                 this.apresentarMensagemErro()
                 this.showHideSpinner();
             })
@@ -56,21 +56,22 @@ export default class ListarParcelasContrato extends LightningElement {
 
     salvarParcelas(){
         this.showHideSpinner();
-        let lstParcelas = this.clonarListaOriginal();
+        let lstParcelasTO = this.clonarListaOriginal();
 
-        salvarParcelasService({lstParcelas})
+        salvarParcelasService({lstParcelasTO: lstParcelasTO})
             .then(response => {
                 if(response){
-                    this.apresentarMensagemToast('Boa!','Suas parcelas foram salvas com sucesso','success')
-                    this.atualizarTela()
+                    this.apresentarMensagemToast('Boa!','Suas parcelas foram salvas com sucesso','success');
+                    this.atualizarTela();
+                    this.buscarParcelasContrato(this.recordId);
+
                 } else {
-                    this.apresentarMensagemErro()
+                    this.apresentarMensagemErro();
                 }
                 this.showHideSpinner();
             })
             .catch(error => {
-                this.showHideSpinner();
-                this.apresentarMensagemErro()
+                this.apresentarMensagemErro();
                 this.showHideSpinner();
             })
 
