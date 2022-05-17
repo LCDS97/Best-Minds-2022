@@ -11,12 +11,14 @@ export default class ListarParcelasContrato extends LightningElement {
     @track listaFiltrada = [];
     @track valorFiltro = '';
     @track temParcelas = true;
+    @track apresentarSpinner = false;
 
     connectedCallback(){
         this.buscarParcelasContrato(this.recordId);
     }
 
     buscarParcelasContrato(idContrato){
+        this.showHideSpinner();
         buscarParcelasContratoService({idContrato})
             .then(response => {
                 if (response.length != 0) {
@@ -27,9 +29,12 @@ export default class ListarParcelasContrato extends LightningElement {
                     this.listaFiltrada = response;
                     this.temParcelas = false;
                 }
+                this.showHideSpinner();
             })
             .catch(error => {
-                console.log(error);
+                this.showHideSpinner();
+                this.apresentarMensagemErro()
+                this.showHideSpinner();
             })
     }
 
@@ -50,19 +55,23 @@ export default class ListarParcelasContrato extends LightningElement {
     }
 
     salvarParcelas(){
+        this.showHideSpinner();
         let lstParcelas = this.clonarListaOriginal();
 
         salvarParcelasService({lstParcelas})
             .then(response => {
                 if(response){
                     this.apresentarMensagemToast('Boa!','Suas parcelas foram salvas com sucesso','success')
+                    this.atualizarTela()
                 } else {
-                    this.apresentarMensagemToast('Ih rapaz...','Ocorreu um erro ao fazer atualização do suas parcelas','error')
+                    this.apresentarMensagemErro()
                 }
-
+                this.showHideSpinner();
             })
             .catch(error => {
-                console.log(error)
+                this.showHideSpinner();
+                this.apresentarMensagemErro()
+                this.showHideSpinner();
             })
 
     }
@@ -102,6 +111,18 @@ export default class ListarParcelasContrato extends LightningElement {
             variant: variant
         });
         this.dispatchEvent(event);
+    }
+
+    apresentarMensagemErro(){
+        this.apresentarMensagemToast('Ih rapaz...','Ocorreu um erro ao fazer atualização do suas parcelas','error')
+    }
+
+    atualizarTela(){
+        eval("$A.get('e.force:refreshView').fire()")
+    }
+
+    showHideSpinner(){
+        this.apresentarSpinner = !this.apresentarSpinner
     }
 
 

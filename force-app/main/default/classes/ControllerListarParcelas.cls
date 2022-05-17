@@ -7,7 +7,7 @@ public with sharing class ControllerListarParcelas {
 
     @AuraEnabled
     public static Boolean salvarParcelas(List<ContractBO.ContractTO> lstParcelas){
-        System.debug('####### LST PARCELA =>' + JSON.serialize(lstParcelas));
-        return false;
+        
+        return ContractBO.salvarParcelas(lstParcelas);
     }
 }

@@ -1,6 +1,10 @@
 <template>
     <template if:true={temParcelas}>
+        <template if:false={showHideSpinner}>
+            <lightning-spinner alternative-text="Loading"></lightning-spinner>
+        </template>
         <lightning-card title="Lista de Parcelas do Contrato" variant="narrow" icon-name="standard">
+            
             <div class="slds-grid slds-gutters">
                 <div class="slds-col">
 
@@ -63,6 +67,7 @@
                 </table>
             </div>
         </lightning-card>
+
     </template>
     <template if:false={temParcelas}>
         <lightning-card title="Não há Parcelas para Esse Contrato"></lightning-card>

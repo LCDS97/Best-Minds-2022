@@ -173,6 +173,21 @@ public with sharing class ContractBO {
         return lstParcelasContratoTO;
     }
 
+    public static Boolean salvarParcelas(List<ContractTO> lstParcelaTO){
+        Boolean sucesso = false;
+        try {
+            
+            List<Parcela__c> lstParcela = transformarListContratoTOParaListParcela(lstParcelaTO);
+            update lstParcela;
+            sucesso = true;
+
+        } catch (Exception e) {
+            throw new AuraHandledException(e.getMessage());
+        }
+
+        return sucesso;
+    }
+
     private static List<ContractTO> transformarContratosEmTO(List<Parcela__c> lstParcelasDoContrato){
         List<ContractTO> lstContratoTO = new List<ContractTO>();
 
@@ -188,8 +203,19 @@ public with sharing class ContractBO {
         return lstContratoTO;
     }
 
-    
+    private static List<Parcela__c> transformarListContratoTOParaListParcela(List<ContractTO> lstParcelasTO){
+        List<Parcela__c> lstParcela = new List<Parcela__c>();
 
+        for(ContractTO parcelaTO : lstParcelasTO){
+            Parcela__c parcela = new Parcela__c();
+            parcela.Id = parcelaTO.id;
+            parcela.Moeda__c = Integer.valueOf(parcelaTO.moeda);
+
+            lstParcela.add(parcela);
+        }
+
+        return lstParcela;
+    }
 
     public class ContractTO{
         @AuraEnabled
@@ -201,6 +227,9 @@ public with sharing class ContractBO {
         @AuraEnabled
         public String statusValidade {get;set;}
     }
+
+
+
 
 
 
