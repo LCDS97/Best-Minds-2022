@@ -71,19 +71,19 @@
 
 #### Métodos Futuros
 
-- [ ] 1 - Crie um método futuro que receba uma lista de IDs de Casos, atualize o campo Status para "Escalado", o campo Prioridade para "Alto" e adicione um comentário no caso ( Object CommentCase ) " Exercício método futuro Best Minds - Atualizando Casos.";
+- [x] 1 - Crie um método futuro que receba uma lista de IDs de Casos, atualize o campo Status para "Escalado", o campo Prioridade para "Alto" e adicione um comentário no caso ( Object CommentCase ) " Exercício método futuro Best Minds - Atualizando Casos.";
 
 ---
 
-- [ ] 2 - Crie um método futuro que recebe um parâmetro do tipo Id, e que chame o método fictício "service.enviarNotificao('Passe aqui o Id recebido no método')" *( A linha de chamada desse método pode estar comentado pois esse método não existe )* simulando que esse método seja um callout
+- [x] 2 - Crie um método futuro que recebe um parâmetro do tipo Id, e que chame o método fictício "service.enviarNotificao('Passe aqui o Id recebido no método')" *( A linha de chamada desse método pode estar comentado pois esse método não existe )* simulando que esse método seja um callout
 
 ---
 
 #### Batch Apex
 
-- [ ] 1 - Crie uma Batch para preencher o endereço dos contatos de contas, com o endereço das contas *( Fazer com o que endereço dos contatos seja o mesmo que os da contas que estão associados)*, porém essas contas a serem atualizadas devem ter no mínimo 2 contatos associados.
+- [x] 1 - Crie uma Batch para preencher o endereço dos contatos de contas, com o endereço das contas *( Fazer com o que endereço dos contatos seja o mesmo que os da contas que estão associados)*, porém essas contas a serem atualizadas devem ter no mínimo 2 contatos associados.
 
-- [ ] 2 - Crie um Contato com o seu nome, depois crie uma Batch para buscar todos os Casos criado nos últimos 5 dias e que estão sem nenhum contato associado e associe todos os Casos encontrados a esse contato criado.
+- [x] 2 - Crie um Contato com o seu nome, depois crie uma Batch para buscar todos os Casos criado nos últimos 5 dias e que estão sem nenhum contato associado e associe todos os Casos encontrados a esse contato criado.
 
 ---
 
