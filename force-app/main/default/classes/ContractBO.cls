@@ -1,4 +1,6 @@
 public with sharing class ContractBO {
+
+    public class ParcelaStatusPagaException extends Exception {}
     
     
 /*
@@ -190,19 +192,33 @@ public with sharing class ContractBO {
         return sucesso;
     }
 
-    public static Boolean deletarParcela(Id idParcela){
-        Boolean parcelaDeletada = false;
+    public static ResponseTO deletarParcela(List<ParcelaTO> lstParcelaTO){
+        ResponseTO response = new ResponseTO();
 
         try {
-            Parcela__c deletarParcela = ParcelaDAO.retornarParcelaIdValorVencimento(idParcela);
-            delete deletarParcela;
-            parcelaDeletada = true;
+            List<Parcela__c> lstParcela = transformarListContratoTOParaListParcela(lstParcelaTO);
+
+             for(ParcelaTO parcelaTO: lstParcelaTO){
+                if(parcelaTO.status == 'Paga'){
+                    throw new ParcelaStatusPagaException('Não é possível deletar uma Parcela com o Status "Paga"');
+                }
+            }
+
+            delete lstParcela;
+
+            response.sucesso = true;
+            response.mensagem = 'Parcela removida com sucesso!';
             
-        } catch (Exception e) {
-            throw new AuraHandledException(e.getMessage());
+        } catch (ParcelaStatusPagaException e) {
+            response.sucesso = false;
+            response.mensagem = e.getMessage();
+        }
+          catch (Exception e) {
+            response.sucesso = false;
+            response.mensagem = e.getMessage();
         }
 
-        return parcelaDeletada;
+        return response;
     }
 
     private static List<ParcelaTO> transformarContratosEmTO(List<Parcela__c> lstParcelasDoContrato){
@@ -214,6 +230,7 @@ public with sharing class ContractBO {
             ParcelaTO.moeda = parcela.Moeda__c;
             ParcelaTO.contract = String.valueOf(parcela.Contrato__c);
             ParcelaTO.statusValidade = String.valueOf(parcela.Status_Validade__c);
+            ParcelaTO.status = String.valueOf(parcela.Status__c);
             lstContratoTO.add(ParcelaTO);
         }
 
@@ -227,6 +244,7 @@ public with sharing class ContractBO {
             Parcela__c parcela = new Parcela__c();
             parcela.Id = parcelaTO.id;
             parcela.Moeda__c = parcelaTO.moeda;
+            parcela.Status__c = parcelaTO.status;
 
             lstParcela.add(parcela);
         }
@@ -243,9 +261,9 @@ public with sharing class ContractBO {
         public String contract {get;set;}
         @AuraEnabled
         public String statusValidade {get;set;}
+        @AuraEnabled
+        public String status {get;set;}
     }
-
-
 
 
 

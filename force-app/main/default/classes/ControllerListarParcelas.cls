@@ -12,7 +12,7 @@ public with sharing class ControllerListarParcelas {
     }
 
     @AuraEnabled
-    public static Boolean deletarParcela(Id idParcela){
-        return ContractBO.deletarParcela(idParcela);
+    public static ResponseTO deletarParcela(List<ContractBO.ParcelaTO> lstParcelaTO){
+        return ContractBO.deletarParcela(lstParcelaTO);
     }
 }

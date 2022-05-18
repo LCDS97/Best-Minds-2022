@@ -10,6 +10,7 @@ export default class ListarParcelasContrato extends LightningElement {
 
     @track listaParcelasContrato = [];
     @track listaFiltrada = [];
+    @track listaTemporaria = [];
     @track valorFiltro = '';
     @track temParcelas = true;
     @track apresentarSpinner = false;
@@ -81,20 +82,37 @@ export default class ListarParcelasContrato extends LightningElement {
     deletarParcela( event ){
         this.showHideSpinner();
         let idParcela = event.currentTarget.dataset.id;
-        deletarParcelaService({ idParcela : idParcela})
+        let listaParcelasOriginal = this.clonarListaOriginal();
+
+        let listaParcelasDeletar = listaParcelasOriginal.filter((element) => {return element.id == idParcela});
+        listaParcelasOriginal = listaParcelasOriginal.filter((element) =>{ return element.id!= idParcela});
+
+        this.listaTemporaria = listaParcelasOriginal;
+
+        if(listaParcelasDeletar[0].status == 'Paga'){
+            this.apresentarMensagemToast('Ops!', 'Não é possível deletar uma parcela com o Status "paga"', 'warning');
+            this.showHideSpinner();
+            return;
+        }
+
+        deletarParcelaService({ lstParcelaTO : listaParcelasDeletar})
             .then( response => {
-                if(response){
-                    this.apresentarMensagemToast('Atenção!', 'Sua parcela foi deletada com sucesso', 'success');
-                    this.atualizarTela();
-                    this.atualizarListaOriginal(listaOriginalClonada)
-                }else{
-                    this.apresentarMensagemErro();
+                if(response.sucesso){
+                    this.apresentarMensagemToast('Sucesso!', response.mensagem, 'success');
+                    this.atualizarListaOriginal(this.listaTemporaria);
+                    this.atualizarListaFiltrada(this.listaParcelasContrato);
+                    
+                }else {
+                    this.apresentarMensagemToast('Ops!', response.mensagem, 'error');
                 }
+
+                this.listaTemporaria = [];
                 this.showHideSpinner();
             })
             .catch(error => {
-                this.apresentarMensagemErro();
                 this.showHideSpinner();
+                console.log(error);
+                this.apresentarMensagemErro();
             })
         
         
@@ -128,6 +146,10 @@ export default class ListarParcelasContrato extends LightningElement {
 
     atualizarListaOriginal(listaOriginalAtualizada){
         this.listaParcelasContrato = listaOriginalAtualizada
+    }
+
+    atualizarListaFiltrada(listaFiltradaAtualizada){
+        this.listaFiltrada = listaFiltradaAtualizada;
     }
 
     apresentarMensagemToast(title, message, variant) {

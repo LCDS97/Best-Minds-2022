@@ -41,7 +41,7 @@
                             <th>Status da Validade</th>
                             <th>Contrato</th>
                             <th>Editar Valor da Parcela</th>
-                            <!-- <th>Editar Valor da Parcela</th> -->
+                            <th>Status da Parcela</th>
                         </thead>
 
                         <tbody>
@@ -49,6 +49,7 @@
                                 <tr key={parcela.id}>
                                     <td>{parcela.statusValidade}</td>
                                     <td>{parcela.contract}</td>
+                                    <td>{parcela.status}</td>
                                     <td><lightning-input
                                                     type="number"
                                                     label="Novo valor"
