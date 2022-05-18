@@ -190,6 +190,21 @@ public with sharing class ContractBO {
         return sucesso;
     }
 
+    public static Boolean deletarParcela(Id idParcela){
+        Boolean parcelaDeletada = false;
+
+        try {
+            Parcela__c deletarParcela = ParcelaDAO.retornarParcelaIdValorVencimento(idParcela);
+            delete deletarParcela;
+            parcelaDeletada = true;
+            
+        } catch (Exception e) {
+            throw new AuraHandledException(e.getMessage());
+        }
+
+        return parcelaDeletada;
+    }
+
     private static List<ParcelaTO> transformarContratosEmTO(List<Parcela__c> lstParcelasDoContrato){
         List<ParcelaTO> lstContratoTO = new List<ParcelaTO>();
 

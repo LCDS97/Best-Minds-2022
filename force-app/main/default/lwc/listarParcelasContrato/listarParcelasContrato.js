@@ -2,7 +2,8 @@ import { LightningElement, api, track } from 'lwc';
 import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 
 import buscarParcelasContratoService from '@salesforce/apex/ControllerListarParcelas.buscarParcelasContrato';
-import salvarParcelasService from '@salesforce/apex/ControllerListarParcelas.salvarParcelas'
+import salvarParcelasService from '@salesforce/apex/ControllerListarParcelas.salvarParcelas';
+import deletarParcelaService from '@salesforce/apex/ControllerListarParcelas.deletarParcela';
 
 export default class ListarParcelasContrato extends LightningElement {
     @api recordId;
@@ -77,6 +78,30 @@ export default class ListarParcelasContrato extends LightningElement {
 
     }
 
+    deletarParcela( event ){
+        this.showHideSpinner();
+        let idParcela = event.currentTarget.dataset.id;
+        deletarParcelaService({ idParcela : idParcela})
+            .then( response => {
+                if(response){
+                    this.apresentarMensagemToast('Atenção!', 'Sua parcela foi deletada com sucesso', 'success');
+                    this.atualizarTela();
+                    this.atualizarListaOriginal(listaOriginalClonada)
+                }else{
+                    this.apresentarMensagemErro();
+                }
+                this.showHideSpinner();
+            })
+            .catch(error => {
+                this.apresentarMensagemErro();
+                this.showHideSpinner();
+            })
+        
+        
+
+
+    }
+
     atualizarCampoHandler( event ){
         let valorCampo = event.currentTarget.value;
         this.valorFiltro = valorCampo;
@@ -125,6 +150,8 @@ export default class ListarParcelasContrato extends LightningElement {
     showHideSpinner(){
         this.apresentarSpinner = !this.apresentarSpinner
     }
+
+
 
 
 

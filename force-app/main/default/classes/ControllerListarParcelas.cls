@@ -10,4 +10,9 @@ public with sharing class ControllerListarParcelas {
         System.debug('###### lstParcelasTO => ' + lstParcelasTO);
         return ContractBO.salvarParcelas(lstParcelasTO);
     }
+
+    @AuraEnabled
+    public static Boolean deletarParcela(Id idParcela){
+        return ContractBO.deletarParcela(idParcela);
+    }
 }
