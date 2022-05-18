@@ -13,6 +13,49 @@ public class TestDataFactory{
         insert conta;
     }
 
+    public static List<Account> gerarContasComDadosBancariosContratos(Integer numAccts, Integer numcontratoPerAcct, Integer numDadosBancariosPerAcct){
+
+      List<Account> accts = new List<Account>();
+      for(Integer i=0;i<numAccts;i++) {
+          Account a = new Account(Name='TestAccount' + i);
+          accts.add(a);
+      }
+      insert accts;
+
+      List<Contract> contrato = new List<Contract>();
+
+      for(Integer c = 0; c < numAccts; c++){
+        Account acct = accts[c];
+
+        for(Integer k = 0; k < numcontratoPerAcct; k++){
+          contrato.add(new Contract(
+            Status='Draft',
+            //CreatedDate=TODAY(),
+            ContractTerm=12,
+            AccountId=acct.Id));
+        }
+      }
+
+      insert contrato;
+
+      List<DadosBancarios__c> DadosBancarios = new List<DadosBancarios__c>();
+
+      for(Integer c = 0; c < numAccts; c++){
+        Account acct = accts[c];
+
+        for(Integer k = 0; k < numDadosBancariosPerAcct; k++){
+          DadosBancarios.add(new DadosBancarios__c(
+            Conta__c = acct.Id,
+            Agencia__c = 1234,
+            NumeroConta__c = 4321
+            ));
+        }
+      }
+
+      insert DadosBancarios;
+      return accts;
+    }
+
     public static List<Account> criarContaComContato(Integer numAccts, Integer numCttsPerAcct){
       
       List<Account> accts = new List<Account>();
@@ -69,3 +112,5 @@ public class TestDataFactory{
           insert psa;
       }
 }
+
+

@@ -1,6 +1,6 @@
-public class ContractBO {
-    public static ContractBO instance = new ContractBO();
-    public static ContractBO getInstance () {
+public class ContractBOAtividade {
+    public static ContractBOAtividade instance = new ContractBOAtividade();
+    public static ContractBOAtividade getInstance () {
         return instance;
     }
     public void criarTarefa (List<Contract> lstContract) {
