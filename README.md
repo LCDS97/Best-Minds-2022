@@ -20,6 +20,7 @@
 - Pegar minhas anotações e desafios na parte Admin e replicar aqui conforme o tempo
 - Revisitar e-mails enviados
 - Reever anotações do notion
+- Rever começo da Aula do Arthur do Dia 18 de Maio
 
 
 ## LWC ✅
