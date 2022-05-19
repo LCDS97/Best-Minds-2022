@@ -3,12 +3,28 @@
 - Do mais recente para o mais antigo
 - Cada desafio contém no final o local aonde esta seu arquivo
 
+---
 
-## LWC
+## O que eu preciso reforçar?
+
+- Salesforce Admin conceitos
+- Integrações, REST API e como comunicações externas funcionam
+- Flow
+- Entitlements ( Direitos ) questões de SLA
+- Refatorar as TO
+
+---
+
+## Tarefa Importante!
+
+- Pegar minhas anotações e desafios na parte Admin e replicar aqui conforme o tempo
+- Revisitar e-mails enviados
+- Reever anotações do notion
+
+
+## LWC ✅
 
 - [x] 1. Criar um componente LWC para Contratos que apresente uma tabela com todas as parcelas do Contrato.
-
-##### [Componente da Atividade](./force-app/main/default/lwc/listarParcelasContrato/)
 
 ---
 
@@ -21,31 +37,57 @@
 
 - [x] 3. Criar um campo de pesquisa no componente para que seja possível filtrar as parcelas. (O filtro pode ser realizado com base em qualquer campo da parcela). Ao digitar algum valor no campo, é necessário que as parcelas sejam filtradas. Quando não houver valor nenhum no campo, deve ser apresentada a lista total de parcelas;
 
+---
 
 - [x] 4. Incluir uma coluna para apresentar o Valor da Parcela, esse valor deve ser editável utilizando o <lightning-input>
 
+---
 
 - [x] 5. Criar um botão de Salvar para salvar as alterações realizadas na tabela;
 
-- [x] 6. Caso não exista nenhuma parcela, é necessário não apresentar a tabela e sim uma mensagem indicando que não existem parcelas para aquele contrato;
+---
 
-## Aura
+- [x] 6. Caso não exista nenhuma parcela, é necessário não apresentar a tabela e sim uma mensagem indicando que não existem parcelas para aquele contrato
+
+---
+
+- [x] 7. Criar um botão para cada item da parcela, onde ao clicar no botão deve ser realizada a tentativa de exclusão do registro no Salesforce
+
+----
+
+- [x] 8. Se a parcela estiver com o status "Paga" não deve ser possível excluir a parcela, e deve ser apresentada uma mensagem de erro ao usuário, caso ele tente excluir a mesma
+
+---
+
+- [x] 9. É necessário que ao excluir uma parcela seja apresentada uma mensagmem de sucesso para o usuário
+
+
+##### [Componente da Atividade](./force-app/main/default/lwc/listarParcelasContrato/)
+##### [Controller da Atividade](./force-app/main/default/classes/ControllerListarParcelas.cls)
+##### [Response TO](./force-app/main/default/classes/ResponseTO.cls)
+##### [ContractBO e Métodos para comunicação no Front-End](./force-app/main/default/classes/ContractBO.cls#L171)
+
+---
+
+## Aura ✅
 
 - [x] 1. Criar Componente no contato que tenha os seguintes critérios:
 > Receba um texto através do input text
 > Botão para limpar o input text, e se o campo vazio não permitir salvar os dados.
 > Botão para salvar que realiza a chamada de um Apex e atualiza informação do contato.
 
-##### Gravar vídeo funcionando e enviar classes
+##### [Componente da Atividade](./force-app/main/default/aura/ContactComponent/)
+##### [Contact Controller](./force-app/main/default/classes/ContactController.cls)
 
+---
 
-## Classe de Teste
+## Classe de Teste ✅
 
-### Entregar até 16/05/2022
+- [x] 1 - Crie uma classe de teste para a classe ContractBO, mapeei todos os cenários de testes para o método **criarTarefa** e crie todos os métodos necessários para cobrir 100% desse método específico, esse teste deve rodar no contesto de um usuário com perfil diferente.
 
-- [ ] 1 - Crie uma classe de teste para a classe ContractBO, mapeei todos os cenários de testes para o método **criarTarefa** e crie todos os métodos necessários para cobrir 100% desse método específico, esse teste deve rodar no contesto de um usuário com perfil diferente.
+##### [Classe de Teste](./force-app/main/default/classes/ContractBOAtividadeTest.cls)
 
-
+---
 
 ## Apex Async
 
@@ -56,6 +98,7 @@
 ---
 
 - [x] 2 - Crie um Batch Apex para atualizar o status do caso para fechado quando ele não conter nenhum contato associado.
+
 ##### [Classe da Atividade](./force-app/main/default/classes/SchuduledApex.cls)
 
 ---
@@ -66,34 +109,44 @@
 
 ---
 
-### Entregar até terça-feira
-
-
-#### Métodos Futuros
+#### Métodos Futuros ✅
 
 - [x] 1 - Crie um método futuro que receba uma lista de IDs de Casos, atualize o campo Status para "Escalado", o campo Prioridade para "Alto" e adicione um comentário no caso ( Object CommentCase ) " Exercício método futuro Best Minds - Atualizando Casos.";
 
----
-
-- [x] 2 - Crie um método futuro que recebe um parâmetro do tipo Id, e que chame o método fictício "service.enviarNotificao('Passe aqui o Id recebido no método')" *( A linha de chamada desse método pode estar comentado pois esse método não existe )* simulando que esse método seja um callout
+##### [Classe da Atividade](./force-app/main/default/classes/CaseBO.cls#L90)
 
 ---
 
-#### Batch Apex
+- [x] 2 - Crie um método futuro que recebe um parâmetro do tipo Id, e que chame o método fictício "service.enviarNotificao('Passe aqui o Id recebido no método')" *( A linha de chamada desse método pode estar comentado pois esse método não existe )* simulando que esse método seja um callout.
+
+##### [Classe da Atividade](./force-app/main/default/classes/GenericsHelper.cls#L110)
+
+
+---
+
+#### Batch Apex ✅
 
 - [x] 1 - Crie uma Batch para preencher o endereço dos contatos de contas, com o endereço das contas *( Fazer com o que endereço dos contatos seja o mesmo que os da contas que estão associados)*, porém essas contas a serem atualizadas devem ter no mínimo 2 contatos associados.
 
+##### [Classe Batch da Atividade](./force-app/main/default/classes/BatchPreencherEndereco.cls)
+
 - [x] 2 - Crie um Contato com o seu nome, depois crie uma Batch para buscar todos os Casos criado nos últimos 5 dias e que estão sem nenhum contato associado e associe todos os Casos encontrados a esse contato criado.
+
+##### [Classe Batch da Atividade](./force-app/main/default/classes/BatchAtribuirContatoMeuCasos.cls)
 
 ---
 
-#### Schedule Apex
+#### Schedule Apex ✅
 
 - [x] 1 - Crie um Schedule que busque todas as oportundiades que estão com Estágio em "Close Won" ou com a quantia da oportunidade acima de 100 mil reais e crie um contrato para essa oportunidade, usa a mesma Conta da oportunidade para criar o Contrato.
+
+[Classe Schedule da Atividade](./force-app/main/default/classes/ScheduleBuscarOportunidades.cls)
 
 ---
 
 - [x] 2 - Crie um Schedule que chama o Batch criado na Atividade anterior que atualiza os Casos sem Contatos. *2 - Atividade*
+
+##### [Classe Schedule da Atividade](./force-app/main/default/classes/ScheduleCases.cls)
 
 ---
 
@@ -101,26 +154,30 @@
 
 [Salesforce Help](https://developer.salesforce.com/docs/atlas.en-us.apexcode.meta/apexcode/apex_scheduler.htm)
 
+**Print do Agendamento no Developer Console:**
+
+<img src="./assets/ScheduleConsole.png">
 
 ---
 
-#### Queueable Apex
+#### Queueable Apex ✅
 
 - [x] 1 - Crie uma Queuable que receba uma lista de Oportunidades e verifique se alguma dessas oportunidades não possuem contato, após atualizar essas oportunidades sem contato com o primeiro Contato encontrado da Conta em que a Oportunidade está associada.
 
+##### [Classe da Atividade](./force-app/main/default/classes/QueueableOportunidade.cls)
+
 - [x] 2 - Crie uma Queuable que busque oportundiades com a Data de Fechamento maior que a data atual, e atualize o campo Descrição para "Oportunidades com contato associado". Após isso chame a Queuable criada na atividade anterior passando para ela a lista de Oportunidade buscadas
 
+##### [Classe da Atividade](./force-app/main/default/classes/QueueableDataFechamentoMaiorQueAtual.cls)
 **Isso fará o encadeamento de Duas Queueables**
 
 
-## Boas Práticas de Programação
-
-### Entregar até terça-feira
+## Boas Práticas de Programação ✅
 
 - [x] 1. Serena Williams precisa que toda vez que alterar o domínio de email de uma de suas contas, todos os responsáveis tenham seu e-mail atualizado de acordo com o novo domínio.
 > Sejam livres para trazer a melhor solução que atenda ao pedido da Serena Williams colocando em ação as boas práticas de programação
 -       Os responsáveis da Conta são os Contatos
--       A Serena Williams são donos dessas contas ( Owner Id)
+-       A Serena Williams são donos dessas contas ( Owner Id )
 -       Somente para alterar campo de @dominio.com.br
 -       Manter o e-mail e somente alterar domínio
 -       Alterar somente quem tiver e-mail, quem não tiver eliminar da Trigger
@@ -139,7 +196,10 @@
 
 </details>
 
-#### Confirmar questões sobre a Regra de Validação e tirar prints dela ao enviar atividade
+**Solução: Feito uma Trigger em Account para atualização dos e-mails no campo Domínio.**
+
+##### [Trigger da Atividade](./force-app/main/default/triggers/TriggerAccount.trigger)
+##### [Classe Account BO](./force-app/main/default/classes/AccountBO.cls#L251)
 
 ---
 
@@ -147,7 +207,10 @@
 
 ![Código do Desafio para arrumar](./images/codigoMeganRapinoe.png)
 
-#### Separar os arquivos para enviar, Feito uma TriggerContact acionado a partir do picklist igual = "Homossexual" a contagem de contatos naquela conta
+**Solução Feito uma Trigger em Contact para cada vez que for criado ou editado um registro de Contato com o Valor Picklist = Homossexual faça a contagem nas Contas.**
+
+##### [Trigger da Atividade](./force-app/main/default/triggers/TriggerContact.trigger)
+##### [Classe ContactBO](./force-app/main/default/classes/ContactBO.cls#L3)
 
 ---
 
@@ -162,12 +225,13 @@
 - Filtrar a condição dos contatos com base nesse campo
 - Verificar em trigger ou apex batch ainda
 
-### Organizar todas as classes para Enviar Para o Mathias
+**Solução - Feito um Apex Schedule para rodar todo ano no dia 25 de Dezembro ( mais ou menos quando as Temporadas da Formula 1 terminam ), para ser distribuido igualmente os salários dos Sócios caso a receita anual da Conta seja maior que 1 milhão ( Esse só não consegui fazer atualização dos 50% na conta ).**
+
+##### [Schedule Apex](./force-app/main/default/classes/ScheduleAtualizarSalarios.cls)
+##### [Classe da ContactBO](./force-app/main/default/classes/ContactBO.cls#L33)
 
 ---
 ## Apex Trigger ✅
-
-### Entregar até segunda-feira ✅
 
 #### Refeito todos com as boas práticas caso o Bruno queira somente dentro da Trigger, enviar da pasta no gitIgnore
 

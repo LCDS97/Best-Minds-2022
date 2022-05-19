@@ -86,5 +86,26 @@ public with sharing class CaseBO {
         update objCase;
     }
 
+    @future
+    public static void metodoFuturoBestMinds(Set<Id> idCasos){
+        List<Case> lstCasosFechados = CaseDAO.buscarCasosPorId(idCasos);
+        List<CaseComment> lstComentariosCasosFechados = new List<CaseComment>();
+        List<Case> lstCasosUpdate = new List<Case>();
+        
+        for(Case caso: lstCasosFechados){
+            caso.Status = 'Escalated';
+            CaseComment caseComment = new CaseComment();
+            caseComment.CommentBody = 'Exercício Método Futuro Best Minds - Atualizando Casos';
+            caseComment.ParentId = caso.Id;
+            lstComentariosCasosFechados.add(caseComment);
+            lstCasosUpdate.add(caso);
+
+
+        }
+
+        insert lstComentariosCasosFechados;
+        update lstCasosUpdate;
+    }
+
 
 }
