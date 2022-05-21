@@ -107,5 +107,10 @@ public with sharing class GenericsHelper {
         
     }
 
+    @future(callout=true)
+    public static void enviarNotificacaoService(Id idAccount){
+        //String result = service.enviarNotificao(idAccount, 'Necessário atualizar sua conta');
+    }
+
             
 }
